@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
@@ -27,6 +27,18 @@
         <activity
             android:name="com.prcse.jamjar.Artists"
             android:label="@string/title_activity_artists" >
+        </activity>
+        <activity
+            android:name="com.prcse.jamjar.ActivityArtistsList"
+            android:label="@string/title_activity_artists" >
+        </activity>
+        <activity
+            android:name="com.prcse.jamjar.ActivityArtistDetail"
+            android:label="@string/title_activity_artist_view" >
+        </activity>
+        <activity
+            android:name="com.prcse.jamjar.ActivityEventDetail"
+            android:label="@string/title_activity_event_view" >
         </activity>
     </application>
 
