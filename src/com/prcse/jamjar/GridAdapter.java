@@ -2,7 +2,9 @@ package com.prcse.jamjar;
 
 
 import java.util.ArrayList;
+
 import com.prcse.datamodel.Artist;
+
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
