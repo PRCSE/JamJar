@@ -69,6 +69,7 @@ public class GridAdapter extends BaseAdapter {
         }
 
         Artist artist = (Artist) artists.get(position);
+        holder.image.setImageResource(R.drawable.asap_rocky);
         holder.text.setText(artist.getName());
         //imageView.setImageResource(mThumbIds[position]);
         return convertView;

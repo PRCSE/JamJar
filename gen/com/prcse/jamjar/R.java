@@ -23,13 +23,14 @@ public final class R {
     public static final class drawable {
         public static final int action_help=0x7f020000;
         public static final int action_search=0x7f020001;
-        public static final int collections_go_to_today=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int location_place=0x7f020004;
-        public static final int navigation_previous_item=0x7f020005;
-        public static final int sample_user_icon=0x7f020006;
-        public static final int social_group=0x7f020007;
-        public static final int social_person=0x7f020008;
+        public static final int asap_rocky=0x7f020002;
+        public static final int collections_go_to_today=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int location_place=0x7f020005;
+        public static final int navigation_previous_item=0x7f020006;
+        public static final int sample_user_icon=0x7f020007;
+        public static final int social_group=0x7f020008;
+        public static final int social_person=0x7f020009;
     }
     public static final class id {
         public static final int action_settings=0x7f080004;
