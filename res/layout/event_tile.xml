@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ticket_grid"
+    android:layout_width="260dp"
+    android:layout_height="100dp"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:padding="0dp" >
+    
+    	<RelativeLayout
+    	    android:id="@+id/thumbnail"
+    	    android:layout_width="100dp"
+    	    android:layout_height="100dp"
+    	    android:background="#7F4993" >
+    	    
+    	    <TextView
+    	        android:id="@+id/year"
+    	        android:layout_width="fill_parent"
+    	        android:layout_height="wrap_content"
+    	        android:layout_alignTop="@+id/thumbnail"
+    	        android:text="2013"
+    	        android:textColor="#BDA3CE" >
+
+    	 	</TextView>
+    	 	
+    	    <TextView
+    	        android:id="@+id/day"
+    	        android:layout_width="wrap_content"
+    	        android:layout_height="wrap_content"
+    	        android:layout_above="@+id/month"
+    	        android:layout_alignParentRight="true"
+    	        android:includeFontPadding="false"
+    	        android:text="15"
+    	        android:textColor="#ffffff"
+    	        android:textSize="80sp" >
+
+    	 	</TextView>
+
+    	    <TextView
+    	        android:id="@+id/month"
+    	        android:layout_width="wrap_content"
+    	        android:layout_height="wrap_content"
+    	        android:layout_alignParentBottom="true"
+    	        android:layout_alignParentRight="true"
+    	        android:text="November"
+    	        android:textColor="#ffffff"
+    	        android:textSize="20sp" />
+    	    
+    	</RelativeLayout>
+        
+    	<RelativeLayout
+    	    android:id="@+id/act" 
+    	    android:layout_toRightOf="@+id/thumbnail"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="50dp" >
+    	
+	    	<TextView
+	    	    android:id="@+id/artist"
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"
+	    	    android:paddingLeft="10dp"
+	    	    android:text="A$AP Rocky,"
+	    	    android:textSize="20sp" />
+	        
+	        <TextView
+	            android:id="@+id/tour"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/artist"
+	            android:paddingLeft="10dp"
+	            android:text="Long.Live.A$AP"
+	            android:textColor="#808080" />
+    	    
+    	</RelativeLayout>
+    	
+    	<RelativeLayout 
+    	    android:id="@+id/location"
+    	    android:layout_below="@+id/act"
+    	    android:layout_toRightOf="@+id/thumbnail"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content" >
+	        
+	        <TextView
+	            android:id="@+id/city"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:paddingLeft="10dp"
+	            android:text="Manchester,"
+	            android:textSize="20sp" />
+	        
+	        <TextView
+	            android:id="@+id/venue"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/city"
+	            android:paddingLeft="10dp"
+	            android:text="HMV, The Ritz"
+	            android:textColor="#808080" />
+    	    
+    	</RelativeLayout>
+
+       
+
+</RelativeLayout>
