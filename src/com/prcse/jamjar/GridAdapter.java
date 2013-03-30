@@ -1,32 +1,37 @@
 package com.prcse.jamjar;
 
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import com.prcse.datamodel.Artist;
 
 import android.content.Context;
-import android.database.DataSetObserver;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class GridAdapter extends BaseAdapter {
 	private Context mContext;
+	private String image_base;
 	private LayoutInflater layoutInflater;
-	private ArrayList artists = null;
+	private ArrayList<Artist> artists = null;
 
-    public GridAdapter(Context c) {
+    public GridAdapter(Context c, String image_base) {
         mContext = c;
+        this.image_base = image_base;
         layoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     
-    public void setArtists(ArrayList artists) {
+    public void setArtists(ArrayList<Artist> artists) {
     	this.artists = artists;
     	this.notifyDataSetChanged();
     }
@@ -51,7 +56,6 @@ public class GridAdapter extends BaseAdapter {
 
     	ViewHolder holder;
     	
-        ImageView imageView;
         if (convertView == null) {  // if it's not recycled, initialise some attributes
             convertView = layoutInflater.inflate(R.layout.artist_venue_tile, parent, false);
             
@@ -62,18 +66,27 @@ public class GridAdapter extends BaseAdapter {
     		
     		convertView.setTag(holder);
         	
+    		// unused image scaling
         	//imageView = new ImageView(mContext);
             //imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
             //imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             //imageView.setPadding(8, 8, 8, 8);
+    		
         } else {
         	holder = (ViewHolder) convertView.getTag();
         }
 
         Artist artist = (Artist) artists.get(position);
-        holder.image.setImageResource(R.drawable.asap_rocky);
+        
+        if(artist.getThumb() != null) {
+        	String url = this.image_base + artist.getThumb();
+        	new DownloadImageTask(holder.image).execute(url);
+        }
+        else {
+        	holder.image.setImageResource(R.drawable.place_thumb);
+        }
+        
         holder.text.setText(artist.getName());
-        //imageView.setImageResource(mThumbIds[position]);
         return convertView;
     }
     
@@ -81,5 +94,30 @@ public class GridAdapter extends BaseAdapter {
     	RelativeLayout rl;
     	ImageView image;
     	TextView text;
+    }
+    
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 }

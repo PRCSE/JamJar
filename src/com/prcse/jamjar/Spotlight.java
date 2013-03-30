@@ -20,6 +20,9 @@ public class Spotlight extends Activity {
 	private ActionBar actionBar;
 	private PrcseConnection connection;
 	private GridView gridview;
+	private String image_base = "https://dl.dropbox.com/u/63072480/JamJarPics/";
+	private String host = "10.0.1.31";
+	private int port = 1234;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,7 @@ public class Spotlight extends Activity {
         setContentView(R.layout.activity_spotlight); 
 
         gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new GridAdapter(this));
+        gridview.setAdapter(new GridAdapter(this, this.image_base));
 
         gridview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -36,7 +39,7 @@ public class Spotlight extends Activity {
 			}
         });
         
-        connection = new PrcseConnection("10.0.1.31", 1234);
+        connection = new PrcseConnection(host, port);
         new Connector().execute(connection);
     }
 
