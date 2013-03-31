@@ -2,12 +2,14 @@ package com.prcse.jamjar;
 
 import java.util.ArrayList;
 
+import com.prcse.datamodel.Artist;
 import com.prcse.utils.PrcseConnection;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +22,7 @@ public class Spotlight extends Activity {
 	private ActionBar actionBar;
 	private PrcseConnection connection;
 	private GridView gridview;
+	private ArrayList<Artist> artists;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,9 @@ public class Spotlight extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 				Toast.makeText(Spotlight.this, "" + position, Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(v.getContext(), ActivityArtistDetail.class);
+				intent.putExtra("artist", artists.get(position));
+				startActivity(intent);
 			}
         });
         
@@ -72,14 +78,14 @@ public class Spotlight extends Activity {
     	@Override
 		protected ArrayList doInBackground(PrcseConnection... params) {
 			PrcseConnection connection = params[0];
-			ArrayList result = null;
+			artists = null;
 			try {
-				result = connection.getFrontPage();
+				artists = connection.getFrontPage();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return result;
+			return artists;
 		}
     	
     	protected void onPostExecute(ArrayList result) {

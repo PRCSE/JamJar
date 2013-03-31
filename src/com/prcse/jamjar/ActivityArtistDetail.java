@@ -1,8 +1,11 @@
 package com.prcse.jamjar;
 
+import com.prcse.datamodel.Artist;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.widget.TextView;
 
 public class ActivityArtistDetail extends Activity {
 
@@ -10,6 +13,13 @@ public class ActivityArtistDetail extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_artist_detail);
+		
+		Artist artist = (Artist) getIntent().getExtras().get("artist");
+		TextView artistBio = (TextView) findViewById(R.id.artist_bio);
+		
+		setTitle(artist.getName());
+		artistBio.setText(artist.getBio());
+		
 	}
 
 	@Override
