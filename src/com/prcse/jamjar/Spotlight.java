@@ -42,7 +42,7 @@ public class Spotlight extends Activity {
 			}
         });
         
-        connection = new PrcseConnection("DashMac.local", 1234);
+        connection = new PrcseConnection("10.0.1.31", 1234);
         new Connector().execute(connection);
     }
 
