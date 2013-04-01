@@ -8,6 +8,9 @@
 package com.prcse.jamjar;
 
 public final class R {
+    public static final class array {
+        public static final int default_tour_filter_spinner_items=0x7f060000;
+    }
     public static final class attr {
     }
     public static final class dimen {
@@ -23,6 +26,7 @@ public final class R {
     public static final class drawable {
         public static final int action_help=0x7f020000;
         public static final int action_search=0x7f020001;
+<<<<<<< HEAD
         public static final int collections_go_to_today=0x7f020002;
         public static final int ic_launcher=0x7f020003;
         public static final int location_place=0x7f020004;
@@ -31,26 +35,61 @@ public final class R {
         public static final int sample_user_icon=0x7f020007;
         public static final int social_group=0x7f020008;
         public static final int social_person=0x7f020009;
+=======
+        public static final int artist_venue_placeholder=0x7f020002;
+        public static final int asap_rocky=0x7f020003;
+        public static final int collections_go_to_today=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int location_place=0x7f020006;
+        public static final int navigation_previous_item=0x7f020007;
+        public static final int sample_user_icon=0x7f020008;
+        public static final int social_group=0x7f020009;
+        public static final int social_person=0x7f02000a;
+>>>>>>> james
     }
     public static final class id {
-        public static final int action_settings=0x7f080004;
-        public static final int artist_venue_grid=0x7f080001;
-        public static final int gridview=0x7f080000;
-        public static final int thumbnail=0x7f080002;
-        public static final int title=0x7f080003;
+        public static final int act=0x7f09000d;
+        public static final int action_settings=0x7f090013;
+        public static final int artist=0x7f09000e;
+        public static final int artist_banner=0x7f090000;
+        public static final int artist_bio=0x7f090002;
+        public static final int artist_thumb=0x7f090001;
+        public static final int artist_venue_grid=0x7f090006;
+        public static final int city=0x7f090011;
+        public static final int day=0x7f09000b;
+        public static final int event_tickets=0x7f090004;
+        public static final int gridview=0x7f090005;
+        public static final int location=0x7f090010;
+        public static final int month=0x7f09000c;
+        public static final int thumbnail=0x7f090007;
+        public static final int ticket_grid=0x7f090009;
+        public static final int title=0x7f090008;
+        public static final int tour=0x7f09000f;
+        public static final int tour_filter_spinner=0x7f090003;
+        public static final int venue=0x7f090012;
+        public static final int year=0x7f09000a;
     }
     public static final class layout {
-        public static final int activity_spotlight=0x7f030000;
-        public static final int artist_venue_tile=0x7f030001;
+        public static final int activity_artist_detail=0x7f030000;
+        public static final int activity_artists_list=0x7f030001;
+        public static final int activity_event_detail=0x7f030002;
+        public static final int activity_spotlight=0x7f030003;
+        public static final int artist_venue_tile=0x7f030004;
+        public static final int event_tile=0x7f030005;
     }
     public static final class menu {
-        public static final int spotlight=0x7f070000;
+        public static final int artist_view=0x7f080000;
+        public static final int artists=0x7f080001;
+        public static final int event_view=0x7f080002;
+        public static final int spotlight=0x7f080003;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int hello_world=0x7f050002;
+        public static final int title_activity_artist_view=0x7f050004;
         public static final int title_activity_artists=0x7f050003;
+        public static final int title_activity_event_view=0x7f050005;
     }
     public static final class style {
         /** 
@@ -74,10 +113,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
 }

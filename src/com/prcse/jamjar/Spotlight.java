@@ -2,12 +2,14 @@ package com.prcse.jamjar;
 
 import java.util.ArrayList;
 
+import com.prcse.datamodel.Artist;
 import com.prcse.utils.PrcseConnection;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,9 +22,13 @@ public class Spotlight extends Activity {
 	private ActionBar actionBar;
 	private PrcseConnection connection;
 	private GridView gridview;
+<<<<<<< HEAD
 	private String image_base = "https://dl.dropbox.com/u/63072480/JamJarPics/";
 	private String host = "10.0.1.31"; // "192.168.1.155";
 	private int port = 1234;
+=======
+	private ArrayList<Artist> artists;
+>>>>>>> james
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,10 +42,17 @@ public class Spotlight extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 				Toast.makeText(Spotlight.this, "" + position, Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(v.getContext(), ActivityArtistDetail.class);
+				intent.putExtra("artist", artists.get(position));
+				startActivity(intent);
 			}
         });
         
+<<<<<<< HEAD
         connection = new PrcseConnection(host, port);
+=======
+        connection = new PrcseConnection("10.0.1.31", 1234);
+>>>>>>> james
         new Connector().execute(connection);
     }
 
@@ -75,14 +88,14 @@ public class Spotlight extends Activity {
     	@Override
 		protected ArrayList doInBackground(PrcseConnection... params) {
 			PrcseConnection connection = params[0];
-			ArrayList result = null;
+			artists = null;
 			try {
-				result = connection.getFrontPage();
+				artists = connection.getFrontPage();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return result;
+			return artists;
 		}
     	
     	protected void onPostExecute(ArrayList result) {

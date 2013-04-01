@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E5E5E4"
+    tools:context=".ActivityArtistDetail" >
+
+    <LinearLayout
+        android:id="@+id/artist_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#FFFFFF" >
+
+        <ImageView
+            android:id="@+id/artist_thumb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/artist_venue_placeholder" />
+
+        <TextView
+            android:id="@+id/artist_bio"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            android:text="Sorry, there currently is no bio avalible for this artist." />
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/tour_filter_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/artist_banner"
+        android:entries="@array/default_tour_filter_spinner_items"
+        />
+    
+    <GridView
+        android:id="@+id/event_tickets"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tour_filter_spinner" >
+	</GridView>
+
+</RelativeLayout>

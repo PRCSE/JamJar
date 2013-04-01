@@ -77,6 +77,7 @@ public class GridAdapter extends BaseAdapter {
         }
 
         Artist artist = (Artist) artists.get(position);
+<<<<<<< HEAD
         
         if(artist.getThumb() != null) {
         	String url = this.image_base + artist.getThumb();
@@ -86,6 +87,9 @@ public class GridAdapter extends BaseAdapter {
         	holder.image.setImageResource(R.drawable.place_thumb);
         }
         
+=======
+        holder.image.setImageResource(R.drawable.artist_venue_placeholder);
+>>>>>>> james
         holder.text.setText(artist.getName());
         return convertView;
     }
