@@ -21,7 +21,7 @@ public class Spotlight extends Activity {
 	private PrcseConnection connection;
 	private GridView gridview;
 	private String image_base = "https://dl.dropbox.com/u/63072480/JamJarPics/";
-	private String host = "10.0.1.31";
+	private String host = "10.0.1.31"; // "192.168.1.155";
 	private int port = 1234;
 	
     @Override
