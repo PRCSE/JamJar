@@ -19,6 +19,9 @@ public class ActivityArtistsList extends Activity {
 	
 	private GridView gridView;
 	private PrcseConnection connection;
+	private String image_base = "https://dl.dropbox.com/u/63072480/JamJarPics/";
+	private String host = "10.0.1.31"; // "192.168.1.155";
+	private int port = 1234;
 
 	
 	@Override
@@ -28,7 +31,7 @@ public class ActivityArtistsList extends Activity {
 		
 		
 		gridView = (GridView) findViewById(R.id.gridview);
-        gridView.setAdapter(new GridAdapter(this));
+        gridView.setAdapter(new GridAdapter(this, this.image_base));
         
         gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -37,7 +40,7 @@ public class ActivityArtistsList extends Activity {
 			}
         });
         
-        connection = new PrcseConnection("DashMac.local", 1234);
+        connection = new PrcseConnection(host, port);
         new Connector().execute(connection);
 	}
 

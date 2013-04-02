@@ -22,13 +22,10 @@ public class Spotlight extends Activity {
 	private ActionBar actionBar;
 	private PrcseConnection connection;
 	private GridView gridview;
-<<<<<<< HEAD
 	private String image_base = "https://dl.dropbox.com/u/63072480/JamJarPics/";
 	private String host = "10.0.1.31"; // "192.168.1.155";
 	private int port = 1234;
-=======
 	private ArrayList<Artist> artists;
->>>>>>> james
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,11 +45,7 @@ public class Spotlight extends Activity {
 			}
         });
         
-<<<<<<< HEAD
         connection = new PrcseConnection(host, port);
-=======
-        connection = new PrcseConnection("10.0.1.31", 1234);
->>>>>>> james
         new Connector().execute(connection);
     }
 
