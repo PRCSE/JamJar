@@ -2,14 +2,18 @@ package com.prcse.jamjar;
 
 import java.util.ArrayList;
 
+
 import com.prcse.datamodel.Artist;
 import com.prcse.utils.PrcseConnection;
+import com.slidingmenu.lib.SlidingMenu;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
+import android.view.Display;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +24,7 @@ import android.widget.Toast;
 public class Spotlight extends Activity {
 
 	private ActionBar actionBar;
+	private SlidingMenu menu_tray;
 	private PrcseConnection connection;
 	private GridView gridview;
 	private String image_base = "https://dl.dropbox.com/u/63072480/JamJarPics/";
@@ -31,6 +36,22 @@ public class Spotlight extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spotlight); 
+        
+        actionBar = getActionBar();
+		Display display = getWindowManager().getDefaultDisplay();
+		Point point = new Point();
+
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		display.getSize(point);
+		int width = point.x;
+
+		SlidingMenu menu_tray = new SlidingMenu(this);
+		menu_tray.setMode(SlidingMenu.LEFT);
+		menu_tray.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		menu_tray.setBehindOffset(width / 2);
+		menu_tray.setFadeDegree(0.35f);
+		menu_tray.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+		menu_tray.setMenu(R.layout.menu_tray);
 
         gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new GridAdapter(this, this.image_base));
