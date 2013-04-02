@@ -26,6 +26,7 @@ public class Spotlight extends Activity {
 	private String host = "10.0.1.31"; // "192.168.1.155";
 	private int port = 1234;
 	private ArrayList<Artist> artists;
+	private String testingGitHub;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
