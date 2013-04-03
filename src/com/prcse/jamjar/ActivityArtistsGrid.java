@@ -16,6 +16,7 @@ import android.graphics.Point;
 import android.view.Display;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -23,7 +24,7 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class ActivityArtistsGrid extends Activity {
+public class ActivityArtistsGrid extends Activity implements OnClickListener{
 
 	private ActionBar actionBar;
 	private SlidingMenu menu_tray;
@@ -37,36 +38,10 @@ public class ActivityArtistsGrid extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_artists_grid); 
+        setContentView(R.layout.activity_artists_grid);
+        setTitle(R.string.title_activity_artists);
         
-        actionBar = getActionBar();
-		Display display = getWindowManager().getDefaultDisplay();
-		Point point = new Point();
-
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		display.getSize(point);
-		int width = point.x;
-
-		SlidingMenu menu_tray = new SlidingMenu(this);
-		menu_tray.setMode(SlidingMenu.LEFT);
-		menu_tray.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		menu_tray.setBehindOffset(width / 2);
-		menu_tray.setFadeDegree(0.35f);
-		menu_tray.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-		menu_tray.setMenu(R.layout.menu_tray);
-		
-		RelativeLayout button = (RelativeLayout) menu_tray.findViewById(R.id.profile);
-		
-		button.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Toast.makeText(ActivityArtistsGrid.this, "yo yo yo", Toast.LENGTH_SHORT).show();
-				//Intent intent = new Intent(v.getContext(), ActivityArtistsList.class);
-				//startActivity(intent);
-			}
-		});
+        menuTraySetUp();
 
         gridview = (GridView) findViewById(R.id.artists_grid);
         gridview.setAdapter(new GridAdapter(this, this.image_base));
@@ -129,6 +104,69 @@ public class ActivityArtistsGrid extends Activity {
     	
     	protected void onPostExecute(ArrayList result) {
     		((GridAdapter) gridview.getAdapter()).setArtists(result);
+    	}
+    }
+    
+	private void menuTraySetUp() {
+		actionBar = getActionBar();
+		Display display = getWindowManager().getDefaultDisplay();
+		Point point = new Point();
+
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		display.getSize(point);
+		int width = point.x;
+
+		menu_tray = new SlidingMenu(this);
+		menu_tray.setMode(SlidingMenu.LEFT);
+		menu_tray.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		menu_tray.setBehindOffset(width / 2);
+		menu_tray.setFadeDegree(0.35f);
+		menu_tray.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+		menu_tray.setMenu(R.layout.menu_tray);
+		
+		RelativeLayout menu_profile_btn = (RelativeLayout) menu_tray.findViewById(R.id.profile);
+		RelativeLayout menu_spotlight_btn = (RelativeLayout) menu_tray.findViewById(R.id.spotlight);
+		RelativeLayout menu_artists_btn = (RelativeLayout) menu_tray.findViewById(R.id.artists);
+		RelativeLayout menu_venues_btn = (RelativeLayout) menu_tray.findViewById(R.id.venues);
+		RelativeLayout menu_tours_btn = (RelativeLayout) menu_tray.findViewById(R.id.tours);
+		menu_profile_btn.setOnClickListener(this);
+		menu_spotlight_btn.setOnClickListener(this);
+		menu_artists_btn.setOnClickListener(this);
+		menu_venues_btn.setOnClickListener(this);
+		menu_tours_btn.setOnClickListener(this);
+	}
+	
+    @Override
+    public void onClick(View v)
+    {
+    	Intent intent = null;
+    	
+    	switch(v.getId()){
+    	
+    	case R.id.profile:
+    		intent = new Intent(v.getContext(), ActivityProfile.class);
+			startActivity(intent);
+    		break;
+    		
+    	case R.id.spotlight:
+    		intent = new Intent(v.getContext(), ActivitySpotlight.class);
+			startActivity(intent);
+    		break;
+    		
+    	case R.id.artists:
+    		intent = new Intent(v.getContext(), ActivityArtistsGrid.class);
+			startActivity(intent);
+    		break;
+    		
+    	case R.id.venues:
+    		intent = new Intent(v.getContext(), ActivityVenuesGrid.class);
+			startActivity(intent);
+    		break;
+    			
+    	case R.id.tours:
+    		intent = new Intent(v.getContext(), ActivityToursGrid.class);
+			startActivity(intent);
+    		break;
     	}
     }
 }
