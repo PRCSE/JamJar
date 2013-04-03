@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.Menu;
@@ -21,7 +22,7 @@ public class ActivityToursGrid extends Activity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_tour_grid);
+		setContentView(R.layout.activity_tours_grid);
 		setTitle(R.string.title_activity_tours);
 		
 		menuTraySetUp();
@@ -53,14 +54,18 @@ public class ActivityToursGrid extends Activity implements OnClickListener{
 		
 		RelativeLayout menu_profile_btn = (RelativeLayout) menu_tray.findViewById(R.id.profile);
 		RelativeLayout menu_spotlight_btn = (RelativeLayout) menu_tray.findViewById(R.id.spotlight);
+		RelativeLayout menu_search_btn = (RelativeLayout) menu_tray.findViewById(R.id.search);
 		RelativeLayout menu_artists_btn = (RelativeLayout) menu_tray.findViewById(R.id.artists);
 		RelativeLayout menu_venues_btn = (RelativeLayout) menu_tray.findViewById(R.id.venues);
 		RelativeLayout menu_tours_btn = (RelativeLayout) menu_tray.findViewById(R.id.tours);
 		menu_profile_btn.setOnClickListener(this);
 		menu_spotlight_btn.setOnClickListener(this);
+		menu_search_btn.setOnClickListener(this);
 		menu_artists_btn.setOnClickListener(this);
 		menu_venues_btn.setOnClickListener(this);
 		menu_tours_btn.setOnClickListener(this);
+		
+		menu_tours_btn.setBackgroundColor(Color.parseColor("#7f4993"));
 	}
 	
     @Override
@@ -78,6 +83,11 @@ public class ActivityToursGrid extends Activity implements OnClickListener{
     	case R.id.spotlight:
     		intent = new Intent(v.getContext(), ActivitySpotlight.class);
 			startActivity(intent);
+    		break;
+    		
+    	case R.id.search:
+    		intent = new Intent(v.getContext(), ActivitySearch.class);
+    		startActivity(intent);
     		break;
     		
     	case R.id.artists:

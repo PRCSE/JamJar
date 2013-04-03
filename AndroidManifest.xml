@@ -52,6 +52,10 @@
             android:name="com.prcse.jamjar.ActivityToursGrid"
             android:label="@string/title_activity_activity_tour_grid" >
         </activity>
+        <activity
+            android:name="com.prcse.jamjar.ActivitySearch"
+            android:label="@string/title_activity_activity_search" >
+        </activity>
     </application>
 
 </manifest>

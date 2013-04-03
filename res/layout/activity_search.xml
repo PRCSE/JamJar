@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/venues_grid"
+    android:id="@+id/search"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="91dp"
-        android:text="Venues Grid Comming Soon"
+        android:text="Detailed Search Comming Soon"
         android:textSize="25sp" />
 
 </RelativeLayout>

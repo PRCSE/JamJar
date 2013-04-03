@@ -14,16 +14,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 
-public class ActivityProfile extends Activity implements OnClickListener{
-	
+public class ActivitySearch extends Activity implements OnClickListener {
+
 	private ActionBar actionBar;
 	private SlidingMenu menu_tray;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_profile);
-		setTitle(R.string.title_activity_profile);
+		setContentView(R.layout.activity_search);
+		setTitle(R.string.title_activity_search);
 		
 		menuTraySetUp();
 	}
@@ -31,7 +31,7 @@ public class ActivityProfile extends Activity implements OnClickListener{
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_profile, menu);
+		getMenuInflater().inflate(R.menu.activity_search, menu);
 		return true;
 	}
 	
@@ -65,9 +65,9 @@ public class ActivityProfile extends Activity implements OnClickListener{
 		menu_venues_btn.setOnClickListener(this);
 		menu_tours_btn.setOnClickListener(this);
 		
-		menu_profile_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+		menu_search_btn.setBackgroundColor(Color.parseColor("#7f4993"));
 	}
-	
+
     @Override
     public void onClick(View v)
     {
