@@ -3,8 +3,14 @@
 
     <string name="app_name">JamJar</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_spotlight">Spotlight</string>
     <string name="title_activity_artists">Artists</string>
+    <string name="title_activity_Venues">Venues</string>
+    <string name="title_activity_Tours">Tours</string>
     <string name="title_activity_artist_view">Artist View</string>
+    <string name="title_activity_venue_view">Venue View</string>
+    <string name="title_activity_tour_view">Tour View</string>
     <string name="title_activity_event_view">Event View</string>
     <string-array name="default_tour_filter_spinner_items">
         <item>All Events</item>

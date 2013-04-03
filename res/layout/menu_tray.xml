@@ -2,14 +2,160 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#000000" >
     
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="button"
-    />
+    <RelativeLayout
+        android:id="@+id/profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:padding="15dp"
+        android:clickable="true">
+        
+        <ImageView
+            android:id="@+id/profile_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Profile"
+            android:src="@drawable/social_person" />
+
+        <TextView
+            android:id="@+id/profile_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/profile_icon"
+            android:text="Profile"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            android:textSize="22sp" />
+        
+        </RelativeLayout>
+        
+    <RelativeLayout 
+        android:id="@+id/break_1"
+        android:layout_width="match_parent"
+        android:layout_height="22dp">
+        
+    </RelativeLayout>
+        
+   	<RelativeLayout
+        android:id="@+id/spotlight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:padding="15dp"
+        android:clickable="true">
+        
+        <ImageView
+            android:id="@+id/spotlight_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Profile"
+            android:src="@drawable/social_person" />
+
+        <TextView
+            android:id="@+id/spotlight_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/spotlight_icon"
+            android:text="Spotlight"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            android:textSize="22sp" />
+        
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/artists"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:padding="15dp"
+        android:clickable="true">
+        
+        <ImageView
+            android:id="@+id/artists_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Profile"
+            android:src="@drawable/social_person" />
+
+        <TextView
+            android:id="@+id/artists_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/artists_icon"
+            android:text="Artists"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            android:textSize="22sp" />
+        
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/venues"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:padding="15dp"
+        android:clickable="true">
+        
+        <ImageView
+            android:id="@+id/venues_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Profile"
+            android:src="@drawable/social_person" />
+
+        <TextView
+            android:id="@+id/venues_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/venues_icon"
+            android:text="Venues"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            android:textSize="22sp" />
+        
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/tours"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:padding="15dp"
+        android:clickable="true">
+        
+        <ImageView
+            android:id="@+id/tours_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Profile"
+            android:src="@drawable/social_person" />
+
+        <TextView
+            android:id="@+id/tours_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tours_icon"
+            android:text="Tours"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            android:textSize="22sp" />
+        
+        </RelativeLayout>
     
 </LinearLayout>

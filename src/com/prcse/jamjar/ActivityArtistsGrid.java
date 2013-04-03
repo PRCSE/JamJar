@@ -16,7 +16,6 @@ import android.graphics.Point;
 import android.view.Display;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -24,7 +23,7 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class Spotlight extends Activity implements OnClickListener {
+public class ActivityArtistsGrid extends Activity {
 
 	private ActionBar actionBar;
 	private SlidingMenu menu_tray;
@@ -38,8 +37,7 @@ public class Spotlight extends Activity implements OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_spotlight); 
-        setTitle(R.string.title_activity_spotlight);
+        setContentView(R.layout.activity_artists_grid); 
         
         actionBar = getActionBar();
 		Display display = getWindowManager().getDefaultDisplay();
@@ -57,23 +55,41 @@ public class Spotlight extends Activity implements OnClickListener {
 		menu_tray.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		menu_tray.setMenu(R.layout.menu_tray);
 		
-		RelativeLayout menu_profile_btn = (RelativeLayout) menu_tray.findViewById(R.id.profile);
-		RelativeLayout menu_spotlight_btn = (RelativeLayout) menu_tray.findViewById(R.id.spotlight);
-		RelativeLayout menu_artists_btn = (RelativeLayout) menu_tray.findViewById(R.id.artists);
-		RelativeLayout menu_venues_btn = (RelativeLayout) menu_tray.findViewById(R.id.venues);
-		RelativeLayout menu_tours_btn = (RelativeLayout) menu_tray.findViewById(R.id.tours);
-		menu_profile_btn.setOnClickListener(this);
-		menu_spotlight_btn.setOnClickListener(this);
-		menu_artists_btn.setOnClickListener(this);
-		menu_venues_btn.setOnClickListener(this);
-		menu_tours_btn.setOnClickListener(this);
+		RelativeLayout button = (RelativeLayout) menu_tray.findViewById(R.id.profile);
+		
+		button.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Toast.makeText(ActivityArtistsGrid.this, "yo yo yo", Toast.LENGTH_SHORT).show();
+				//Intent intent = new Intent(v.getContext(), ActivityArtistsList.class);
+				//startActivity(intent);
+			}
+		});
+
+        gridview = (GridView) findViewById(R.id.artists_grid);
+        gridview.setAdapter(new GridAdapter(this, this.image_base));
+
+        gridview.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+				Toast.makeText(ActivityArtistsGrid.this, "" + position, Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(v.getContext(), ActivityArtistDetail.class);
+				intent.putExtra("artist", artists.get(position));
+				startActivity(intent);
+			}
+        });
+        
+        connection = new PrcseConnection(host, port);
+        new Connector().execute(connection);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.spotlight, menu);
+        getMenuInflater().inflate(R.menu.artists, menu);
         return true;
     }
     
@@ -113,33 +129,6 @@ public class Spotlight extends Activity implements OnClickListener {
     	
     	protected void onPostExecute(ArrayList result) {
     		((GridAdapter) gridview.getAdapter()).setArtists(result);
-    	}
-    }
-    
-    @Override
-    public void onClick(View v)
-    {
-    	switch(v.getId()){
-    	
-    	case R.id.profile:
-    		Toast.makeText(Spotlight.this, "profile", Toast.LENGTH_SHORT).show();
-    		break;
-    		
-    	case R.id.spotlight:
-    		Toast.makeText(Spotlight.this, "spotlight", Toast.LENGTH_SHORT).show();
-    		break;
-    		
-    	case R.id.artists:
-    		Toast.makeText(Spotlight.this, "artists", Toast.LENGTH_SHORT).show();
-    		break;
-    		
-    	case R.id.venues:
-    		Toast.makeText(Spotlight.this, "venues", Toast.LENGTH_SHORT).show();
-    		break;
-    			
-    	case R.id.tours:
-    		Toast.makeText(Spotlight.this, "tours", Toast.LENGTH_SHORT).show();
-    		break;
     	}
     }
 }

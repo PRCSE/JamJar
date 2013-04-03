@@ -29,7 +29,7 @@
             android:label="@string/title_activity_artists" >
         </activity>
         <activity
-            android:name="com.prcse.jamjar.ActivityArtistsList"
+            android:name="com.prcse.jamjar.ActivityArtistsGrid"
             android:label="@string/title_activity_artists" >
         </activity>
         <activity

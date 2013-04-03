@@ -1,14 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>  
-<GridView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/gridview"
-	android:layout_width="fill_parent" 
-	android:layout_height="fill_parent"
-	android:columnWidth="125dp"
-	android:numColumns="auto_fit"
-	android:verticalSpacing="10dp"
-	android:horizontalSpacing="0dp"
-	android:stretchMode="spacingWidthUniform"
-	android:gravity="center"
-	android:background="#E5E5E4"
-	android:padding="0dp" 
-/>
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/spotlight"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/place_holder_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="91dp"
+        android:text="Spotlight Comming Soon"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/page_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/place_holder_text"
+        android:layout_alignRight="@+id/place_holder_text"
+        android:layout_below="@+id/place_holder_text"
+        android:text="Will show featured events, tours and artists etc. Taking the role of the users home page" />
+
+</RelativeLayout>
