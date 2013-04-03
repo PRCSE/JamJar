@@ -137,27 +137,31 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class drawable {
         public static final int action_help=0x7f020000;
         public static final int action_search=0x7f020001;
-        public static final int artist_venue_placeholder=0x7f020002;
-        public static final int collections_go_to_today=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int location_place=0x7f020005;
-        public static final int navigation_previous_item=0x7f020006;
-        public static final int sample_user_icon=0x7f020007;
-        public static final int social_group=0x7f020008;
-        public static final int social_person=0x7f020009;
+        public static final int action_spotlight=0x7f020002;
+        public static final int action_tour=0x7f020003;
+        public static final int action_venues=0x7f020004;
+        public static final int artist_venue_placeholder=0x7f020005;
+        public static final int bert=0x7f020006;
+        public static final int collections_go_to_today=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int location_place=0x7f020009;
+        public static final int navigation_previous_item=0x7f02000a;
+        public static final int sample_user_icon=0x7f02000b;
+        public static final int social_group=0x7f02000c;
+        public static final int social_person=0x7f02000d;
     }
     public static final class id {
         public static final int act=0x7f040015;
-        public static final int action_settings=0x7f04002d;
+        public static final int action_settings=0x7f040030;
         public static final int artist=0x7f040016;
         public static final int artist_banner=0x7f040005;
         public static final int artist_bio=0x7f040007;
         public static final int artist_thumb=0x7f040006;
         public static final int artist_venue_grid=0x7f04000e;
-        public static final int artists=0x7f040021;
+        public static final int artists=0x7f040024;
         public static final int artists_grid=0x7f04000a;
-        public static final int artists_icon=0x7f040022;
-        public static final int artists_text=0x7f040023;
+        public static final int artists_icon=0x7f040025;
+        public static final int artists_text=0x7f040026;
         public static final int break_1=0x7f04001e;
         public static final int city=0x7f040019;
         public static final int day=0x7f040013;
@@ -167,16 +171,19 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int location=0x7f040018;
         public static final int margin=0x7f040002;
         public static final int month=0x7f040014;
-        public static final int network_error_description=0x7f04002b;
-        public static final int network_error_text=0x7f04002a;
+        public static final int network_error_description=0x7f04002e;
+        public static final int network_error_text=0x7f04002d;
         public static final int page_description=0x7f04000d;
         public static final int place_holder_text=0x7f04000c;
         public static final int profile=0x7f04001b;
         public static final int profile_icon=0x7f04001c;
         public static final int profile_text=0x7f04001d;
         public static final int right=0x7f040001;
+        public static final int search=0x7f040021;
+        public static final int search_icon=0x7f040022;
+        public static final int search_text=0x7f040023;
         public static final int selected_view=0x7f040004;
-        public static final int slidingmenumain=0x7f04002c;
+        public static final int slidingmenumain=0x7f04002f;
         public static final int spotlight=0x7f04000b;
         public static final int spotlight_icon=0x7f04001f;
         public static final int spotlight_text=0x7f040020;
@@ -185,13 +192,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int title=0x7f040010;
         public static final int tour=0x7f040017;
         public static final int tour_filter_spinner=0x7f040008;
-        public static final int tours=0x7f040027;
-        public static final int tours_icon=0x7f040028;
-        public static final int tours_text=0x7f040029;
+        public static final int tours=0x7f04002a;
+        public static final int tours_icon=0x7f04002b;
+        public static final int tours_text=0x7f04002c;
         public static final int venue=0x7f04001a;
-        public static final int venues=0x7f040024;
-        public static final int venues_icon=0x7f040025;
-        public static final int venues_text=0x7f040026;
+        public static final int venues=0x7f040027;
+        public static final int venues_icon=0x7f040028;
+        public static final int venues_text=0x7f040029;
         public static final int year=0x7f040012;
     }
     public static final class layout {

@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#000000"
-        android:padding="15dp"
         android:clickable="true">
         
         <ImageView
@@ -19,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Profile"
-            android:src="@drawable/social_person" />
+            android:src="@drawable/bert" />
 
         <TextView
             android:id="@+id/profile_text"
@@ -28,7 +27,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/profile_icon"
-            android:text="Profile"
+            android:text="Bert Smith"
             android:textColor="#ffffff"
             android:paddingLeft="10dp"
             android:textSize="22sp" />
@@ -47,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#000000"
-        android:padding="15dp"
+        android:padding="7dp"
         android:clickable="true">
         
         <ImageView
@@ -55,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Profile"
-            android:src="@drawable/social_person" />
+            android:src="@drawable/action_spotlight" />
 
         <TextView
             android:id="@+id/spotlight_text"
@@ -66,7 +65,36 @@
             android:layout_toRightOf="@+id/spotlight_icon"
             android:text="Spotlight"
             android:textColor="#ffffff"
-            android:paddingLeft="10dp"
+            android:paddingLeft="18dp"
+            android:textSize="22sp" />
+        
+        </RelativeLayout>
+        
+   	<RelativeLayout
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:padding="7dp"
+        android:clickable="true">
+        
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Search"
+            android:src="@drawable/action_search" />
+
+        <TextView
+            android:id="@+id/search_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/search_icon"
+            android:text="Search"
+            android:textColor="#ffffff"
+            android:paddingLeft="18dp"
             android:textSize="22sp" />
         
         </RelativeLayout>
@@ -76,7 +104,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#000000"
-        android:padding="15dp"
+        android:padding="7dp"
         android:clickable="true">
         
         <ImageView
@@ -84,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Profile"
-            android:src="@drawable/social_person" />
+            android:src="@drawable/social_group" />
 
         <TextView
             android:id="@+id/artists_text"
@@ -95,7 +123,7 @@
             android:layout_toRightOf="@+id/artists_icon"
             android:text="Artists"
             android:textColor="#ffffff"
-            android:paddingLeft="10dp"
+            android:paddingLeft="18dp"
             android:textSize="22sp" />
         
         </RelativeLayout>
@@ -105,7 +133,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#000000"
-        android:padding="15dp"
+        android:padding="7dp"
         android:clickable="true">
         
         <ImageView
@@ -113,7 +141,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Profile"
-            android:src="@drawable/social_person" />
+            android:src="@drawable/action_venues" />
 
         <TextView
             android:id="@+id/venues_text"
@@ -124,7 +152,7 @@
             android:layout_toRightOf="@+id/venues_icon"
             android:text="Venues"
             android:textColor="#ffffff"
-            android:paddingLeft="10dp"
+            android:paddingLeft="18dp"
             android:textSize="22sp" />
         
         </RelativeLayout>
@@ -134,7 +162,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#000000"
-        android:padding="15dp"
+        android:padding="7dp"
         android:clickable="true">
         
         <ImageView
@@ -142,7 +170,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Profile"
-            android:src="@drawable/social_person" />
+            android:src="@drawable/action_tour" />
 
         <TextView
             android:id="@+id/tours_text"
@@ -153,7 +181,7 @@
             android:layout_toRightOf="@+id/tours_icon"
             android:text="Tours"
             android:textColor="#ffffff"
-            android:paddingLeft="10dp"
+            android:paddingLeft="18dp"
             android:textSize="22sp" />
         
         </RelativeLayout>
