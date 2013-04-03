@@ -148,7 +148,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class id {
         public static final int act=0x7f040015;
-        public static final int action_settings=0x7f04002b;
+        public static final int action_settings=0x7f04002d;
         public static final int artist=0x7f040016;
         public static final int artist_banner=0x7f040005;
         public static final int artist_bio=0x7f040007;
@@ -167,6 +167,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int location=0x7f040018;
         public static final int margin=0x7f040002;
         public static final int month=0x7f040014;
+        public static final int network_error_description=0x7f04002b;
+        public static final int network_error_text=0x7f04002a;
         public static final int page_description=0x7f04000d;
         public static final int place_holder_text=0x7f04000c;
         public static final int profile=0x7f04001b;
@@ -174,7 +176,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int profile_text=0x7f04001d;
         public static final int right=0x7f040001;
         public static final int selected_view=0x7f040004;
-        public static final int slidingmenumain=0x7f04002a;
+        public static final int slidingmenumain=0x7f04002c;
         public static final int spotlight=0x7f04000b;
         public static final int spotlight_icon=0x7f04001f;
         public static final int spotlight_text=0x7f040020;
@@ -203,7 +205,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int artist_venue_tile=0x7f030007;
         public static final int event_tile=0x7f030008;
         public static final int menu_tray=0x7f030009;
-        public static final int slidingmenumain=0x7f03000a;
+        public static final int network_error_alert=0x7f03000a;
+        public static final int slidingmenumain=0x7f03000b;
     }
     public static final class menu {
         public static final int activity_profile=0x7f090000;
