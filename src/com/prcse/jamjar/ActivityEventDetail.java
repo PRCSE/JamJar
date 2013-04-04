@@ -3,6 +3,7 @@ package com.prcse.jamjar;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class ActivityEventDetail extends Activity {
 
@@ -19,4 +20,15 @@ public class ActivityEventDetail extends Activity {
 		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				finish();
+				break;
+		}
+		
+		return true;
+	}
+	
 }

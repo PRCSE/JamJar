@@ -16,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -68,6 +69,17 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
         getMenuInflater().inflate(R.menu.artists, menu);
         return true;
     }
+    
+    @Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				finish();
+				break;
+		}
+		
+		return true;
+	}
     
     private class Connector extends AsyncTask<PrcseConnection, Integer, Boolean> {
 		@Override
@@ -145,6 +157,8 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
     public void onClick(View v)
     {
     	Intent intent = null;
+    	
+    	menu_tray.toggle();
     	
     	switch(v.getId()){
     	

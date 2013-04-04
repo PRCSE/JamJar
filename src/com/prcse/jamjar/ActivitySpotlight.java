@@ -16,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -54,6 +55,22 @@ public class ActivitySpotlight extends Activity implements OnClickListener {
         getMenuInflater().inflate(R.menu.spotlight, menu);
         return true;
     }
+    
+    @Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				menu_tray.toggle();
+				if (menu_tray.isMenuShowing()){
+					actionBar.setDisplayHomeAsUpEnabled(false);
+				}else{
+					actionBar.setDisplayHomeAsUpEnabled(true);
+				}
+				break;
+		}
+		
+		return true;
+	}
     
     private class Connector extends AsyncTask<PrcseConnection, Integer, Boolean> {
 		@Override
@@ -131,6 +148,8 @@ public class ActivitySpotlight extends Activity implements OnClickListener {
     public void onClick(View v)
     {
     	Intent intent = null;
+    	
+    	menu_tray.toggle();
     	
     	switch(v.getId()){
     	

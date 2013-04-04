@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
@@ -32,6 +33,17 @@ public class ActivityToursGrid extends Activity implements OnClickListener{
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_tour_grid, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				finish();
+				break;
+		}
+		
 		return true;
 	}
 	
@@ -72,6 +84,8 @@ public class ActivityToursGrid extends Activity implements OnClickListener{
     public void onClick(View v)
     {
     	Intent intent = null;
+    	
+    	menu_tray.toggle();
     	
     	switch(v.getId()){
     	
