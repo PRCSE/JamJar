@@ -85,7 +85,9 @@ public class ActivityVenuesGrid extends Activity implements OnClickListener{
     {
     	Intent intent = null;
     	
-    	menu_tray.toggle();
+    	if(menu_tray.isMenuShowing()){
+    		menu_tray.toggle();
+    	}
     	
     	switch(v.getId()){
     	
