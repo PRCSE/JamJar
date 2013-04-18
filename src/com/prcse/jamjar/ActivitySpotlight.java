@@ -17,10 +17,8 @@ import android.graphics.Point;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -162,6 +160,7 @@ public class ActivitySpotlight extends Activity implements OnClickListener {
     		
     	case R.id.spotlight:
     		intent = new Intent(v.getContext(), ActivitySpotlight.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     		
@@ -172,6 +171,7 @@ public class ActivitySpotlight extends Activity implements OnClickListener {
     		
     	case R.id.artists:
     		intent = new Intent(v.getContext(), ActivityArtistsGrid.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     		
