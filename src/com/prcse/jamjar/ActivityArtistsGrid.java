@@ -171,6 +171,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
     		
     	case R.id.spotlight:
     		intent = new Intent(v.getContext(), ActivitySpotlight.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     		
@@ -181,6 +182,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
     		
     	case R.id.artists:
     		intent = new Intent(v.getContext(), ActivityArtistsGrid.class);
+    		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     		

@@ -17,7 +17,9 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.prcse.jamjar.ActivitySpotlight"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,35 +28,51 @@
         </activity>
         <activity
             android:name="com.prcse.jamjar.Artists"
-            android:label="@string/title_activity_artists" >
+            android:label="@string/title_activity_artists"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
         <activity
             android:name="com.prcse.jamjar.ActivityArtistsGrid"
-            android:label="@string/title_activity_artists" >
+            android:label="@string/title_activity_artists"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
         <activity
             android:name="com.prcse.jamjar.ActivityArtistDetail"
-            android:label="@string/title_activity_artist_view" >
+            android:label="@string/title_activity_artist_view"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
         <activity
             android:name="com.prcse.jamjar.ActivityEventDetail"
-            android:label="@string/title_activity_event_view" >
+            android:label="@string/title_activity_event_view"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
         <activity
             android:name="com.prcse.jamjar.ActivityProfile"
-            android:label="@string/title_activity_activity_profile" >
+            android:label="@string/title_activity_activity_profile"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
         <activity
             android:name="com.prcse.jamjar.ActivityVenuesGrid"
-            android:label="@string/title_activity_activity_venues_grid" >
+            android:label="@string/title_activity_activity_venues_grid"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
         <activity
             android:name="com.prcse.jamjar.ActivityToursGrid"
-            android:label="@string/title_activity_activity_tour_grid" >
+            android:label="@string/title_activity_activity_tour_grid"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
         <activity
             android:name="com.prcse.jamjar.ActivitySearch"
-            android:label="@string/title_activity_activity_search" >
+            android:label="@string/title_activity_activity_search"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
     </application>
 
