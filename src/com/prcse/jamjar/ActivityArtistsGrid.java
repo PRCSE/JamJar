@@ -61,8 +61,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
         connection = new PrcseConnection(host, port);
         new Connector().execute(connection);
     }
-
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -178,8 +177,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
     	case R.id.spotlight:
     		intent = new Intent(v.getContext(), ActivitySpotlight.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    		//intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    		overridePendingTransition(0,0);
+    		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     		startActivity(intent);
     		break;
     		
