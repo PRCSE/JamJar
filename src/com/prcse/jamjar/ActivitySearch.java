@@ -89,6 +89,7 @@ public class ActivitySearch extends Activity implements OnClickListener {
     		menu_tray.toggle();
     	}
     	
+    	//TODO set right flags to clear stack
     	switch(v.getId()){
     	
     	case R.id.profile:
