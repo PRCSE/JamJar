@@ -61,8 +61,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
         connection = new PrcseConnection(host, port);
         new Connector().execute(connection);
     }
-
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -72,9 +71,14 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
     
     @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
+    	Intent intent = null;
+    	
+    	switch (item.getItemId()) {
 			case android.R.id.home:
-				finish();
+				intent = new Intent(this, ActivitySpotlight.class);
+	    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    		overridePendingTransition(0,0);
+	    		startActivity(intent);
 				break;
 		}
 		
@@ -166,32 +170,39 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
     	
     	case R.id.profile:
     		intent = new Intent(v.getContext(), ActivityProfile.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     		
     	case R.id.spotlight:
     		intent = new Intent(v.getContext(), ActivitySpotlight.class);
-			startActivity(intent);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		startActivity(intent);
     		break;
     		
     	case R.id.search:
     		intent = new Intent(v.getContext(), ActivitySearch.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     		startActivity(intent);
     		break;
     		
     	case R.id.artists:
     		intent = new Intent(v.getContext(), ActivityArtistsGrid.class);
+    		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     		
     	case R.id.venues:
     		intent = new Intent(v.getContext(), ActivityVenuesGrid.class);
-			startActivity(intent);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    		startActivity(intent);
     		break;
     			
     	case R.id.tours:
     		intent = new Intent(v.getContext(), ActivityToursGrid.class);
-			startActivity(intent);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    		startActivity(intent);
     		break;
     	}
     }

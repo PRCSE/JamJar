@@ -17,10 +17,8 @@ import android.graphics.Point;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -47,7 +45,6 @@ public class ActivitySpotlight extends Activity implements OnClickListener {
         
         menuTraySetUp();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -157,31 +154,37 @@ public class ActivitySpotlight extends Activity implements OnClickListener {
     	
     	case R.id.profile:
     		intent = new Intent(v.getContext(), ActivityProfile.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     		
     	case R.id.spotlight:
     		intent = new Intent(v.getContext(), ActivitySpotlight.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 			startActivity(intent);
     		break;
     		
     	case R.id.search:
     		intent = new Intent(v.getContext(), ActivitySearch.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     		startActivity(intent);
     		break;
     		
     	case R.id.artists:
     		intent = new Intent(v.getContext(), ActivityArtistsGrid.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     		
     	case R.id.venues:
     		intent = new Intent(v.getContext(), ActivityVenuesGrid.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     			
     	case R.id.tours:
     		intent = new Intent(v.getContext(), ActivityToursGrid.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     	}
