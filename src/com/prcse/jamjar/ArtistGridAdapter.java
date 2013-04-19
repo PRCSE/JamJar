@@ -78,7 +78,7 @@ public class ArtistGridAdapter extends BaseAdapter {
 
         Artist artist = (Artist) artists.get(position);
         
-        if(artist.getThumb() != null) {
+        if(artist.getThumb() != "NO SET IMAGE") {
         	String url = this.image_base + artist.getThumb();
         	new DownloadImageTask(holder.image).execute(url);
         }
