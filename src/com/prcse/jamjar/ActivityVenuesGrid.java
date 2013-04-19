@@ -38,10 +38,14 @@ public class ActivityVenuesGrid extends Activity implements OnClickListener{
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		//TODO get updated switch case from artist grid
-		switch (item.getItemId()) {
+		Intent intent = null;
+    	
+    	switch (item.getItemId()) {
 			case android.R.id.home:
-				finish();
+				intent = new Intent(this, ActivitySpotlight.class);
+		    	intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		    	overridePendingTransition(0,0);
+		    	startActivity(intent);
 				break;
 		}
 		
