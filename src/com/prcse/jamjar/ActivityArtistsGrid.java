@@ -31,9 +31,9 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
 	private ActionBar actionBar;
 	private SlidingMenu menu_tray;
 	private PrcseConnection connection;
-	private GridView gridview;
+	private GridView artistGrid;
 	private String image_base = "https://dl.dropbox.com/u/63072480/JamJarPics/";
-	private String host = "10.0.1.31"; // "192.168.1.155";
+	private String host = "77.99.8.110"; // "192.168.1.155";
 	private int port = 1234;
 	private ArrayList<Artist> artists;
 	
@@ -45,10 +45,10 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
         
         menuTraySetUp();
 
-        gridview = (GridView) findViewById(R.id.artists_grid);
-        gridview.setAdapter(new GridAdapter(this, this.image_base));
+        artistGrid = (GridView) findViewById(R.id.artists_grid);
+        artistGrid.setAdapter(new ArtistGridAdapter(this, this.image_base));
 
-        gridview.setOnItemClickListener(new OnItemClickListener() {
+        artistGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 				Toast.makeText(ActivityArtistsGrid.this, "" + position, Toast.LENGTH_SHORT).show();
@@ -116,7 +116,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
 		}
     	
     	protected void onPostExecute(ArrayList result) {
-    		((GridAdapter) gridview.getAdapter()).setArtists(result);
+    		((ArtistGridAdapter) artistGrid.getAdapter()).setArtists(result);
     	}
     }
     

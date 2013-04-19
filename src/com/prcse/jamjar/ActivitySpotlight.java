@@ -35,7 +35,7 @@ public class ActivitySpotlight extends Activity implements OnClickListener {
 	private PrcseConnection connection;
 	private GridView gridview;
 	private String image_base = "https://dl.dropbox.com/u/63072480/JamJarPics/";
-	private String host = "10.0.1.31"; // "192.168.1.155";
+	private String host = "77.99.8.110"; // "192.168.1.155";
 	private int port = 1234;
 	private ArrayList<Artist> artists;
 	
@@ -107,7 +107,7 @@ public class ActivitySpotlight extends Activity implements OnClickListener {
 		}
     	
     	protected void onPostExecute(ArrayList result) {
-    		((GridAdapter) gridview.getAdapter()).setArtists(result);
+    		((ArtistGridAdapter) gridview.getAdapter()).setArtists(result);
     	}
     }
     

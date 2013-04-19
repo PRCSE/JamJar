@@ -19,13 +19,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class GridAdapter extends BaseAdapter {
+public class ArtistGridAdapter extends BaseAdapter {
 	private Context mContext;
 	private String image_base;
 	private LayoutInflater layoutInflater;
 	private ArrayList<Artist> artists = null;
 
-    public GridAdapter(Context c, String image_base) {
+    public ArtistGridAdapter(Context c, String image_base) {
         mContext = c;
         this.image_base = image_base;
         layoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
