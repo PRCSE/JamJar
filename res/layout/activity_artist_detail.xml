@@ -60,7 +60,15 @@
         android:id="@+id/event_tickets"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/events_title" >
+        android:layout_below="@+id/events_title"
+        android:columnWidth="125dp"
+		android:numColumns="auto_fit"
+		android:verticalSpacing="10dp"
+		android:horizontalSpacing="0dp"
+		android:stretchMode="spacingWidthUniform"
+		android:gravity="center"
+		android:background="#E5E5E4"
+		android:padding="0dp"  >
 	</GridView>
 
 

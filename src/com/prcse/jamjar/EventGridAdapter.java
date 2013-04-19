@@ -25,17 +25,12 @@ public class EventGridAdapter extends BaseAdapter {
 	private Context mContext;
 	private LayoutInflater layoutInflater;
 	private Artist artist;
-	private ArrayList<Billing> billings;
-	private ArrayList<Event> events = null;
+	private ArrayList<Billing> billings = new ArrayList<Billing>();
+	private ArrayList<Event> events = new ArrayList<Event>();
 
     public EventGridAdapter(Context c, Artist artist) {
         mContext = c;
         this.artist = artist;
-        this.billings = artist.getBillings();
-        for (Billing b : this.billings)
-        {
-        	this.events.add(b.getEvent());
-        }
         layoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     
@@ -86,6 +81,14 @@ public class EventGridAdapter extends BaseAdapter {
         	holder = (ViewHolder) convertView.getTag();
         }
 
+        
+        
+//        this.billings = artist.getBillings();
+//        for (Billing b : this.billings)
+//        {
+//        	this.events.add(b.getEvent());
+//        }
+        
         Event event = (Event) events.get(position);
         holder.day.setText(event.getDayToString());
         holder.month.setText(event.getMonthToString());
