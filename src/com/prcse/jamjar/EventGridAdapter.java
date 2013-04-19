@@ -25,13 +25,14 @@ public class EventGridAdapter extends BaseAdapter {
 	private Context mContext;
 	private LayoutInflater layoutInflater;
 	private Artist artist;
+	private ArrayList<Billing> billings;
 	private ArrayList<Event> events = null;
 
     public EventGridAdapter(Context c, Artist artist) {
         mContext = c;
         this.artist = artist;
-        ArrayList<Billing> billings = artist.getBillings();
-        for (Billing b : billings)
+        this.billings = artist.getBillings();
+        for (Billing b : this.billings)
         {
         	this.events.add(b.getEvent());
         }
@@ -90,7 +91,9 @@ public class EventGridAdapter extends BaseAdapter {
         holder.month.setText(event.getMonthToString());
         holder.year.setText(event.getYearToString());
         holder.artist.setText(artist.getName());
-        holder.tour.setText(event.getYearToString());
+        //holder.tour.setText(event.getYearToString());
+        holder.city.setText(artist.getName());
+        holder.venue.setText(artist.getName());
 
         //holder.text.setText(artist.getName());
         return convertView;

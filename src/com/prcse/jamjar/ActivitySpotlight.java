@@ -35,13 +35,8 @@ public class ActivitySpotlight extends Activity implements OnClickListener {
 	private PrcseConnection connection;
 	private GridView gridview;
 	private String image_base = "https://dl.dropbox.com/u/63072480/JamJarPics/";
-<<<<<<< HEAD
 	private String host = "77.99.8.110"; // "192.168.1.155";
 	private int port = 1234;
-=======
-	private String host = "192.168.1.122"; //"10.0.1.31";
-	private int port = 3030;
->>>>>>> connection params
 	private ArrayList<Artist> artists;
 	
     @Override
