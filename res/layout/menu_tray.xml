@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#000000"
+    android:background="@drawable/fabric"
      >
     
 
@@ -11,7 +11,6 @@
         android:id="@+id/profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
         android:clickable="true"
         android:layout_marginTop="22dp">
         
@@ -48,7 +47,6 @@
         android:id="@+id/spotlight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
         android:padding="7dp"
         android:clickable="true">
         
@@ -77,7 +75,6 @@
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
         android:padding="7dp"
         android:clickable="true">
         
@@ -106,7 +103,6 @@
         android:id="@+id/artists"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
         android:padding="7dp"
         android:clickable="true">
         
@@ -135,7 +131,6 @@
         android:id="@+id/venues"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
         android:padding="7dp"
         android:clickable="true">
         
@@ -164,7 +159,6 @@
         android:id="@+id/tours"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
         android:padding="7dp"
         android:clickable="true">
         
