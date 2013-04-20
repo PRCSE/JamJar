@@ -9,7 +9,7 @@ package com.prcse.jamjar;
 
 public final class R {
     public static final class array {
-        public static final int default_tour_filter_spinner_items=0x7f070000;
+        public static final int default_tour_filter_spinner_items=0x7f080000;
     }
     public static final class attr {
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
@@ -125,7 +125,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int viewBehind=0x7f010002;
     }
     public static final class color {
-        public static final int text_grey=0x7f090000;
+        public static final int dark_purple=0x7f050001;
+        public static final int text_grey=0x7f050000;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -134,8 +135,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f050000;
-        public static final int activity_vertical_margin=0x7f050001;
+        public static final int activity_horizontal_margin=0x7f060000;
+        public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
         public static final int action_help=0x7f020000;
@@ -147,86 +148,102 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int bert=0x7f020006;
         public static final int collections_go_to_today=0x7f020007;
         public static final int ic_launcher=0x7f020008;
-        public static final int location_place=0x7f020009;
-        public static final int navigation_previous_item=0x7f02000a;
-        public static final int sample_user_icon=0x7f02000b;
-        public static final int social_group=0x7f02000c;
-        public static final int social_person=0x7f02000d;
+        public static final int jam_splatter=0x7f020009;
+        public static final int location_place=0x7f02000a;
+        public static final int navigation_previous_item=0x7f02000b;
+        public static final int sample_user_icon=0x7f02000c;
+        public static final int social_group=0x7f02000d;
+        public static final int social_person=0x7f02000e;
     }
     public static final class id {
-        public static final int act=0x7f04002f;
-        public static final int action_settings=0x7f040048;
-        public static final int artist=0x7f040030;
+        public static final int act=0x7f04003e;
+        public static final int action_settings=0x7f040057;
+        public static final int artist=0x7f04003f;
         public static final int artist_banner=0x7f040005;
         public static final int artist_bio=0x7f040007;
-        public static final int artist_name=0x7f04000d;
+        public static final int artist_name=0x7f04000e;
         public static final int artist_thumb=0x7f040006;
-        public static final int artist_venue_grid=0x7f040028;
-        public static final int artists=0x7f04003c;
-        public static final int artists_grid=0x7f04000c;
-        public static final int artists_icon=0x7f04003d;
-        public static final int artists_text=0x7f04003e;
-        public static final int at_title=0x7f040010;
-        public static final int break_1=0x7f040037;
-        public static final int button1=0x7f04001b;
-        public static final int city=0x7f040033;
-        public static final int city_name=0x7f040013;
-        public static final int date_string=0x7f040015;
-        public static final int day=0x7f04002d;
-        public static final int email=0x7f04001c;
-        public static final int errorText=0x7f04001f;
-        public static final int event_tickets=0x7f04000b;
+        public static final int artist_venue_grid=0x7f040037;
+        public static final int artists=0x7f04004b;
+        public static final int artists_grid=0x7f04000d;
+        public static final int artists_icon=0x7f04004c;
+        public static final int artists_text=0x7f04004d;
+        public static final int at_title=0x7f040011;
+        public static final int book_button=0x7f04001a;
+        public static final int break_1=0x7f040046;
+        public static final int btnRegister=0x7f040032;
+        public static final int city=0x7f040042;
+        public static final int city_name=0x7f040014;
+        public static final int date_string=0x7f040016;
+        public static final int day=0x7f04003c;
+        public static final int email=0x7f04001b;
+        public static final int errorText=0x7f04001e;
+        public static final int event_tickets=0x7f04000c;
+        public static final int event_unavalible_message=0x7f04000b;
         public static final int events_title=0x7f04000a;
         public static final int fullscreen=0x7f040003;
-        public static final int in_title=0x7f040012;
+        public static final int in_title=0x7f040013;
         public static final int left=0x7f040000;
-        public static final int location=0x7f040032;
-        public static final int login=0x7f04001e;
+        public static final int location=0x7f040041;
+        public static final int login=0x7f04001d;
         public static final int margin=0x7f040002;
-        public static final int month=0x7f04002e;
-        public static final int network_error_description=0x7f040046;
-        public static final int network_error_text=0x7f040045;
-        public static final int on_title=0x7f040014;
-        public static final int page_description=0x7f040023;
-        public static final int password=0x7f04001d;
-        public static final int place_holder_text=0x7f040022;
-        public static final int premium_radio=0x7f04001a;
-        public static final int presents_title=0x7f04000e;
-        public static final int profile=0x7f040021;
-        public static final int profile_icon=0x7f040035;
-        public static final int profile_text=0x7f040036;
-        public static final int purchase_title=0x7f040016;
-        public static final int register=0x7f040020;
+        public static final int month=0x7f04003d;
+        public static final int network_error_description=0x7f040055;
+        public static final int network_error_text=0x7f040054;
+        public static final int on_title=0x7f040015;
+        public static final int page_description=0x7f040022;
+        public static final int password=0x7f04001c;
+        public static final int place_holder_text=0x7f040021;
+        public static final int presents_title=0x7f04000f;
+        public static final int profile=0x7f040020;
+        public static final int profile_icon=0x7f040044;
+        public static final int profile_text=0x7f040045;
+        public static final int purchase_title=0x7f040017;
+        public static final int register=0x7f04001f;
+        public static final int registerView=0x7f040023;
         public static final int right=0x7f040001;
-        public static final int search=0x7f040024;
-        public static final int search_icon=0x7f04003a;
-        public static final int search_text=0x7f04003b;
-        public static final int seated_radio=0x7f040019;
+        public static final int search=0x7f040033;
+        public static final int search_icon=0x7f040049;
+        public static final int search_text=0x7f04004a;
+        public static final int seat_picker_button=0x7f040019;
         public static final int selected_view=0x7f040004;
-        public static final int slidingmenumain=0x7f040047;
-        public static final int spotlight=0x7f040025;
-        public static final int spotlight_icon=0x7f040038;
-        public static final int spotlight_text=0x7f040039;
-        public static final int standing_radio=0x7f040018;
-        public static final int thumbnail=0x7f040029;
-        public static final int ticket_grid=0x7f04002b;
-        public static final int ticket_type_title=0x7f040017;
-        public static final int title=0x7f04002a;
-        public static final int tour=0x7f040031;
+        public static final int slidingmenumain=0x7f040056;
+        public static final int spnCountry=0x7f040031;
+        public static final int spnTitle=0x7f040027;
+        public static final int spotlight=0x7f040034;
+        public static final int spotlight_icon=0x7f040047;
+        public static final int spotlight_text=0x7f040048;
+        public static final int thumbnail=0x7f040038;
+        public static final int ticket_grid=0x7f04003a;
+        public static final int ticket_type_title=0x7f040018;
+        public static final int title=0x7f040039;
+        public static final int tour=0x7f040040;
         public static final int tour_filter_spinner=0x7f040009;
-        public static final int tour_name=0x7f04000f;
-        public static final int tours=0x7f040042;
-        public static final int tours_grid=0x7f040026;
-        public static final int tours_icon=0x7f040043;
-        public static final int tours_text=0x7f040044;
+        public static final int tour_name=0x7f040010;
+        public static final int tours=0x7f040051;
+        public static final int tours_grid=0x7f040035;
+        public static final int tours_icon=0x7f040052;
+        public static final int tours_text=0x7f040053;
         public static final int tours_title=0x7f040008;
-        public static final int venue=0x7f040034;
-        public static final int venue_name=0x7f040011;
-        public static final int venues=0x7f04003f;
-        public static final int venues_grid=0x7f040027;
-        public static final int venues_icon=0x7f040040;
-        public static final int venues_text=0x7f040041;
-        public static final int year=0x7f04002c;
+        public static final int txtAddress1=0x7f04002c;
+        public static final int txtAddress2=0x7f04002d;
+        public static final int txtCounty=0x7f04002f;
+        public static final int txtEmailReg=0x7f040024;
+        public static final int txtForename=0x7f040028;
+        public static final int txtMobile=0x7f04002b;
+        public static final int txtPasswordReg=0x7f040025;
+        public static final int txtPasswordRegConfirm=0x7f040026;
+        public static final int txtPostCode=0x7f040030;
+        public static final int txtSurname=0x7f040029;
+        public static final int txtTelephone=0x7f04002a;
+        public static final int txtTown=0x7f04002e;
+        public static final int venue=0x7f040043;
+        public static final int venue_name=0x7f040012;
+        public static final int venues=0x7f04004e;
+        public static final int venues_grid=0x7f040036;
+        public static final int venues_icon=0x7f04004f;
+        public static final int venues_text=0x7f040050;
+        public static final int year=0x7f04003b;
     }
     public static final class layout {
         public static final int activity_artist_detail=0x7f030000;
@@ -235,49 +252,54 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_event_detail=0x7f030003;
         public static final int activity_login=0x7f030004;
         public static final int activity_profile=0x7f030005;
-        public static final int activity_search=0x7f030006;
-        public static final int activity_spotlight=0x7f030007;
-        public static final int activity_tours_grid=0x7f030008;
-        public static final int activity_venues_grid=0x7f030009;
-        public static final int artist_venue_tile=0x7f03000a;
-        public static final int event_tile=0x7f03000b;
-        public static final int menu_tray=0x7f03000c;
-        public static final int network_error_alert=0x7f03000d;
-        public static final int slidingmenumain=0x7f03000e;
+        public static final int activity_register=0x7f030006;
+        public static final int activity_search=0x7f030007;
+        public static final int activity_spotlight=0x7f030008;
+        public static final int activity_tours_grid=0x7f030009;
+        public static final int activity_venues_grid=0x7f03000a;
+        public static final int artist_venue_tile=0x7f03000b;
+        public static final int event_tile=0x7f03000c;
+        public static final int menu_tray=0x7f03000d;
+        public static final int network_error_alert=0x7f03000e;
+        public static final int slidingmenumain=0x7f03000f;
     }
     public static final class menu {
         public static final int activity_book=0x7f0a0000;
         public static final int activity_booking=0x7f0a0001;
         public static final int activity_login=0x7f0a0002;
         public static final int activity_profile=0x7f0a0003;
-        public static final int activity_search=0x7f0a0004;
-        public static final int activity_tour_grid=0x7f0a0005;
-        public static final int activity_venues_grid=0x7f0a0006;
-        public static final int artist_view=0x7f0a0007;
-        public static final int artists=0x7f0a0008;
-        public static final int event_view=0x7f0a0009;
-        public static final int spotlight=0x7f0a000a;
+        public static final int activity_register=0x7f0a0004;
+        public static final int activity_search=0x7f0a0005;
+        public static final int activity_tour_grid=0x7f0a0006;
+        public static final int activity_venues_grid=0x7f0a0007;
+        public static final int artist_view=0x7f0a0008;
+        public static final int artists=0x7f0a0009;
+        public static final int event_view=0x7f0a000a;
+        public static final int spotlight=0x7f0a000b;
     }
     public static final class string {
-        public static final int action_settings=0x7f060001;
-        public static final int app_name=0x7f060000;
-        public static final int title_activity_activity_book=0x7f060011;
-        public static final int title_activity_activity_booking=0x7f060012;
-        public static final int title_activity_activity_login=0x7f060010;
-        public static final int title_activity_activity_profile=0x7f06000c;
-        public static final int title_activity_activity_search=0x7f06000f;
-        public static final int title_activity_activity_tour_grid=0x7f06000e;
-        public static final int title_activity_activity_venues_grid=0x7f06000d;
-        public static final int title_activity_artist_view=0x7f060008;
-        public static final int title_activity_artists=0x7f060005;
-        public static final int title_activity_event_view=0x7f06000b;
-        public static final int title_activity_profile=0x7f060002;
-        public static final int title_activity_search=0x7f060004;
-        public static final int title_activity_spotlight=0x7f060003;
-        public static final int title_activity_tour_view=0x7f06000a;
-        public static final int title_activity_tours=0x7f060007;
-        public static final int title_activity_venue_view=0x7f060009;
-        public static final int title_activity_venues=0x7f060006;
+        public static final int action_settings=0x7f070001;
+        public static final int app_name=0x7f070000;
+        public static final int country=0x7f070014;
+        public static final int system_null_image_url=0x7f070015;
+        public static final int title=0x7f070013;
+        public static final int title_activity_activity_book=0x7f070011;
+        public static final int title_activity_activity_booking=0x7f070012;
+        public static final int title_activity_activity_login=0x7f070010;
+        public static final int title_activity_activity_profile=0x7f07000c;
+        public static final int title_activity_activity_search=0x7f07000f;
+        public static final int title_activity_activity_tour_grid=0x7f07000e;
+        public static final int title_activity_activity_venues_grid=0x7f07000d;
+        public static final int title_activity_artist_view=0x7f070008;
+        public static final int title_activity_artists=0x7f070005;
+        public static final int title_activity_event_view=0x7f07000b;
+        public static final int title_activity_profile=0x7f070002;
+        public static final int title_activity_search=0x7f070004;
+        public static final int title_activity_spotlight=0x7f070003;
+        public static final int title_activity_tour_view=0x7f07000a;
+        public static final int title_activity_tours=0x7f070007;
+        public static final int title_activity_venue_view=0x7f070009;
+        public static final int title_activity_venues=0x7f070006;
     }
     public static final class style {
         /** 
@@ -301,11 +323,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080000;
+        public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f080001;
+        public static final int AppTheme=0x7f090001;
     }
     public static final class styleable {
         /** Attributes that can be used with a SlidingMenu.
