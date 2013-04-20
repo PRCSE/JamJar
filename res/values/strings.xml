@@ -25,6 +25,7 @@
     <string name="title_activity_activity_login">ActivityLogin</string>
     <string name="title_activity_activity_book">Event</string>
     <string name="title_activity_activity_booking">ActivityBooking</string>
-    <string name="hello_world">Hello world!</string>
+    
+    <string name="system_null_image_url">https://dl.dropboxusercontent.com/u/6918192/University/PRCSE/null</string>
 
 </resources>
