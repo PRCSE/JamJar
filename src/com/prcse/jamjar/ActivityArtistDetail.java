@@ -49,6 +49,8 @@ public class ActivityArtistDetail extends Activity implements OnItemClickListene
 		EventGridAdapter eventGridAdapter = new EventGridAdapter(this, artist);
 		eventGrid = (GridView) findViewById(R.id.event_tickets);
         eventGrid.setAdapter(eventGridAdapter);
+        eventGridAdapter.notifyDataSetChanged();
+        String test = "test";
         //eventGridAdapter.setArtist(artist);
 //        eventGrid.setOnItemClickListener(new OnItemClickListener() {
 //			@Override

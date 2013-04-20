@@ -29,11 +29,21 @@ public class EventGridAdapter extends BaseAdapter {
     public EventGridAdapter(Context c, Artist artist) {
         mContext = c;
         this.artist = artist;
+        billings = artist.getBillings();
+        for (Billing b : billings)
+        {
+        	events.add(b.getEvent());
+        }
         layoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     
     public void setArtist(Artist artist) {
     	this.artist = artist;
+    	billings = artist.getBillings();
+        for (Billing b : billings)
+        {
+        	events.add(b.getEvent());
+        }
     	this.notifyDataSetChanged();
     }
 
@@ -58,7 +68,7 @@ public class EventGridAdapter extends BaseAdapter {
     	ViewHolder holder;
     	
         if (convertView == null) {  // if it's not recycled, initialise some attributes
-            convertView = layoutInflater.inflate(R.layout.artist_venue_tile, parent, false);
+            convertView = layoutInflater.inflate(R.layout.event_tile, parent, false);
             
             holder = new ViewHolder();
         	holder.ticketGrid = (RelativeLayout) convertView.findViewById(R.id.ticket_grid);
@@ -79,14 +89,9 @@ public class EventGridAdapter extends BaseAdapter {
         	holder = (ViewHolder) convertView.getTag();
         }
 
-        billings = artist.getBillings();
-        for (Billing b : billings)
-        {
-        	events.add(b.getEvent());
-        }
-        
-        venue = events.get(position).getSeatingPlan().getVenue();
         Event event = (Event) events.get(position);
+        venue = event.getSeatingPlan().getVenue();
+        
         
         holder.day.setText(event.getDayToString());
         holder.month.setText(event.getMonthToString());
