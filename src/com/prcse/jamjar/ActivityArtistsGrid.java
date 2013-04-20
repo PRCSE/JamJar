@@ -4,14 +4,11 @@ import java.util.ArrayList;
 
 
 import com.prcse.datamodel.Artist;
-import com.prcse.utils.PrcseConnection;
 import com.slidingmenu.lib.SlidingMenu;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -24,7 +21,6 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
