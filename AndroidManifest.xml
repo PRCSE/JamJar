@@ -78,6 +78,18 @@
             android:name="com.prcse.jamjar.ActivityLogin"
             android:label="@string/title_activity_activity_login" >
         </activity>
+        <activity
+            android:name="com.prcse.jamjar.ActivityBook"
+            android:label="@string/title_activity_activity_book"
+            android:parentActivityName="com.prcse.jamjar.ActivityArtistDetail" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.prcse.jamjar.ActivityArtistDetail" />
+        </activity>
+        <activity
+            android:name="com.prcse.jamjar.ActivityBooking"
+            android:label="@string/title_activity_activity_booking" >
+        </activity>
     </application>
 
 </manifest>
