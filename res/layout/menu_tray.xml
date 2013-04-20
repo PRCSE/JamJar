@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#000000" >
+    android:background="#000000"
+     >
     
 
     <RelativeLayout
@@ -11,14 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#000000"
-        android:clickable="true">
+        android:clickable="true"
+        android:layout_marginTop="22dp">
         
         <ImageView
             android:id="@+id/profile_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Profile"
-            android:src="@drawable/bert" />
+            android:padding="7dp"
+            android:src="@drawable/social_person" />
 
         <TextView
             android:id="@+id/profile_text"
@@ -27,7 +30,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/profile_icon"
-            android:text="Bert Smith"
+            android:text="Login"
             android:textColor="#ffffff"
             android:paddingLeft="10dp"
             android:textSize="22sp" />

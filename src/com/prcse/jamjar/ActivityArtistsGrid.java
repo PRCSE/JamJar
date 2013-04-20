@@ -28,7 +28,7 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class ActivityArtistsGrid extends Activity implements OnClickListener, OnTouchListener{
+public class ActivityArtistsGrid extends Activity implements OnClickListener, OnTouchListener, OnItemClickListener{
 
 	RelativeLayout menu_profile_btn;
 	RelativeLayout menu_spotlight_btn;
@@ -42,31 +42,29 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 	private PrcseConnection connection;
 	private GridView artistGrid;
 	private String image_base = "https://dl.dropboxusercontent.com/u/6918192/University/PRCSE";
-	private String host = "77.99.8.110"; // "192.168.1.155";
+	private String host = "77.99.8.110";
 	private int port = 1234;
 	private ArrayList<Artist> artists;
+	private ArtistGridAdapter artistAdapter;
 	
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) 
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artists_grid);
         setTitle(R.string.title_activity_artists);
         
+        // sets up sliding menu tray
         menuTraySetUp();
 
+        // gets grid, set values to custom adapter then sets adapter to grid.
+        // Finally, sets listener for artist select.
         artistGrid = (GridView) findViewById(R.id.artists_grid);
-        artistGrid.setAdapter(new ArtistGridAdapter(this, this.image_base));
-
-        artistGrid.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-				Toast.makeText(ActivityArtistsGrid.this, "" + position, Toast.LENGTH_SHORT).show();
-				Intent intent = new Intent(v.getContext(), ActivityArtistDetail.class);
-				intent.putExtra("artist", artists.get(position));
-				startActivity(intent);
-			}
-        });
+        artistAdapter = new ArtistGridAdapter(this, this.image_base);
+        artistGrid.setAdapter(artistAdapter);
+        artistGrid.setOnItemClickListener(this);
         
+        // Creates a connection to middle-wear and grabs artist information.
         connection = new PrcseConnection(host, port);
         new Connector().execute(connection);
     }
@@ -125,9 +123,10 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			return artists;
 		}
-    	
+
     	protected void onPostExecute(ArrayList result) {
     		((ArtistGridAdapter) artistGrid.getAdapter()).setArtists(result);
     	}
@@ -175,7 +174,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 	}
 	
     @Override
-    public void onClick(View v)
+    public void onClick(View view)
     {
     	Intent intent = null;
     	
@@ -183,41 +182,41 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
     		menu_tray.toggle();
     	}
     	
-    	switch(v.getId()){
+    	switch(view.getId()){
     	
     	case R.id.profile:
-    		intent = new Intent(v.getContext(), ActivityProfile.class);
+    		intent = new Intent(view.getContext(), ActivityProfile.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     		
     	case R.id.spotlight:
-    		intent = new Intent(v.getContext(), ActivitySpotlight.class);
+    		intent = new Intent(view.getContext(), ActivitySpotlight.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     		startActivity(intent);
     		break;
     		
     	case R.id.search:
-    		intent = new Intent(v.getContext(), ActivitySearch.class);
+    		intent = new Intent(view.getContext(), ActivitySearch.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     		startActivity(intent);
     		break;
     		
     	case R.id.artists:
-    		intent = new Intent(v.getContext(), ActivityArtistsGrid.class);
+    		intent = new Intent(view.getContext(), ActivityArtistsGrid.class);
     		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     		
     	case R.id.venues:
-    		intent = new Intent(v.getContext(), ActivityVenuesGrid.class);
+    		intent = new Intent(view.getContext(), ActivityVenuesGrid.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     		startActivity(intent);
     		break;
     			
     	case R.id.tours:
-    		intent = new Intent(v.getContext(), ActivityToursGrid.class);
+    		intent = new Intent(view.getContext(), ActivityToursGrid.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     		startActivity(intent);
     		break;
@@ -225,9 +224,9 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
     }
 
 	@Override
-	public boolean onTouch(View v, MotionEvent event) {
+	public boolean onTouch(View view, MotionEvent event) {
 		
-		switch(v.getId())
+		switch(view.getId())
 		{
     	
     	case R.id.profile:
@@ -255,5 +254,18 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
     		break;
 		}
 		return false;
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+		switch(parent.getId())
+		{
+		case R.id.artist_venue_grid:
+			Intent intent = new Intent(view.getContext(), ActivityArtistDetail.class);
+			intent.putExtra("artist", artists.get(position));
+			startActivity(intent);
+			break;
+		}
 	}
 }
