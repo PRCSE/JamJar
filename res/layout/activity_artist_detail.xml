@@ -64,11 +64,24 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"/>
     
+    <TextView
+        android:id="@+id/event_unavalible_message"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Unfortunately, this artist currently has no scheduled events"
+        android:layout_below="@id/events_title"
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="30dp"
+        />
+    
     <GridView
         android:id="@+id/event_tickets"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/events_title"
+        android:layout_below="@+id/event_unavalible_message"
 		android:numColumns="auto_fit"
 		android:verticalSpacing="10dp"
 		android:horizontalSpacing="20dp"

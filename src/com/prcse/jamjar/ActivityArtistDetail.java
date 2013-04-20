@@ -34,33 +34,43 @@ public class ActivityArtistDetail extends Activity implements OnItemClickListene
 		TextView artistBio = (TextView) findViewById(R.id.artist_bio);
 		Spinner toursSpinner = (Spinner) findViewById(R.id.tour_filter_spinner);
 		ArrayAdapter<String> toursArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-		
+		TextView noEventsMessage = (TextView) findViewById(R.id.event_unavalible_message);
 		
 		setTitle(artist.getName());
 		artistBio.setText(artist.getBio());
 		
-		toursArrayAdapter.add("All Events");
-		for (Tour t : tours)
+		if (tours.size() > 0)
 		{
-			toursArrayAdapter.add(t.getName());
+			toursArrayAdapter.add("All Events");
+			for (Tour t : tours)
+			{
+				toursArrayAdapter.add(t.getName());
+			}
+			toursSpinner.setEnabled(true);
 		}
+		else
+		{
+			toursArrayAdapter.add("Currently No Scheduled Tours");
+			toursSpinner.setEnabled(false);
+		}
+		
 		toursSpinner.setAdapter(toursArrayAdapter);
 		
 		EventGridAdapter eventGridAdapter = new EventGridAdapter(this, artist);
 		eventGrid = (GridView) findViewById(R.id.event_tickets);
         eventGrid.setAdapter(eventGridAdapter);
         eventGridAdapter.notifyDataSetChanged();
-        String test = "test";
-        //eventGridAdapter.setArtist(artist);
-//        eventGrid.setOnItemClickListener(new OnItemClickListener() {
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-//				Toast.makeText(ActivityArtistDetail.this, "" + position, Toast.LENGTH_SHORT).show();
-//				//Intent intent = new Intent(v.getContext(), ActivityArtistDetail.class);
-//				//intent.putExtra("artist", artists.get(position));
-//				//startActivity(intent);
-//			}
-//        });
+        
+        if (eventGridAdapter.getCount() == 0)
+        {
+        	noEventsMessage.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+        	noEventsMessage.setVisibility(View.GONE);
+        }
+        
+        eventGrid.setOnItemClickListener(this);
 		
 		
 		
@@ -95,7 +105,18 @@ public class ActivityArtistDetail extends Activity implements OnItemClickListene
 		case R.id.tour_filter_spinner:
 			// TODO: filter based on selected tour.
 			break;
+		case R.id.event_tickets:
+			viewEvent(position);
+			break;
 		}
+		
+	}
+
+	private void viewEvent(int position) {
+		
+		Toast.makeText(ActivityArtistDetail.this, "" + position, Toast.LENGTH_SHORT).show();
+		//Intent intent = new Intent(v.getContext(), ActivityBooking.class);
+		//intent.putExtra("artist", ActivityArtistDetail.this.artist);
 		
 	}
 
