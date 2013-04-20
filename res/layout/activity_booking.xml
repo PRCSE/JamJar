@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ActivityBook" >
+
+    <TextView
+        android:id="@+id/artist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A$AP ROCKY"
+        android:textAllCaps="true"
+        android:textSize="55sp" />
+    
+    <TextView
+        android:id="@+id/presents_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="presents"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
+        android:textStyle="italic"
+        android:textColor="@color/text_grey"
+        android:layout_below="@id/artist_name" />
+    
+    <TextView
+        android:id="@+id/tour_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Long.Live.A$AP"
+        android:textSize="30sp"
+        android:layout_below="@id/presents_title" />
+    
+    <TextView
+        android:id="@+id/at_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="at"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
+        android:textStyle="italic"
+        android:textColor="@color/text_grey"
+        android:layout_below="@id/tour_name" />
+    
+    <TextView
+        android:id="@+id/venue_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HMV, The Ritz"
+        android:textSize="30sp"
+        android:layout_below="@id/at_title" />
+    
+    <TextView
+        android:id="@+id/in_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textStyle="italic"
+        android:textColor="@color/text_grey"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignBaseline="@+id/venue_name"
+        android:layout_alignBottom="@+id/venue_name"
+        android:layout_toRightOf="@+id/venue_name"
+        android:text="in" />
+    
+    <TextView
+        android:id="@+id/city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/venue_name"
+        android:layout_alignBottom="@+id/venue_name"
+        android:layout_toRightOf="@+id/in_title"
+        android:textSize="30sp"
+        android:text="Manchester" />
+    
+    <TextView
+        android:id="@+id/on_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="on"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
+        android:textStyle="italic"
+        android:textColor="@color/text_grey"
+        android:layout_below="@id/venue_name" />
+    
+    <TextView
+        android:id="@+id/date_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monday, November 15, 2013"
+        android:textSize="30sp"
+        android:layout_below="@id/on_title" />
+
+
+</RelativeLayout>

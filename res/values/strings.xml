@@ -23,5 +23,7 @@
     <string name="title_activity_activity_venues_grid">ActivityVenuesGrid</string>
     <string name="title_activity_activity_tour_grid">ActivityTourGrid</string>
     <string name="title_activity_activity_search">ActivitySearch</string>
+    <string name="title_activity_activity_book">Event</string>
+    <string name="title_activity_activity_booking">ActivityBooking</string>
 
 </resources>
