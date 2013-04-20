@@ -1,23 +1,19 @@
 package com.prcse.jamjar;
 
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import com.prcse.datamodel.Artist;
 import com.prcse.datamodel.Billing;
 import com.prcse.datamodel.Event;
+import com.prcse.datamodel.Tour;
+import com.prcse.datamodel.Venue;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,8 +21,10 @@ public class EventGridAdapter extends BaseAdapter {
 	private Context mContext;
 	private LayoutInflater layoutInflater;
 	private Artist artist;
+	private ArrayList<Tour> tours = new ArrayList<Tour>();
 	private ArrayList<Billing> billings = new ArrayList<Billing>();
 	private ArrayList<Event> events = new ArrayList<Event>();
+	private Venue venue = null;
 
     public EventGridAdapter(Context c, Artist artist) {
         mContext = c;
@@ -81,24 +79,23 @@ public class EventGridAdapter extends BaseAdapter {
         	holder = (ViewHolder) convertView.getTag();
         }
 
+        billings = artist.getBillings();
+        for (Billing b : billings)
+        {
+        	events.add(b.getEvent());
+        }
         
-        
-//        this.billings = artist.getBillings();
-//        for (Billing b : this.billings)
-//        {
-//        	this.events.add(b.getEvent());
-//        }
-        
+        venue = events.get(position).getSeatingPlan().getVenue();
         Event event = (Event) events.get(position);
+        
         holder.day.setText(event.getDayToString());
         holder.month.setText(event.getMonthToString());
         holder.year.setText(event.getYearToString());
         holder.artist.setText(artist.getName());
-        //holder.tour.setText(event.getYearToString());
-        holder.city.setText(artist.getName());
-        holder.venue.setText(artist.getName());
+        holder.tour.setText("tba");
+        holder.city.setText(venue.getPostcode());
+        holder.venue.setText(venue.getName());
 
-        //holder.text.setText(artist.getName());
         return convertView;
     }
     
