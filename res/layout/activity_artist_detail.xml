@@ -35,8 +35,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/artist_banner"
-        android:text="Tours"
-        android:textSize="18sp"/>
+        android:text="tours"
+        android:textColor="@color/dark_purple"
+        android:textSize="30sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"/>
     
     <Spinner
         android:id="@+id/tour_filter_spinner"
@@ -53,17 +57,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/tour_filter_spinner"
-        android:text="Events"
-        android:textSize="18sp"/>
+        android:text="events"
+        android:textColor="@color/dark_purple"
+        android:textSize="30sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"/>
     
     <GridView
         android:id="@+id/event_tickets"
-        android:layout_width="260dp"
-        android:layout_height="100dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_below="@+id/events_title"
 		android:numColumns="auto_fit"
 		android:verticalSpacing="10dp"
-		android:horizontalSpacing="0dp"
+		android:horizontalSpacing="20dp"
 		android:stretchMode="spacingWidthUniform"
 		android:gravity="center"
 		android:background="#E5E5E4"

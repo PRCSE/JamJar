@@ -3,4 +3,7 @@
     <color
         name="text_grey"
         >#7D7D7D</color>
+    <color
+        name="dark_purple"
+        >#7F4993</color>
 </resources>
