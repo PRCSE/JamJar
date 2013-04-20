@@ -54,8 +54,8 @@ public class EventGridAdapter extends BaseAdapter {
     	return 0;
     }
 
-    public Object getItem(int position) {
-        return null;
+    public Event getItem(int position) {
+        return events.get(position);
     }
 
     public long getItemId(int position) {

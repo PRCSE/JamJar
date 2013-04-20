@@ -3,6 +3,7 @@ package com.prcse.jamjar;
 import java.util.ArrayList;
 
 import com.prcse.datamodel.Artist;
+import com.prcse.datamodel.Event;
 import com.prcse.datamodel.Tour;
 
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import android.widget.Toast;
 public class ActivityArtistDetail extends Activity implements OnItemClickListener {
 
 	private GridView eventGrid;
+	private Artist artist;
+	private EventGridAdapter eventGridAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,7 @@ public class ActivityArtistDetail extends Activity implements OnItemClickListene
 		setContentView(R.layout.activity_artist_detail);
 		
 		
-		Artist artist = (Artist) getIntent().getExtras().get("artist");
+		artist = (Artist) getIntent().getExtras().get("artist");
 		ArrayList<Tour> tours = (ArrayList<Tour>) artist.getTours();
 		TextView artistBio = (TextView) findViewById(R.id.artist_bio);
 		Spinner toursSpinner = (Spinner) findViewById(R.id.tour_filter_spinner);
@@ -56,7 +59,7 @@ public class ActivityArtistDetail extends Activity implements OnItemClickListene
 		
 		toursSpinner.setAdapter(toursArrayAdapter);
 		
-		EventGridAdapter eventGridAdapter = new EventGridAdapter(this, artist);
+		eventGridAdapter = new EventGridAdapter(this, artist);
 		eventGrid = (GridView) findViewById(R.id.event_tickets);
         eventGrid.setAdapter(eventGridAdapter);
         eventGridAdapter.notifyDataSetChanged();
@@ -106,18 +109,18 @@ public class ActivityArtistDetail extends Activity implements OnItemClickListene
 			// TODO: filter based on selected tour.
 			break;
 		case R.id.event_tickets:
-			viewEvent(position);
+			viewEvent(view, position);
 			break;
 		}
-		
 	}
 
-	private void viewEvent(int position) {
-		
+	private void viewEvent(View view, int position) 
+	{
 		Toast.makeText(ActivityArtistDetail.this, "" + position, Toast.LENGTH_SHORT).show();
-		//Intent intent = new Intent(v.getContext(), ActivityBooking.class);
-		//intent.putExtra("artist", ActivityArtistDetail.this.artist);
-		
+		Intent intent = new Intent(view.getContext(), ActivityBooking.class);
+		intent.putExtra("artist", ActivityArtistDetail.this.artist);
+		intent.putExtra("event", ActivityArtistDetail.this.eventGridAdapter.getItem(position));
+		startActivity(intent);
 	}
 
 }

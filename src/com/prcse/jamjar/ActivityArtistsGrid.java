@@ -17,8 +17,10 @@ import android.graphics.Point;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -26,13 +28,20 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class ActivityArtistsGrid extends Activity implements OnClickListener{
+public class ActivityArtistsGrid extends Activity implements OnClickListener, OnTouchListener{
 
+	RelativeLayout menu_profile_btn;
+	RelativeLayout menu_spotlight_btn;
+	RelativeLayout menu_search_btn;
+	RelativeLayout menu_artists_btn;
+	RelativeLayout menu_venues_btn;
+	RelativeLayout menu_tours_btn;
+	
 	private ActionBar actionBar;
 	private SlidingMenu menu_tray;
 	private PrcseConnection connection;
 	private GridView artistGrid;
-	private String image_base = "http://drive.google.com/uc?export=view&id=";
+	private String image_base = "https://dl.dropboxusercontent.com/u/6918192/University/PRCSE";
 	private String host = "77.99.8.110"; // "192.168.1.155";
 	private int port = 1234;
 	private ArrayList<Artist> artists;
@@ -141,18 +150,26 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
 		menu_tray.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		menu_tray.setMenu(R.layout.menu_tray);
 		
-		RelativeLayout menu_profile_btn = (RelativeLayout) menu_tray.findViewById(R.id.profile);
-		RelativeLayout menu_spotlight_btn = (RelativeLayout) menu_tray.findViewById(R.id.spotlight);
-		RelativeLayout menu_search_btn = (RelativeLayout) menu_tray.findViewById(R.id.search);
-		RelativeLayout menu_artists_btn = (RelativeLayout) menu_tray.findViewById(R.id.artists);
-		RelativeLayout menu_venues_btn = (RelativeLayout) menu_tray.findViewById(R.id.venues);
-		RelativeLayout menu_tours_btn = (RelativeLayout) menu_tray.findViewById(R.id.tours);
+		menu_profile_btn = (RelativeLayout) menu_tray.findViewById(R.id.profile);
+		menu_spotlight_btn = (RelativeLayout) menu_tray.findViewById(R.id.spotlight);
+		menu_search_btn = (RelativeLayout) menu_tray.findViewById(R.id.search);
+		menu_artists_btn = (RelativeLayout) menu_tray.findViewById(R.id.artists);
+		menu_venues_btn = (RelativeLayout) menu_tray.findViewById(R.id.venues);
+		menu_tours_btn = (RelativeLayout) menu_tray.findViewById(R.id.tours);
+		
 		menu_profile_btn.setOnClickListener(this);
 		menu_spotlight_btn.setOnClickListener(this);
 		menu_search_btn.setOnClickListener(this);
 		menu_artists_btn.setOnClickListener(this);
 		menu_venues_btn.setOnClickListener(this);
 		menu_tours_btn.setOnClickListener(this);
+		
+		menu_profile_btn.setOnTouchListener(this);
+		menu_spotlight_btn.setOnTouchListener(this);
+		menu_search_btn.setOnTouchListener(this);
+		menu_artists_btn.setOnTouchListener(this);
+		menu_venues_btn.setOnTouchListener(this);
+		menu_tours_btn.setOnTouchListener(this);
 		
 		menu_artists_btn.setBackgroundColor(Color.parseColor("#7f4993"));
 	}
@@ -206,4 +223,37 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener{
     		break;
     	}
     }
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		
+		switch(v.getId())
+		{
+    	
+    	case R.id.profile:
+    		menu_profile_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+    		break;
+    		
+    	case R.id.spotlight:
+    		menu_spotlight_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+    		break;
+    		
+    	case R.id.search:
+    		menu_search_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+    		break;
+    		
+    	case R.id.artists:
+    		menu_artists_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+    		break;
+    		
+    	case R.id.venues:
+    		menu_venues_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+    		break;
+    			
+    	case R.id.tours:
+    		menu_tours_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+    		break;
+		}
+		return false;
+	}
 }

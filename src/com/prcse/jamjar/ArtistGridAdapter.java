@@ -65,12 +65,6 @@ public class ArtistGridAdapter extends BaseAdapter {
     		holder.text = (TextView) convertView.findViewById(R.id.title);
     		
     		convertView.setTag(holder);
-        	
-    		// unused image scaling
-        	//imageView = new ImageView(mContext);
-            //imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-            //imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            //imageView.setPadding(8, 8, 8, 8);
     		
         } else {
         	holder = (ViewHolder) convertView.getTag();
@@ -78,7 +72,7 @@ public class ArtistGridAdapter extends BaseAdapter {
 
         Artist artist = (Artist) artists.get(position);
         
-        if(artist.getThumb() != "NO SET IMAGE") {
+        if(artist.getThumb() != "NO SET IMAGE" || artist.getThumb() != null) {
         	String url = this.image_base + artist.getThumb();
         	new DownloadImageTask(holder.image).execute(url);
         }
