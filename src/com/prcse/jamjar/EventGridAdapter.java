@@ -21,7 +21,7 @@ public class EventGridAdapter extends BaseAdapter {
 	private Context mContext;
 	private LayoutInflater layoutInflater;
 	private Artist artist;
-	private ArrayList<Tour> tours = new ArrayList<Tour>();
+	//private ArrayList<Tour> tours = new ArrayList<Tour>();
 	private ArrayList<Billing> billings = new ArrayList<Billing>();
 	private ArrayList<Event> events = new ArrayList<Event>();
 	private Venue venue = null;
