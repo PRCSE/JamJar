@@ -116,6 +116,70 @@
         android:textSize="55sp"
         android:fontFamily="sans-serif-light"
         android:layout_below="@id/date_string" />
+    
+    <TextView
+        android:id="@+id/ticket_type_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ticket type"
+        android:layout_marginTop="5dp"
+        android:textSize="30sp"
+        android:textStyle="italic"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/text_grey"
+        android:layout_below="@id/purchase_title" />
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ticket_type_title"
+        android:layoutDirection="ltr"
+        android:gravity="center" >
+        
+        <RadioButton
+	        android:id="@+id/standing_radio"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:textSize="30sp"
+	        android:fontFamily="sans-serif-light"
+	        android:text="standing" />
+        
+        <RadioButton
+	        android:id="@+id/seated_radio"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:textSize="30sp"
+	        android:fontFamily="sans-serif-light"
+	        android:text="seated" />
 
+	    <RadioButton
+	        android:id="@+id/premium_radio"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:textSize="30sp"
+	        android:fontFamily="sans-serif-light"
+	        android:text="premium" />
+    
+    
+        
+    </LinearLayout>
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="BOOK"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="sans-serif-light"
+        android:textSize="50sp" />
+    
 </RelativeLayout>
