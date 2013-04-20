@@ -32,7 +32,7 @@ public class ActivityBooking extends Activity {
 		//tourName.setText
 		venueName.setText(event.getSeatingPlan().getVenue().getName());
 		cityName.setText(event.getSeatingPlan().getVenue().getPostcode());
-		dateString.setText(event.getDateToString());
+		//dateString.setText(event.getDateToString());
 	}
 
 	@Override
