@@ -48,6 +48,10 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
         setContentView(R.layout.activity_artists_grid);
         setTitle(R.string.title_activity_artists);
         
+        // get global variables
+        appState = ((JarLid)this.getApplication());
+        artists = appState.getArtists();
+        
         // sets up sliding menu tray
         menuTraySetUp();
 
@@ -57,9 +61,6 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
         artistAdapter = new ArtistGridAdapter(this, appState.getImage_base());
         artistGrid.setAdapter(artistAdapter);
         artistGrid.setOnItemClickListener(this);
-        
-        appState = ((JarLid)this.getApplication());
-        artists = appState.getArtists();
 
         artistGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override

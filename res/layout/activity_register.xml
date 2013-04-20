@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/registerView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical"
+	    android:gravity="center_horizontal" >
+	
+	        
+	    <EditText
+	        android:id="@+id/txtEmailReg"
+	        android:hint="your@email.here"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="textEmailAddress"
+	        android:layout_marginTop="150dp" >
+	
+	        <requestFocus />
+	    </EditText>
+	
+	    <EditText
+	        android:id="@+id/txtPasswordReg"
+	        android:hint="password"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:layout_marginTop="10dp"
+	        android:inputType="textPassword" />
+	    
+	    <EditText
+	        android:id="@+id/txtPasswordRegConfirm"
+	        android:hint="confirm password"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:layout_marginTop="10dp"
+	        android:inputType="textPassword" />
+	    
+	    <Spinner 
+	        android:id="@+id/spnTitle"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:prompt="@string/title" />
+	    
+	    <EditText
+	        android:id="@+id/txtForename"
+	        android:hint="Forename"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:layout_marginTop="10dp"
+	        android:inputType="text" />
+	    
+	    <EditText
+	        android:id="@+id/txtSurname"
+	        android:hint="Surname"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:layout_marginTop="10dp"
+	        android:inputType="text" />
+	    
+	    <EditText
+	        android:id="@+id/txtTelephone"
+	        android:hint="Telephone"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:layout_marginTop="10dp"
+	        android:inputType="text" />
+	    
+	    <EditText
+	        android:id="@+id/txtMobile"
+	        android:hint="Mobile"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:layout_marginTop="10dp"
+	        android:inputType="text" />
+	    
+	    <EditText
+	        android:id="@+id/txtAddress1"
+	        android:hint="Address Line 1"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:layout_marginTop="10dp"
+	        android:inputType="text" />
+	    
+	    <EditText
+	        android:id="@+id/txtAddress2"
+	        android:hint="Address Line 2"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:layout_marginTop="10dp"
+	        android:inputType="text" />
+	    
+	    <EditText
+	        android:id="@+id/txtTown"
+	        android:hint="Town"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:layout_marginTop="10dp"
+	        android:inputType="text" />
+	    
+	    <EditText
+	        android:id="@+id/txtCounty"
+	        android:hint="County"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:layout_marginTop="10dp"
+	        android:inputType="text" />
+	    
+	    <EditText
+	        android:id="@+id/txtPostCode"
+	        android:hint="Post Code"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:layout_marginTop="10dp"
+	        android:inputType="textPostalAddress" />
+	    
+		<Spinner 
+	        android:id="@+id/spnCountry"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:prompt="@string/country" />
+	
+	    <Button
+	        android:id="@+id/btnRegister"
+	        android:layout_width="400dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="40dp"
+	        android:text="Register"
+	         />
+	
+	    <TextView
+	        android:id="@+id/errorText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="#FF0000"
+	        android:text="Error" />
+	
+	    
+	</LinearLayout>
+
+</ScrollView>

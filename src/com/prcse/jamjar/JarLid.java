@@ -19,18 +19,10 @@ import com.prcse.utils.PrcseConnection;
 import com.prcse.utils.ResponseHandler;
 import com.slidingmenu.lib.SlidingMenu;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Point;
-import android.util.Log;
-import android.view.Display;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.RelativeLayout;
 
 public class JarLid extends Application {
 	
@@ -59,13 +51,25 @@ public class JarLid extends Application {
 				
 				// arg1 will be the requests that are pushed from the server
 				if(arg1 == null && connection.isConnected()) {
+					// get front page info
 					connection.getFrontPage(new ResponseHandler() {
 
 						// here we react to response
 						@Override
 						public void handleResponse(Request response) {
+							// to be called when response comes back
 							artists = ((FrontPage)response).getArtists();
 						}
+					});
+					
+					connection.login(user, new ResponseHandler() {
+
+						@Override
+						public void handleResponse(Request response) {
+							// change to the profile page
+							
+						}
+						
 					});
 				}	
 			}
@@ -82,6 +86,15 @@ public class JarLid extends Application {
 //        else {
 //        	Log.e("Customer corruption", "Failed to retrieve or save customer to storage");
 //        }
+	}
+	
+	public boolean isLoggedIn() {
+		if(user.getCustomer() != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public PrcseConnection getConnection() {
