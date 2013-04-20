@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:text="A$AP ROCKY"
         android:textAllCaps="true"
+        android:fontFamily="sans-serif-light"
         android:textSize="55sp" />
     
     <TextView
@@ -25,6 +26,7 @@
         android:textSize="30sp"
         android:textStyle="italic"
         android:textColor="@color/text_grey"
+        android:fontFamily="sans-serif-light"
         android:layout_below="@id/artist_name" />
     
     <TextView
@@ -33,6 +35,7 @@
         android:layout_height="wrap_content"
         android:text="Long.Live.A$AP"
         android:textSize="30sp"
+        android:fontFamily="sans-serif-light"
         android:layout_below="@id/presents_title" />
     
     <TextView
@@ -40,9 +43,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="at"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:textSize="30sp"
         android:textStyle="italic"
+        android:fontFamily="sans-serif-light"
         android:textColor="@color/text_grey"
         android:layout_below="@id/tour_name" />
     
@@ -52,6 +56,7 @@
         android:layout_height="wrap_content"
         android:text="HMV, The Ritz"
         android:textSize="30sp"
+        android:fontFamily="sans-serif-light"
         android:layout_below="@id/at_title" />
     
     <TextView
@@ -61,8 +66,9 @@
         android:textSize="30sp"
         android:textStyle="italic"
         android:textColor="@color/text_grey"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:fontFamily="sans-serif-light"
         android:layout_alignBaseline="@+id/venue_name"
         android:layout_alignBottom="@+id/venue_name"
         android:layout_toRightOf="@+id/venue_name"
@@ -76,6 +82,7 @@
         android:layout_alignBottom="@+id/venue_name"
         android:layout_toRightOf="@+id/in_title"
         android:textSize="30sp"
+        android:fontFamily="sans-serif-light"
         android:text="Manchester" />
     
     <TextView
@@ -83,9 +90,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="on"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:textSize="30sp"
         android:textStyle="italic"
+        android:fontFamily="sans-serif-light"
         android:textColor="@color/text_grey"
         android:layout_below="@id/venue_name" />
     
@@ -95,7 +103,19 @@
         android:layout_height="wrap_content"
         android:text="Monday, November 15, 2013"
         android:textSize="30sp"
+        android:fontFamily="sans-serif-light"
         android:layout_below="@id/on_title" />
+    
+    <TextView
+        android:id="@+id/purchase_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="purchase"
+        android:textAllCaps="true"
+        android:layout_marginTop="20dp"
+        android:textSize="55sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_below="@id/date_string" />
 
 
 </RelativeLayout>
