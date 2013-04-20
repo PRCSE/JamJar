@@ -32,7 +32,7 @@ public class ActivitySpotlight extends Activity implements OnClickListener {
 	private SlidingMenu menu_tray;
 	private PrcseConnection connection;
 	private GridView gridview;
-	private String image_base = "https://dl.dropbox.com/u/63072480/JamJarPics/";
+	private String image_base = "http://drive.google.com/uc?export=view&id=";
 	private String host = "77.99.8.110"; // "192.168.1.155";
 	private int port = 1234;
 	private ArrayList<Artist> artists;
