@@ -61,6 +61,8 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
         artistAdapter = new ArtistGridAdapter(this, appState.getImage_base());
         artistGrid.setAdapter(artistAdapter);
         artistGrid.setOnItemClickListener(this);
+        
+        artistAdapter.setArtists(artists);
 
         artistGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override

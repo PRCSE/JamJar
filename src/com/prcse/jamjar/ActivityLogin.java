@@ -1,9 +1,13 @@
 package com.prcse.jamjar;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import com.prcse.protocol.CustomerInfo;
+import com.prcse.protocol.Request;
 import com.prcse.utils.PrcseConnection;
+import com.prcse.utils.ResponseHandler;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,26 +22,27 @@ import android.widget.TextView;
 public class ActivityLogin extends Activity implements OnClickListener {
 
 	private CustomerInfo customer;
-	private PrcseConnection connection;
-	private String host = "77.99.8.110";
-	private int port = 1234;
 	private EditText editTextEmail = null;
 	private EditText editTextPassword = null;
 	private TextView viewTextError = null;
 	private Button btnLogin = null;
-	
-	public CustomerInfo getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(CustomerInfo customer) {
-		this.customer = customer;
-	}
+	private JarLid appState;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
+		appState = ((JarLid)this.getApplication());
+		
+		appState.getConnection().addObserver(new Observer() {
+			
+			@Override
+			public void update(Observable arg0, Object arg1) {
+				// perform updates here
+			}
+			
+		});
 		
 		editTextEmail = (EditText)findViewById(R.id.email);
 		editTextPassword = (EditText)findViewById(R.id.password);
@@ -45,8 +50,6 @@ public class ActivityLogin extends Activity implements OnClickListener {
 		btnLogin = (Button)findViewById(R.id.login);
 		
 		btnLogin.setOnClickListener(this);
-		
-		connection = new PrcseConnection(host, port);
 	}
 
 	@Override
@@ -81,57 +84,30 @@ public class ActivityLogin extends Activity implements OnClickListener {
 	private void executeLogin() {
 		customer = new CustomerInfo(editTextEmail.getText().toString(),
 									editTextPassword.getText().toString());
-				
-		new Connector().execute(connection);
 		
-		while(customer.getCustomer() == null || customer.getError() == null) {
-			if(customer.getError() != null) {
-				btnLogin.setEnabled(true);
-				viewTextError.setText(customer.getError());
+		
+		
+		appState.getConnection().login(customer, new ResponseHandler() {
+
+			@Override
+			public void handleResponse(Request response) {
+				if(customer.getError() != null) {
+					btnLogin.setEnabled(true);
+					viewTextError.setText(customer.getError());
+				}
+				else {
+					// TODO close login activity and open customer profile page (passing customer info object)
+				}
 			}
-			else {
-				// TODO close login activity and open customer profile page (passing customer info object)
-			}
-		}
+			
+		});
+	}
+	
+	public CustomerInfo getCustomer() {
+		return customer;
 	}
 
-	private class Connector extends AsyncTask<PrcseConnection, Integer, Boolean> {
-		@Override
-		protected Boolean doInBackground(PrcseConnection... params) {
-			PrcseConnection connection = params[0];
-			try {
-				connection.connect();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return connection.isConnected();
-		}
-		
-		protected void onPostExecute(Boolean result) {
-    		if(result == true) {
-    			new RunLogin().execute(connection);
-    		}
-    	}
-    }
-	
-	private class RunLogin extends AsyncTask<PrcseConnection, Integer, CustomerInfo> {
-    	@Override
-		protected CustomerInfo doInBackground(PrcseConnection... params) {
-			PrcseConnection connection = params[0];
-			CustomerInfo customer = ActivityLogin.this.getCustomer();
-			
-			try {
-				connection.login(customer, null);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return customer;
-		}
-    	
-    	protected void onPostExecute(CustomerInfo result) {
-    		ActivityLogin.this.setCustomer(result);
-    	}
-    }
+	public void setCustomer(CustomerInfo customer) {
+		this.customer = customer;
+	}
 }
