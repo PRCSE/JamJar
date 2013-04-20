@@ -1,13 +1,7 @@
 package com.prcse.jamjar;
 
-import java.util.ArrayList;
-
-
-import com.prcse.datamodel.Artist;
-import com.prcse.utils.PrcseConnection;
 import com.slidingmenu.lib.SlidingMenu;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -19,29 +13,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.GridView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 public class ActivitySpotlight extends Activity implements OnClickListener {
 
 	private ActionBar actionBar;
 	private SlidingMenu menu_tray;
-	private PrcseConnection connection;
-	private GridView gridview;
-	private String image_base = "http://drive.google.com/uc?export=view&id=";
-	private String host = "77.99.8.110"; // "192.168.1.155";
-	private int port = 1234;
-	private ArrayList<Artist> artists;
+	private JarLid appState;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spotlight); 
         setTitle(R.string.title_activity_spotlight);
+        
+        appState = ((JarLid)this.getApplication());
         
         menuTraySetUp();
     }
@@ -69,46 +55,7 @@ public class ActivitySpotlight extends Activity implements OnClickListener {
 		return true;
 	}
     
-    private class Connector extends AsyncTask<PrcseConnection, Integer, Boolean> {
-		@Override
-		protected Boolean doInBackground(PrcseConnection... params) {
-			PrcseConnection connection = params[0];
-			try {
-				connection.connect();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return connection.isConnected();
-		}
-		
-		protected void onPostExecute(Boolean result) {
-    		if(result == true) {
-    			new GetArtists().execute(connection);
-    		}
-    	}
-    }
-    
-    private class GetArtists extends AsyncTask<PrcseConnection, Integer, ArrayList> {
-    	@Override
-		protected ArrayList doInBackground(PrcseConnection... params) {
-			PrcseConnection connection = params[0];
-			artists = null;
-			try {
-				artists = connection.getFrontPage();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return artists;
-		}
-    	
-    	protected void onPostExecute(ArrayList result) {
-    		((ArtistGridAdapter) gridview.getAdapter()).setArtists(result);
-    	}
-    }
-    
-	private void menuTraySetUp() {
+    private void menuTraySetUp() {
 		actionBar = getActionBar();
 		Display display = getWindowManager().getDefaultDisplay();
 		Point point = new Point();
@@ -138,7 +85,7 @@ public class ActivitySpotlight extends Activity implements OnClickListener {
 		menu_venues_btn.setOnClickListener(this);
 		menu_tours_btn.setOnClickListener(this);
 		
-		menu_spotlight_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+		menu_profile_btn.setBackgroundColor(Color.parseColor("#7f4993"));
 	}
 	
     @Override
@@ -154,37 +101,37 @@ public class ActivitySpotlight extends Activity implements OnClickListener {
     	
     	case R.id.profile:
     		intent = new Intent(v.getContext(), ActivityProfile.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     		
     	case R.id.spotlight:
     		intent = new Intent(v.getContext(), ActivitySpotlight.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     		
     	case R.id.search:
     		intent = new Intent(v.getContext(), ActivitySearch.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     		startActivity(intent);
     		break;
     		
     	case R.id.artists:
     		intent = new Intent(v.getContext(), ActivityArtistsGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     		
     	case R.id.venues:
     		intent = new Intent(v.getContext(), ActivityVenuesGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     			
     	case R.id.tours:
     		intent = new Intent(v.getContext(), ActivityToursGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     	}

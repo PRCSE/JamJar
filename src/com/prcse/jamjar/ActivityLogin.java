@@ -122,7 +122,7 @@ public class ActivityLogin extends Activity implements OnClickListener {
 			CustomerInfo customer = ActivityLogin.this.getCustomer();
 			
 			try {
-				connection.login(customer);
+				connection.login(customer, null);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

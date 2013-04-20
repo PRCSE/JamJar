@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -39,13 +40,10 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 	
 	private ActionBar actionBar;
 	private SlidingMenu menu_tray;
-	private PrcseConnection connection;
 	private GridView artistGrid;
-	private String image_base = "https://dl.dropboxusercontent.com/u/6918192/University/PRCSE";
-	private String host = "77.99.8.110";
-	private int port = 1234;
-	private ArrayList<Artist> artists;
 	private ArtistGridAdapter artistAdapter;
+	private ArrayList<Artist> artists;
+	private JarLid appState;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -60,13 +58,22 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
         // gets grid, set values to custom adapter then sets adapter to grid.
         // Finally, sets listener for artist select.
         artistGrid = (GridView) findViewById(R.id.artists_grid);
-        artistAdapter = new ArtistGridAdapter(this, this.image_base);
+        artistAdapter = new ArtistGridAdapter(this, appState.getImage_base());
         artistGrid.setAdapter(artistAdapter);
         artistGrid.setOnItemClickListener(this);
         
-        // Creates a connection to middle-wear and grabs artist information.
-        connection = new PrcseConnection(host, port);
-        new Connector().execute(connection);
+        appState = ((JarLid)this.getApplication());
+        artists = appState.getArtists();
+
+        artistGrid.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+				Toast.makeText(ActivityArtistsGrid.this, "" + position, Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(v.getContext(), ActivityArtistDetail.class);
+				intent.putExtra("artist", artists.get(position));
+				startActivity(intent);
+			}
+        });
     }
     
     @Override
@@ -92,46 +99,14 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 		return true;
 	}
     
-    private class Connector extends AsyncTask<PrcseConnection, Integer, Boolean> {
-		@Override
-		protected Boolean doInBackground(PrcseConnection... params) {
-			PrcseConnection connection = params[0];
-			try {
-				connection.connect();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return connection.isConnected();
-		}
-		
-		protected void onPostExecute(Boolean result) {
-    		if(result == true) {
-    			new GetArtists().execute(connection);
-    		}
-    	}
-    }
-    
-    private class GetArtists extends AsyncTask<PrcseConnection, Integer, ArrayList> {
-    	@Override
-		protected ArrayList doInBackground(PrcseConnection... params) {
-			PrcseConnection connection = params[0];
-			artists = null;
-			try {
-				artists = connection.getFrontPage();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			return artists;
-		}
+	public ArrayList<Artist> getArtists() {
+		return artists;
+	}
 
-    	protected void onPostExecute(ArrayList result) {
-    		((ArtistGridAdapter) artistGrid.getAdapter()).setArtists(result);
-    	}
-    }
-    
+	public void setArtists(ArrayList<Artist> artists) {
+		this.artists = artists;
+	}
+
 	private void menuTraySetUp() {
 		actionBar = getActionBar();
 		Display display = getWindowManager().getDefaultDisplay();
@@ -163,14 +138,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 		menu_venues_btn.setOnClickListener(this);
 		menu_tours_btn.setOnClickListener(this);
 		
-		menu_profile_btn.setOnTouchListener(this);
-		menu_spotlight_btn.setOnTouchListener(this);
-		menu_search_btn.setOnTouchListener(this);
-		menu_artists_btn.setOnTouchListener(this);
-		menu_venues_btn.setOnTouchListener(this);
-		menu_tours_btn.setOnTouchListener(this);
-		
-		menu_artists_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+		menu_profile_btn.setBackgroundColor(Color.parseColor("#7f4993"));
 	}
 	
     @Override
@@ -193,8 +161,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
     	case R.id.spotlight:
     		intent = new Intent(view.getContext(), ActivitySpotlight.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    		startActivity(intent);
+			startActivity(intent);
     		break;
     		
     	case R.id.search:
@@ -212,13 +179,13 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
     	case R.id.venues:
     		intent = new Intent(view.getContext(), ActivityVenuesGrid.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    		startActivity(intent);
+			startActivity(intent);
     		break;
     			
     	case R.id.tours:
     		intent = new Intent(view.getContext(), ActivityToursGrid.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    		startActivity(intent);
+			startActivity(intent);
     		break;
     	}
     }
