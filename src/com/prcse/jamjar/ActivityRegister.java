@@ -4,18 +4,13 @@ import java.util.Observable;
 import java.util.Observer;
 
 import com.prcse.datamodel.Customer;
-import com.prcse.datamodel.Tour;
 import com.prcse.protocol.CustomerForm;
 import com.prcse.protocol.CustomerInfo;
 import com.prcse.protocol.Request;
-import com.prcse.utils.PrcseConnection;
 import com.prcse.utils.ResponseHandler;
 
-import android.opengl.Visibility;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
