@@ -71,6 +71,7 @@ public class ArtistGridAdapter extends BaseAdapter {
         }
 
         Artist artist = (Artist) artists.get(position);
+
         
         if(appState.getImages() != null) {
         	//TODO get these to load in when image resource changes

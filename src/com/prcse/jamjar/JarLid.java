@@ -239,16 +239,15 @@ public class JarLid extends Application {
     	}
 	}
 	
-	 private class DownloadImageTask extends AsyncTask<Void, Void, Void> {
-		 HashMap<Long, Bitmap> images;
-	
-	    public DownloadImageTask() {
-	        this.images = new HashMap<Long, Bitmap>();
-	    }
-
+	 private class DownloadImageTask extends AsyncTask<Void, Void, HashMap<Long, Bitmap>> {
+		 
 		@Override
-		protected Void doInBackground(Void... params) {
-			for(Artist a : artists) {
+		protected HashMap<Long, Bitmap> doInBackground(Void... params) {
+			
+			HashMap<Long, Bitmap> images = artist_images;
+			ArrayList<Artist> tempArtists = artists;
+			
+			for(Artist a : tempArtists) {
 				String url = image_base + a.getThumb();
 				Bitmap mIcon = null;
 				try {
@@ -258,12 +257,21 @@ public class JarLid extends Application {
 			            images.put(a.getId(), mIcon);
 					}
 		        } catch (Exception e) {
-		            Log.e("Error", e.getMessage());
-		            e.printStackTrace();
+
 		        }
 			}
-			artist_images = images;
-			return null;
+			return images;
+		}
+
+		@Override
+		protected void onPostExecute(HashMap<Long, Bitmap> result) {
+			
+			super.onPostExecute(result);
+			if (!(result == null))
+			{
+				artist_images = result;
+				connection.notifyObservers();
+			}
 		}
 	}
 	 

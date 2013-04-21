@@ -80,9 +80,20 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 			
 			@Override
 			public void update(Observable arg0, Object arg1) {
+
+				ActivityArtistsGrid.this.runOnUiThread(new Runnable() {
+
+					@Override
+					public void run() {
+						
+						appState = (JarLid) getApplication();
+						artists = appState.getArtists();
+						artistAdapter.setArtists(artists);
+						
+					}
+					
+				});
 				
-				artists = appState.getArtists();
-				artistAdapter.setArtists(artists);
 			}	
 		});
     }
