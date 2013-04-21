@@ -6,14 +6,24 @@
     android:gravity="center_horizontal"
     android:orientation="vertical" >
 
-    <EditText
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@color/title_white"
+        android:padding="20dp"
+        android:layout_marginTop="150dp"
+        >
+
+   	<EditText
         android:id="@+id/email"
         android:hint="your@email.here"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:layout_marginTop="150dp" >
+         >
 
         <requestFocus />
     </EditText>
@@ -42,13 +52,15 @@
         android:textColor="#FF0000"
         android:visibility="invisible" />
 
-    <TextView
+    <Button
         android:id="@+id/register"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Click here to create an account"
+        android:text="Create an account"
         android:layout_marginTop="70dp"
-        android:textSize="20sp"
         android:clickable="true" />
+        
+    </LinearLayout>
+    
 
 </LinearLayout>
