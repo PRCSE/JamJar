@@ -15,6 +15,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import com.prcse.datamodel.Artist;
+import com.prcse.datamodel.Customer;
 import com.prcse.protocol.CustomerInfo;
 import com.prcse.protocol.Request;
 import com.prcse.protocol.FrontPage;
@@ -49,9 +50,8 @@ public class JarLid extends Application {
 	// global info
 	private ArrayList<Artist> artists;
 	private CustomerInfo user;
-	private ImageView user_image;
-	HashMap artist_images;
-	
+	private Bitmap user_image;
+	HashMap<Long, Bitmap> artist_images;
 
 	public JarLid() {
 		user = new CustomerInfo();
@@ -62,22 +62,29 @@ public class JarLid extends Application {
 
 			@Override
 			public void update(Observable arg0, Object arg1) {
-				
 				// arg1 will be the requests that are pushed from the server
 				if(arg1 == null && connection.isConnected()) {
-					// get front page info
+					// if this is true we have just connected, so get front page
 					connection.getFrontPage(new ResponseHandler() {
-
-						// here we react to response
+						// here we react to the response
 						@Override
 						public void handleResponse(Request response) {
 							// to be called when response comes back
 							artists = ((FrontPage)response).getArtists();
 							
+							// get images with async task
 							new DownloadImageTask().execute();
 						}
 					});
-				}	
+				}
+				else if(arg1 instanceof CustomerInfo) {
+					// update CustomerInfo object
+					JarLid.this.setUser((CustomerInfo) arg1);
+					if(JarLid.this.getUser() != null) {
+						// get image if exsists
+						new DownloadUserImage().execute();
+					}
+				}
 			}
         	
         });
@@ -94,11 +101,19 @@ public class JarLid extends Application {
 		}
 	}
 	
+	public Bitmap getUser_image() {
+		return user_image;
+	}
+
+	public void setUser_image(Bitmap user_image) {
+		this.user_image = user_image;
+	}
+	
 	public PrcseConnection getConnection() {
 		return connection;
 	}
 	
-	public HashMap getImages() {
+	public HashMap<Long, Bitmap> getImages() {
 		return artist_images;
 	}
 
@@ -225,10 +240,10 @@ public class JarLid extends Application {
 	}
 	
 	 private class DownloadImageTask extends AsyncTask<Void, Void, Void> {
-		 HashMap images;
+		 HashMap<Long, Bitmap> images;
 	
 	    public DownloadImageTask() {
-	        this.images = new HashMap();
+	        this.images = new HashMap<Long, Bitmap>();
 	    }
 
 		@Override
@@ -249,6 +264,32 @@ public class JarLid extends Application {
 			}
 			artist_images = images;
 			return null;
+		}
+	}
+	 
+	private class DownloadUserImage extends AsyncTask<Void, Void, Bitmap> {
+		Bitmap image;
+		Customer customer;
+
+		@Override
+		protected Bitmap doInBackground(Void... params) {
+			String url = customer.getThumb();
+			try {
+				if(url != null) {
+		            InputStream in = new java.net.URL(url).openStream();
+		            image = BitmapFactory.decodeStream(in);
+				}
+	        } catch (Exception e) {
+	            Log.e("Error", e.getMessage());
+	            e.printStackTrace();
+	        }
+			return image;
+		}
+
+		@Override
+		protected void onPostExecute(Bitmap result) {
+			Bitmap retirevedImage = result;
+			JarLid.this.setUser_image(retirevedImage);
 		}
 	}
 }
