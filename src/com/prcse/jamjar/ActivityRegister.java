@@ -35,6 +35,7 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 	private CustomerInfo customer;
 	private CustomerForm enumsData;
 	private JarLid appState;
+	private boolean gettingEnums = true;
 	
 	private String passCheck = null;
 	private String tempEmail = null;
@@ -106,31 +107,30 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 			@Override
 			public void update(Observable arg0, Object arg1) {
 				if(appState.getConnection().isConnected()) {
-					setContentView(R.layout.activity_register);
-					ActivityRegister.this.getEnumsData(arg1);
+					if(gettingEnums == false) {
+						ActivityRegister.this.getEnumsData(arg1);
+					}
 				}
 				else {
-					//setContentView(R.layout.network_error_alert);
+					//TODO setContentView(R.layout.network_error_alert);
 				}
 			}
 			
 		});
 		
 		if(appState.getConnection().isConnected()) {
+			gettingEnums = true;
 			getEnumsData(null);
 		}
 		else {
-			//setContentView(R.layout.network_error_alert);
+			//TODO setContentView(R.layout.network_error_alert);
 		}
 	}
 	
 	
 
 	public void getEnumsData(Object request) {
-		if(request instanceof CustomerForm) {
-			enumsData = (CustomerForm)request;
-		}
-		else {
+		if(request == null) {
 			enumsData = new CustomerForm();
 			appState.getConnection().getCustomerFormData(enumsData, new ResponseHandler() {
 	
@@ -141,11 +141,13 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 				
 			});
 		}
+		else if(request instanceof CustomerForm) {
+			enumsData = (CustomerForm)request;
+		}
 		
 		if(enumsData.getError() != null || enumsData.getCountries().size() < 1 || enumsData.getCountries().size() < 1) {
 			Log.e("Connection Error", "Could not get form fill data.");
-			viewTextError.setText("Connection Error Could not get form fill data.");
-			//setContentView(R.layout.network_error_alert);
+			//TODO setContentView(R.layout.network_error_alert);
 		}
 		else {
 			// build adapter
@@ -170,6 +172,7 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 			// set spinner adapter
 			spinnerCountry.setAdapter(countryAdapter);
 		}
+		gettingEnums = false;
 	}
 
 	@Override
