@@ -56,8 +56,8 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 	private TextView viewTextError = null;
 	private Button btnRegister = null;
 	
-	private ArrayAdapter<String> titleAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-	private ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+	private ArrayAdapter<String> titleAdapter;
+	private ArrayAdapter<String> countryAdapter;
 	
 	public CustomerInfo getCustomer() {
 		return customer;
@@ -73,74 +73,8 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
 		
-		appState = ((JarLid)this.getApplication());
-				
-		appState.getConnection().addObserver(new Observer() {
-			
-			@Override
-			public void update(Observable arg0, Object arg1) {
-				if(appState.isLoggedIn()) {
-					finish();
-				}
-			}
-			
-		});
-		
-		appState.getConnection().getCustomerFormData(enumsData, new ResponseHandler() {
-
-			@Override
-			public void handleResponse(Request response) {
-				if(customer.getError() != null) {
-					Log.e("Connection Error", "Could not get form fill data.");
-					finish();
-					// TODO send to can't connect page
-				}
-				else {
-					// if result is not 0
-					if (enumsData.getTitles().size() > 0)
-					{
-						// build adapter
-						titleAdapter.add("Select Title");
-						for (String s : enumsData.getTitles())
-						{
-							titleAdapter.add(s);
-						}
-						spinnerTitle.setEnabled(true);
-					}
-					else
-					{
-						// set no data
-						titleAdapter.add("No Data");
-						// disable spinner
-						spinnerTitle.setEnabled(false);
-					}
-					// set spinner adapter
-					spinnerTitle.setAdapter(titleAdapter);
-					
-					// if result is not 0
-					if (enumsData.getCountries().size() > 0)
-					{
-						// build adapter
-						countryAdapter.add("Select Country");
-						for (String s : enumsData.getCountries())
-						{
-							countryAdapter.add(s);
-						}
-						spinnerCountry.setEnabled(true);
-					}
-					else
-					{
-						// set no data
-						countryAdapter.add("No Data");
-						// disable spinner
-						spinnerCountry.setEnabled(false);
-					}
-					// set spinner adapter
-					spinnerCountry.setAdapter(countryAdapter);
-				}
-			}
-			
-		});
+		titleAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+		countryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 		
 		editTextEmail = (EditText)findViewById(R.id.txtEmailReg);
 		editTextPassword = (EditText)findViewById(R.id.txtPasswordReg);
@@ -164,6 +98,78 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 		spinnerTitle.setOnItemSelectedListener(this);
 		spinnerCountry.setOnItemSelectedListener(this);
 		btnRegister.setOnClickListener(this);
+		
+		appState = ((JarLid)this.getApplication());
+				
+		appState.getConnection().addObserver(new Observer() {
+			
+			@Override
+			public void update(Observable arg0, Object arg1) {
+				if(appState.getConnection().isConnected()) {
+					setContentView(R.layout.activity_register);
+					ActivityRegister.this.getEnumsData(arg1);
+				}
+				else {
+					//setContentView(R.layout.network_error_alert);
+				}
+			}
+			
+		});
+		
+		if(appState.getConnection().isConnected()) {
+			getEnumsData(null);
+		}
+		else {
+			//setContentView(R.layout.network_error_alert);
+		}
+	}
+	
+	
+
+	public void getEnumsData(Object request) {
+		if(request instanceof CustomerForm) {
+			enumsData = (CustomerForm)request;
+		}
+		else {
+			enumsData = new CustomerForm();
+			appState.getConnection().getCustomerFormData(enumsData, new ResponseHandler() {
+	
+				@Override
+				public void handleResponse(Request response) {
+					ActivityRegister.this.getEnumsData(response);
+				}
+				
+			});
+		}
+		
+		if(enumsData.getError() != null || enumsData.getCountries().size() < 1 || enumsData.getCountries().size() < 1) {
+			Log.e("Connection Error", "Could not get form fill data.");
+			viewTextError.setText("Connection Error Could not get form fill data.");
+			//setContentView(R.layout.network_error_alert);
+		}
+		else {
+			// build adapter
+			titleAdapter.add("Select Title");
+			for (String s : enumsData.getTitles())
+			{
+				titleAdapter.add(s);
+			}
+			spinnerTitle.setEnabled(true);
+				
+			// set spinner adapter
+			spinnerTitle.setAdapter(titleAdapter);
+			
+			// build adapter
+			countryAdapter.add("Select Country");
+			for (String s : enumsData.getCountries())
+			{
+				countryAdapter.add(s);
+			}
+			spinnerCountry.setEnabled(true);
+			
+			// set spinner adapter
+			spinnerCountry.setAdapter(countryAdapter);
+		}
 	}
 
 	@Override
@@ -178,7 +184,7 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 		int id = view.getId();
 		
 		switch(id) {
-		case R.id.login:
+		case R.id.register:
 			//TODO add constraints check
 			btnRegister.setEnabled(false);
 			executeRegister();
@@ -213,9 +219,6 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 				if(customer.getError() != null) {
 					btnRegister.setEnabled(true);
 					viewTextError.setText(customer.getError());
-				}
-				else {
-					finish();
 				}
 			}
 			

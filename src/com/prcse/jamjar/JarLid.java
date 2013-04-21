@@ -83,15 +83,6 @@ public class JarLid extends Application {
         });
         connThread = new Thread(connection);
         connThread.start();
-        
-        // try and get customer from storage
-//        boolean result = getCustomerStorage();
-//        if(result == false) {
-//        	result = setCustomerStorage();
-//        }
-//        else {
-//        	Log.e("Customer corruption", "Failed to retrieve or save customer to storage");
-//        }
 	}
 	
 	public boolean isLoggedIn() {

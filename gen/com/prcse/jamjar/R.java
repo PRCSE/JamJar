@@ -292,16 +292,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class string {
         public static final int action_settings=0x7f070001;
         public static final int app_name=0x7f070000;
-        public static final int country=0x7f070014;
-        public static final int hello_world=0x7f070017;
-        public static final int system_null_image_url=0x7f070015;
-        public static final int title=0x7f070013;
+        public static final int country=0x7f070015;
+        public static final int hello_world=0x7f070018;
+        public static final int system_null_image_url=0x7f070016;
+        public static final int title=0x7f070014;
         public static final int title_activity_activity_book=0x7f070011;
         public static final int title_activity_activity_booking=0x7f070012;
         public static final int title_activity_activity_login=0x7f070010;
         public static final int title_activity_activity_profile=0x7f07000c;
+        public static final int title_activity_activity_register=0x7f070013;
         public static final int title_activity_activity_search=0x7f07000f;
-        public static final int title_activity_activity_seat_picker=0x7f070016;
+        public static final int title_activity_activity_seat_picker=0x7f070017;
         public static final int title_activity_activity_tour_grid=0x7f07000e;
         public static final int title_activity_activity_venues_grid=0x7f07000d;
         public static final int title_activity_artist_view=0x7f070008;
