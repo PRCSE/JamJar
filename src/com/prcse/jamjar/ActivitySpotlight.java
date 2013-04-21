@@ -15,7 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class ActivitySpotlight extends Activity implements OnClickListener, OnClosedListener, OnOpenedListener {
 
@@ -91,6 +93,18 @@ public class ActivitySpotlight extends Activity implements OnClickListener, OnCl
 		menu_tours_btn.setOnClickListener(this);
 		
 		menu_profile_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+		
+		if (appState.isLoggedIn())
+		{
+			TextView menu_profile_text = (TextView) menu_tray.findViewById(R.id.profile_text);
+			ImageView menu_profile_icon = (ImageView) menu_tray.findViewById(R.id.profile_icon);
+			
+			menu_profile_text.setText(appState.getUser().getCustomer().getFullName());
+			if (appState.getUser().getCustomer().getThumb() != null)
+			{
+				// TODO: get user image...
+			}
+		}
 	}
 	
     @Override
@@ -105,9 +119,18 @@ public class ActivitySpotlight extends Activity implements OnClickListener, OnCl
     	switch(v.getId()){
     	
     	case R.id.profile:
-    		intent = new Intent(v.getContext(), ActivityProfile.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivity(intent);
+    		if (appState.isLoggedIn())
+    		{
+    			intent = new Intent(v.getContext(), ActivityProfile.class);
+        		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    			startActivity(intent);
+    		}
+    		else 
+    		{
+    			intent = new Intent(v.getContext(), ActivityLogin.class);
+        		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    			startActivity(intent);
+    		}
     		break;
     		
     	case R.id.spotlight:
