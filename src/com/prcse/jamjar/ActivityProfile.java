@@ -1,5 +1,8 @@
 package com.prcse.jamjar;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.SlidingMenu.OnClosedListener;
 import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
@@ -15,18 +18,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 public class ActivityProfile extends Activity implements OnClickListener, OnClosedListener, OnOpenedListener {
 	
 	private ActionBar actionBar;
 	private SlidingMenu menu_tray;
+	
+	JarLid appState;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
-		setTitle(R.string.title_activity_profile);
+		appState = ((JarLid)this.getApplication());
+		setTitle(appState.getUser().getCustomer().getFullName());
+		
+		Button logout = (Button) findViewById(R.id.logout_button);
+		logout.setOnClickListener(this);
 		
 		menuTraySetUp();
 	}
@@ -133,6 +143,12 @@ public class ActivityProfile extends Activity implements OnClickListener, OnClos
     			
     	case R.id.tours:
     		intent = new Intent(v.getContext(), ActivityToursGrid.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent);
+    		break;
+    	case R.id.logout_button:
+    		appState.removeCustomerStorage();
+    		intent = new Intent(v.getContext(), ActivitySpotlight.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;

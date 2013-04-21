@@ -1,5 +1,6 @@
 package com.prcse.jamjar;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -169,6 +170,18 @@ public class JarLid extends Application {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public void removeCustomerStorage()
+	{
+		try
+		{
+			new File(customerCertificate).delete();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 	

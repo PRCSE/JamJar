@@ -22,5 +22,13 @@
         android:layout_alignRight="@+id/place_holder_text"
         android:layout_below="@+id/place_holder_text"
         android:text="View user info, upcomming booked events, stared artists/venues/tours, resend email validation, edit profile info." />
+    
+    <Button 
+        android:id="@+id/logout_button"
+        android:text="Logout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/page_description"/>
+    
 
 </RelativeLayout>

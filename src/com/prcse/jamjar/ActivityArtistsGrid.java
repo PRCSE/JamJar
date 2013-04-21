@@ -1,6 +1,8 @@
 package com.prcse.jamjar;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 
 import com.prcse.datamodel.Artist;
@@ -75,6 +77,17 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 				startActivity(intent);
 			}
         });
+        
+        appState.getConnection().addObserver(new Observer() {
+			
+			@Override
+			public void update(Observable arg0, Object arg1) {
+				
+				artists = appState.getArtists();
+				artistAdapter.setArtists(artists);
+				artistAdapter.notifyDataSetChanged();
+			}	
+		});
     }
     
     @Override

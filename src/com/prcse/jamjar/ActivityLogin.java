@@ -37,17 +37,6 @@ public class ActivityLogin extends Activity implements OnClickListener {
 		
 		appState = ((JarLid)this.getApplication());
 		
-		appState.getConnection().addObserver(new Observer() {
-			
-			@Override
-			public void update(Observable arg0, Object arg1) {
-				if(appState.isLoggedIn()) {
-					finish();
-				}
-			}
-			
-		});
-		
 		editTextEmail = (EditText)findViewById(R.id.email);
 		editTextPassword = (EditText)findViewById(R.id.password);
 		viewTextError = (TextView)findViewById(R.id.errorText);
