@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import com.prcse.datamodel.Artist;
 import com.slidingmenu.lib.SlidingMenu;
+import com.slidingmenu.lib.SlidingMenu.OnClosedListener;
+import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 
 import android.os.Bundle;
 import android.app.ActionBar;
@@ -25,7 +27,7 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class ActivityArtistsGrid extends Activity implements OnClickListener, OnTouchListener, OnItemClickListener{
+public class ActivityArtistsGrid extends Activity implements OnClickListener, OnTouchListener, OnItemClickListener, OnClosedListener, OnOpenedListener {
 
 	RelativeLayout menu_profile_btn;
 	RelativeLayout menu_spotlight_btn;
@@ -89,7 +91,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
     	switch (item.getItemId()) {
 			case android.R.id.home:
 				intent = new Intent(this, ActivitySpotlight.class);
-	    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 	    		overridePendingTransition(0,0);
 	    		startActivity(intent);
 				break;
@@ -123,6 +125,9 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 		menu_tray.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		menu_tray.setMenu(R.layout.menu_tray);
 		
+		menu_tray.setOnClosedListener(this);
+		menu_tray.setOnOpenedListener(this);
+		
 		menu_profile_btn = (RelativeLayout) menu_tray.findViewById(R.id.profile);
 		menu_spotlight_btn = (RelativeLayout) menu_tray.findViewById(R.id.spotlight);
 		menu_search_btn = (RelativeLayout) menu_tray.findViewById(R.id.search);
@@ -153,37 +158,37 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
     	
     	case R.id.profile:
     		intent = new Intent(view.getContext(), ActivityProfile.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     		
     	case R.id.spotlight:
     		intent = new Intent(view.getContext(), ActivitySpotlight.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     		
     	case R.id.search:
     		intent = new Intent(view.getContext(), ActivitySearch.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
     		startActivity(intent);
     		break;
     		
     	case R.id.artists:
     		intent = new Intent(view.getContext(), ActivityArtistsGrid.class);
-    		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     		
     	case R.id.venues:
     		intent = new Intent(view.getContext(), ActivityVenuesGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     			
     	case R.id.tours:
     		intent = new Intent(view.getContext(), ActivityToursGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     	}
@@ -233,5 +238,17 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 			startActivity(intent);
 			break;
 		}
+	}
+
+	@Override
+	public void onClosed() {
+		// TODO Auto-generated method stub
+		actionBar.setDisplayHomeAsUpEnabled(true);
+	}
+
+	@Override
+	public void onOpened() {
+		// TODO Auto-generated method stub
+		actionBar.setDisplayHomeAsUpEnabled(false);
 	}
 }

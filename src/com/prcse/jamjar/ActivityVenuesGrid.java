@@ -1,6 +1,8 @@
 package com.prcse.jamjar;
 
 import com.slidingmenu.lib.SlidingMenu;
+import com.slidingmenu.lib.SlidingMenu.OnClosedListener;
+import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 
 import android.os.Bundle;
 import android.app.ActionBar;
@@ -15,7 +17,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 
-public class ActivityVenuesGrid extends Activity implements OnClickListener{
+public class ActivityVenuesGrid extends Activity implements OnClickListener, OnClosedListener, OnOpenedListener {
 	
 	private ActionBar actionBar;
 	private SlidingMenu menu_tray;
@@ -132,5 +134,17 @@ public class ActivityVenuesGrid extends Activity implements OnClickListener{
     		startActivity(intent);
     		break;
     	}
-    }	
+    }
+
+	@Override
+	public void onClosed() {
+		// TODO Auto-generated method stub
+		actionBar.setDisplayHomeAsUpEnabled(true);
+	}
+
+	@Override
+	public void onOpened() {
+		// TODO Auto-generated method stub
+		actionBar.setDisplayHomeAsUpEnabled(false);
+	}	
 }

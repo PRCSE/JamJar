@@ -1,6 +1,8 @@
 package com.prcse.jamjar;
 
 import com.slidingmenu.lib.SlidingMenu;
+import com.slidingmenu.lib.SlidingMenu.OnClosedListener;
+import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 
 import android.os.Bundle;
 import android.app.ActionBar;
@@ -15,7 +17,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 
-public class ActivitySearch extends Activity implements OnClickListener {
+public class ActivitySearch extends Activity implements OnClickListener, OnClosedListener, OnOpenedListener {
 
 	private ActionBar actionBar;
 	private SlidingMenu menu_tray;
@@ -68,6 +70,9 @@ public class ActivitySearch extends Activity implements OnClickListener {
 		menu_tray.setFadeDegree(0.35f);
 		menu_tray.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		menu_tray.setMenu(R.layout.menu_tray);
+		
+		menu_tray.setOnClosedListener(this);
+		menu_tray.setOnOpenedListener(this);
 		
 		RelativeLayout menu_profile_btn = (RelativeLayout) menu_tray.findViewById(R.id.profile);
 		RelativeLayout menu_spotlight_btn = (RelativeLayout) menu_tray.findViewById(R.id.spotlight);
@@ -133,4 +138,16 @@ public class ActivitySearch extends Activity implements OnClickListener {
     		break;
     	}
     }
+
+	@Override
+	public void onClosed() {
+		// TODO Auto-generated method stub
+		actionBar.setDisplayHomeAsUpEnabled(true);
+	}
+
+	@Override
+	public void onOpened() {
+		// TODO Auto-generated method stub
+		actionBar.setDisplayHomeAsUpEnabled(false);
+	}
 }
