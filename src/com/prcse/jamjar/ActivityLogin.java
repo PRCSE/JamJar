@@ -111,6 +111,7 @@ public class ActivityLogin extends Activity implements OnClickListener {
 		if(errorState != null) {
 			this.errorState = errorState;
 			btnLogin.setEnabled(true);
+			viewTextError.setVisibility(View.VISIBLE);
 			viewTextError.setText(customer.getError());
 		}
 		else {

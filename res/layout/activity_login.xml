@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/jam_splatter"
     android:gravity="center_horizontal"
-    android:background="@drawable/jam_splatter" >
+    android:orientation="vertical" >
 
     <EditText
         android:id="@+id/email"
@@ -38,8 +38,9 @@
         android:id="@+id/errorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Error"
         android:textColor="#FF0000"
-        android:text="Error" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/register"
