@@ -16,7 +16,7 @@ public final class R {
 		public static final int right = 0x7f040001;
 	}
 	public static final class layout {
-		public static final int slidingmenumain = 0x7f03000f;
+		public static final int slidingmenumain = 0x7f03000e;
 	}
 	public static final class styleable {
 		public static final int SlidingMenu_mode = 0;

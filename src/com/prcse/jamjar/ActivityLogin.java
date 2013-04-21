@@ -28,7 +28,8 @@ public class ActivityLogin extends Activity implements OnClickListener {
 	private TextView viewTextError = null;
 	private Button btnLogin = null;
 	private JarLid appState;
-	
+	private String errorState;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -68,7 +69,7 @@ public class ActivityLogin extends Activity implements OnClickListener {
 		
 		switch(id) {
 		case R.id.login:
-			btnLogin.setEnabled(false);
+			setErrorState(null);
 			executeLogin();
 			break;
 		}
@@ -83,18 +84,42 @@ public class ActivityLogin extends Activity implements OnClickListener {
 		appState.getConnection().login(customer, new ResponseHandler() {
 
 			@Override
-			public void handleResponse(Request response) {
-				if(customer.getError() != null) {
-					btnLogin.setEnabled(true);
-					viewTextError.setText(customer.getError());
+			public void handleResponse(final Request response) {
+				if(response.getError() != null) {
+					ActivityLogin.this.runOnUiThread(new Runnable() {
+
+						@Override
+						public void run() {
+							setErrorState(response.getError());
+						}
+						
+					});
+					
 				}
 				else {
-					appState.setUser(customer);
+					appState.setUser((CustomerInfo)response);
 					finish();
 				}
 			}
 			
 		});
+	}
+	
+	public String getErrorState() {
+		return errorState;
+	}
+
+	public void setErrorState(String errorState) {
+		if(errorState != null) {
+			this.errorState = errorState;
+			btnLogin.setEnabled(true);
+			viewTextError.setText(customer.getError());
+		}
+		else {
+			this.errorState = "";
+			btnLogin.setEnabled(false);
+			viewTextError.setText("");
+		}
 	}
 	
 	public CustomerInfo getCustomer() {

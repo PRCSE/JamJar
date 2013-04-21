@@ -53,6 +53,8 @@ public class JarLid extends Application {
 	
 
 	public JarLid() {
+		user = new CustomerInfo();
+		
 		// open connection thread to the database
         connection = new PrcseConnection(host, port);
         connection.addObserver(new Observer() {
@@ -92,11 +94,11 @@ public class JarLid extends Application {
 	}
 	
 	public boolean isLoggedIn() {
-		if(user.getCustomer() != null) {
-			return true;
+		if(user.getCustomer() == null) {
+			return false;
 		}
 		else {
-			return false;
+			return true;
 		}
 	}
 	
