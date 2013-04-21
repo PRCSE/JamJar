@@ -19,6 +19,7 @@
     	        android:layout_height="wrap_content"
     	        android:layout_alignTop="@+id/thumbnail"
     	        android:text="2013"
+    	    	android:textSize="14sp"
     	        android:textColor="#BDA3CE" >
 
     	 	</TextView>
@@ -31,8 +32,9 @@
     	        android:layout_alignParentRight="true"
     	        android:includeFontPadding="false"
     	        android:text="15"
+    	        android:fontFamily="sans-serif-light"
     	        android:textColor="#ffffff"
-    	        android:textSize="80sp" >
+    	        android:textSize="65sp" >
 
     	 	</TextView>
 
@@ -44,6 +46,8 @@
     	        android:layout_alignParentRight="true"
     	        android:text="November"
     	        android:textColor="#ffffff"
+    	        android:fontFamily="sans-serif-light"
+    	        android:layout_marginRight="4dp"
     	        android:textSize="20sp" />
     	    
     	</RelativeLayout>
@@ -59,6 +63,7 @@
 	    	    android:layout_width="wrap_content"
 	    	    android:layout_height="wrap_content"
 	    	    android:paddingLeft="10dp"
+	    	    android:fontFamily="sans-serif-light"
 	    	    android:text="A$AP Rocky,"
 	    	    android:textSize="20sp" />
 	        
@@ -69,6 +74,8 @@
 	            android:layout_below="@+id/artist"
 	            android:paddingLeft="10dp"
 	            android:text="Long.Live.A$AP"
+	            android:fontFamily="sans-serif-light"
+	            android:textSize="14sp"
 	            android:textColor="#808080" />
     	    
     	</RelativeLayout>
@@ -86,6 +93,7 @@
 	            android:layout_height="wrap_content"
 	            android:paddingLeft="10dp"
 	            android:text="Manchester,"
+	            android:fontFamily="sans-serif-light"
 	            android:textSize="20sp" />
 	        
 	        <TextView
@@ -95,6 +103,8 @@
 	            android:layout_below="@+id/city"
 	            android:paddingLeft="10dp"
 	            android:text="HMV, The Ritz"
+	            android:textSize="14sp"
+	            android:fontFamily="sans-serif-light"
 	            android:textColor="#808080" />
     	    
     	</RelativeLayout>

@@ -29,12 +29,12 @@ import android.widget.Toast;
 
 public class ActivityArtistsGrid extends Activity implements OnClickListener, OnTouchListener, OnItemClickListener, OnClosedListener, OnOpenedListener {
 
-	RelativeLayout menu_profile_btn;
-	RelativeLayout menu_spotlight_btn;
-	RelativeLayout menu_search_btn;
-	RelativeLayout menu_artists_btn;
-	RelativeLayout menu_venues_btn;
-	RelativeLayout menu_tours_btn;
+	private RelativeLayout menu_profile_btn;
+	private RelativeLayout menu_spotlight_btn;
+	private RelativeLayout menu_search_btn;
+	private RelativeLayout menu_artists_btn;
+	private RelativeLayout menu_venues_btn;
+	private RelativeLayout menu_tours_btn;
 	
 	private ActionBar actionBar;
 	private SlidingMenu menu_tray;
@@ -242,13 +242,11 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 
 	@Override
 	public void onClosed() {
-		// TODO Auto-generated method stub
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
 	public void onOpened() {
-		// TODO Auto-generated method stub
 		actionBar.setDisplayHomeAsUpEnabled(false);
 	}
 }

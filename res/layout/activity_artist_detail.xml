@@ -17,7 +17,7 @@
         <ImageView
             android:id="@+id/artist_thumb"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:src="@drawable/artist_venue_placeholder" />
 
         <TextView
@@ -82,13 +82,11 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/event_unavalible_message"
+		android:background="#E5E5E4"
 		android:numColumns="auto_fit"
 		android:verticalSpacing="10dp"
-		android:horizontalSpacing="20dp"
-		android:stretchMode="spacingWidthUniform"
-		android:gravity="center"
-		android:background="#E5E5E4"
-		android:padding="0dp"  >
+		android:horizontalSpacing="0dp"
+		android:gravity="center_horizontal"  >
 	</GridView>
 
 
