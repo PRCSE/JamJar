@@ -147,7 +147,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int artist_venue_placeholder=0x7f020005;
         public static final int bert=0x7f020006;
         public static final int collections_go_to_today=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
+        public static final int jam_jar=0x7f020008;
         public static final int jam_splatter=0x7f020009;
         public static final int location_place=0x7f02000a;
         public static final int navigation_previous_item=0x7f02000b;

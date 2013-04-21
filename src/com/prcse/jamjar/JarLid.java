@@ -32,7 +32,7 @@ public class JarLid extends Application {
 	private final static String customerCertificate = "customerCertificate";
 	
 	// Connection variables
-	private String image_base = "http://drive.google.com/uc?export=view&id=";
+	private String image_base = "https://dl.dropboxusercontent.com/u/6918192/University/PRCSE/";
 	private String host = "77.99.8.110";
 	private int port = 1234;
 	private PrcseConnection connection;
