@@ -9,4 +9,7 @@
     <color
         name="light_purple"
         >#9568AA</color>
+    <color 
+        name="title_white"
+        >#FFFFFFFF</color>
 </resources>

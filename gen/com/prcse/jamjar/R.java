@@ -128,6 +128,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int dark_purple=0x7f050001;
         public static final int light_purple=0x7f050002;
         public static final int text_grey=0x7f050000;
+        public static final int title_white=0x7f050003;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -317,18 +318,31 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
  API 11 theme customizations can go here. 
+         */
+        public static final int AppBaseTheme=0x7f090000;
+        /**  Application theme. 
+ All customizations that are NOT specific to a particular API-level can go here. 
 
         Base application theme for API 14+. This theme completely replaces
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     
-         */
-        public static final int AppBaseTheme=0x7f090000;
-        /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
+ <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        API 14 theme customizations can go here.
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+    
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/light_purple</item>
+        <item name="android:textColor">#ffffff</item>
+    </style> 
+ Application theme 
          */
         public static final int AppTheme=0x7f090001;
-        public static final int MyActionBar=0x7f090002;
+        /**  ActionBar Style 
+         */
+        public static final int ProjActionBar=0x7f090002;
+        public static final int ProjActionBar_TitleTextStyle=0x7f090003;
     }
     public static final class styleable {
         /** Attributes that can be used with a SlidingMenu.
