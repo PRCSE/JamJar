@@ -327,15 +327,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     
- <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        API 14 theme customizations can go here.
-        <item name="android:actionBarStyle">@style/MyActionBar</item>
-    </style>
-    
-    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/light_purple</item>
-        <item name="android:textColor">#ffffff</item>
-    </style> 
  Application theme 
          */
         public static final int AppTheme=0x7f090001;

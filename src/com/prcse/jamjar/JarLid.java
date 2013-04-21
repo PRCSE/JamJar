@@ -4,10 +4,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -22,7 +24,12 @@ import com.slidingmenu.lib.SlidingMenu;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 
 
@@ -41,6 +48,8 @@ public class JarLid extends Application {
 	// global info
 	private ArrayList<Artist> artists;
 	private CustomerInfo user;
+	private ImageView user_image;
+	HashMap artist_images;
 	
 
 	public JarLid() {
@@ -61,6 +70,8 @@ public class JarLid extends Application {
 						public void handleResponse(Request response) {
 							// to be called when response comes back
 							artists = ((FrontPage)response).getArtists();
+							
+							new DownloadImageTask().execute();
 						}
 					});
 				}	
@@ -93,6 +104,10 @@ public class JarLid extends Application {
 		return connection;
 	}
 	
+	public HashMap getImages() {
+		return artist_images;
+	}
+
 	public ArrayList<Artist> getArtists() {
 		return artists;
 	}
@@ -201,5 +216,33 @@ public class JarLid extends Application {
 			startActivity(intent);
     		break;
     	}
+	}
+	
+	 private class DownloadImageTask extends AsyncTask<Void, Void, Void> {
+		 HashMap images;
+	
+	    public DownloadImageTask() {
+	        this.images = new HashMap();
+	    }
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			for(Artist a : artists) {
+				String url = image_base + a.getThumb();
+				Bitmap mIcon = null;
+				try {
+					if(url != null) {
+			            InputStream in = new java.net.URL(url).openStream();
+			            mIcon = BitmapFactory.decodeStream(in);
+			            images.put(a.getId(), mIcon);
+					}
+		        } catch (Exception e) {
+		            Log.e("Error", e.getMessage());
+		            e.printStackTrace();
+		        }
+			}
+			artist_images = images;
+			return null;
+		}
 	}
 }

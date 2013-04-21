@@ -60,7 +60,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
         // gets grid, set values to custom adapter then sets adapter to grid.
         // Finally, sets listener for artist select.
         artistGrid = (GridView) findViewById(R.id.artists_grid);
-        artistAdapter = new ArtistGridAdapter(this, appState.getImage_base());
+        artistAdapter = new ArtistGridAdapter(this, appState);
         artistGrid.setAdapter(artistAdapter);
         artistGrid.setOnItemClickListener(this);
         

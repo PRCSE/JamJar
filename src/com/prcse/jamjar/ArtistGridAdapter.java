@@ -21,14 +21,14 @@ import android.widget.TextView;
 
 public class ArtistGridAdapter extends BaseAdapter {
 	private Context mContext;
-	private String image_base;
 	private LayoutInflater layoutInflater;
 	private ArrayList<Artist> artists = null;
+	private JarLid appState;
 
-    public ArtistGridAdapter(Context c, String image_base) {
+    public ArtistGridAdapter(Context c, JarLid appState) {
         mContext = c;
-        this.image_base = image_base;
         layoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.appState = appState;
     }
     
     public void setArtists(ArrayList<Artist> artists) {
@@ -72,9 +72,14 @@ public class ArtistGridAdapter extends BaseAdapter {
 
         Artist artist = (Artist) artists.get(position);
         
-        if(artist.getThumb() != "NO SET IMAGE" || artist.getThumb() != "null") {
-        	String url = this.image_base + artist.getThumb();
-        	new DownloadImageTask(holder.image).execute(url);
+        if(appState.getImages() != null) {
+        	//TODO get these to load in when image resource changes
+        	if(appState.getImages().get((int)artist.getId()) != null) {
+        		holder.image.setImageBitmap((Bitmap)appState.getImages().get((int)artist.getId()));
+        	}
+        	else {
+            	holder.image.setImageResource(R.drawable.artist_venue_placeholder);
+            }
         }
         else {
         	holder.image.setImageResource(R.drawable.artist_venue_placeholder);
@@ -88,30 +93,5 @@ public class ArtistGridAdapter extends BaseAdapter {
     	RelativeLayout rl;
     	ImageView image;
     	TextView text;
-    }
-    
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
     }
 }
