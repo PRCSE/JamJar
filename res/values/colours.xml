@@ -6,4 +6,7 @@
     <color
         name="dark_purple"
         >#754595</color>
+    <color
+        name="light_purple"
+        >#9568AA</color>
 </resources>

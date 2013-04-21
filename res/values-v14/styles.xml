@@ -11,7 +11,7 @@
     </style>
     
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/dark_purple</item>
+        <item name="android:background">@color/light_purple</item>
         <item name="android:textColor">#ffffff</item>
     </style>
 

@@ -13,8 +13,8 @@ import java.util.Observer;
 
 import com.prcse.datamodel.Artist;
 import com.prcse.protocol.CustomerInfo;
-import com.prcse.protocol.FrontPage;
 import com.prcse.protocol.Request;
+import com.prcse.protocol.FrontPage;
 import com.prcse.utils.PrcseConnection;
 import com.prcse.utils.ResponseHandler;
 import com.slidingmenu.lib.SlidingMenu;
@@ -23,6 +23,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+
+
 
 public class JarLid extends Application {
 	
