@@ -14,7 +14,7 @@
 	
 	<!-- ActionBar Style -->
 	<style name="ProjActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-    	<item name="android:background">@color/light_purple</item>
+    	<item name="android:background">@color/dark_purple</item>
     	<item name="android:titleTextStyle">@style/ProjActionBar.TitleTextStyle</item>
 	</style>
 	
