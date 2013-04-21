@@ -3,6 +3,30 @@
     android:id="@+id/profile"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
+    
+    <LinearLayout
+        android:id="@+id/profile_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#FFFFFF" >
+
+        <ImageView
+            android:id="@+id/profile_thumb"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/artist_venue_placeholder" />
+
+        <TextView
+            android:id="@+id/profile_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            android:text="Sorry, winter is coming! Also, there currently is no info avalible for this user." />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/place_holder_text"
@@ -22,13 +46,14 @@
         android:layout_alignRight="@+id/place_holder_text"
         android:layout_below="@+id/place_holder_text"
         android:text="View user info, upcomming booked events, stared artists/venues/tours, resend email validation, edit profile info." />
-    
-    <Button 
+
+    <Button
         android:id="@+id/logout_button"
-        android:text="Logout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/page_description"/>
-    
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="18dp"
+        android:text="Logout" />
 
 </RelativeLayout>
