@@ -48,11 +48,6 @@ public class ActivitySpotlight extends Activity implements OnClickListener, OnCl
 		switch (item.getItemId()) {
 			case android.R.id.home:
 				menu_tray.toggle();
-				if (menu_tray.isMenuShowing()){
-					actionBar.setDisplayHomeAsUpEnabled(false);
-				}else{
-					actionBar.setDisplayHomeAsUpEnabled(true);
-				}
 				break;
 		}
 		
