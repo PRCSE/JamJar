@@ -85,7 +85,6 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 				
 				artists = appState.getArtists();
 				artistAdapter.setArtists(artists);
-				artistAdapter.notifyDataSetChanged();
 			}	
 		});
     }

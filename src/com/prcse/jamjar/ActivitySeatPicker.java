@@ -6,11 +6,14 @@ import android.view.Menu;
 
 public class ActivitySeatPicker extends Activity {
 
+	private JarLid appState;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_seat_picker);
-		setTitle("Seat Picker");
+		setTitle(R.string.title_activity_activity_seat_picker);
+		appState = ((JarLid)this.getApplication());
 		
 		createSeatingPlan();
 	}

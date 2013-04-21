@@ -97,9 +97,9 @@ public class EventGridAdapter extends BaseAdapter {
         holder.month.setText(event.getMonthToString());
         holder.year.setText(event.getYearToString());
         holder.artist.setText(artist.getName());
-        holder.tour.setText("tba");
-        holder.city.setText(venue.getPostcode());
-        holder.venue.setText(venue.getName());
+        holder.tour.setText(event.getTourName());
+        holder.city.setText(venue.getName());
+        holder.venue.setText(venue.getPostcode());
 
         return convertView;
     }
@@ -116,5 +116,10 @@ public class EventGridAdapter extends BaseAdapter {
     	RelativeLayout location;
     	TextView city;
     	TextView venue;
+    }
+    
+    static class EventByTour {
+    	Tour tour;
+    	ArrayList<Event> events;
     }
 }

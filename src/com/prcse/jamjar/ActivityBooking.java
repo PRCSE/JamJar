@@ -62,7 +62,7 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		Button seatPicker = (Button) findViewById(R.id.seat_picker_button);
 		
 		artistName.setText(artist.getName());
-		//tourName.setText
+		tourName.setText(event.getTourName());
 		venueName.setText(event.getSeatingPlan().getVenue().getName());
 		cityName.setText(event.getSeatingPlan().getVenue().getPostcode());
 		dateString.setText(event.getDateToString());

@@ -3,6 +3,7 @@ package com.prcse.jamjar;
 import java.util.ArrayList;
 
 import com.prcse.datamodel.Artist;
+import com.prcse.datamodel.Billing;
 import com.prcse.datamodel.Event;
 import com.prcse.datamodel.Tour;
 import com.slidingmenu.lib.SlidingMenu;
@@ -41,8 +42,6 @@ public class ActivityArtistDetail extends Activity implements OnClickListener, O
 	private RelativeLayout menu_tours_btn;
 	private ActionBar actionBar;
 	private SlidingMenu menu_tray;
-	private GridView artistGrid;
-	private ArtistGridAdapter artistAdapter;
 	private ArrayList<Artist> artists;
 	private JarLid appState;
 	private GridView eventGrid;
@@ -54,32 +53,47 @@ public class ActivityArtistDetail extends Activity implements OnClickListener, O
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_artist_detail);
 		
+		// get global variables
+        appState = ((JarLid)this.getApplication());
+        artists = appState.getArtists();
+		
+        // fetch selected artist from intent extras
 		artist = (Artist) getIntent().getExtras().get("artist");
+		
 		ArrayList<Tour> tours = (ArrayList<Tour>) artist.getTours();
 		TextView artistBio = (TextView) findViewById(R.id.artist_bio);
 		Spinner toursSpinner = (Spinner) findViewById(R.id.tour_filter_spinner);
 		ArrayAdapter<String> toursArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 		TextView noEventsMessage = (TextView) findViewById(R.id.event_unavalible_message);
 		
+		// set page artist title and bio for passed artist
 		setTitle(artist.getName());
 		artistBio.setText(artist.getBio());
 		
+		// get artist tour information
 		if (tours.size() > 0)
 		{
+			// Add an All events selection option for the spinner adapter
 			toursArrayAdapter.add("All Events");
+			
+			// for each of the artists tours...
 			for (Tour t : tours)
 			{
+				// get the tour name and add it to the spinner adapter
 				toursArrayAdapter.add(t.getName());
 			}
 			toursSpinner.setEnabled(true);
 		}
 		else
 		{
+			// if the artist has no tours
 			toursArrayAdapter.add("Currently No Scheduled Tours");
 			toursSpinner.setEnabled(false);
 		}
 		
+		// set spinner adapter with values
 		toursSpinner.setAdapter(toursArrayAdapter);
+		
 		
 		eventGridAdapter = new EventGridAdapter(this, artist);
 		eventGrid = (GridView) findViewById(R.id.event_tickets);
@@ -196,5 +210,4 @@ public class ActivityArtistDetail extends Activity implements OnClickListener, O
 		// TODO Auto-generated method stub
 		
 	}
-
 }
