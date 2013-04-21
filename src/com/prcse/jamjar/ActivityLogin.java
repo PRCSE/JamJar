@@ -12,6 +12,7 @@ import com.prcse.utils.ResponseHandler;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,7 +40,9 @@ public class ActivityLogin extends Activity implements OnClickListener {
 			
 			@Override
 			public void update(Observable arg0, Object arg1) {
-				// perform updates here
+				if(appState.isLoggedIn()) {
+					finish();
+				}
 			}
 			
 		});
@@ -69,16 +72,6 @@ public class ActivityLogin extends Activity implements OnClickListener {
 			executeLogin();
 			break;
 		}
-		
-		// TODO if the customer wants to create a new account
-		// open new activity on click of 'create new account'
-		// start new activity with customer form
-		// construct customer info object with no parameters
-		// set the customer to one you have created from the form
-		// execute async connector task and login task in the same manner (no need to change the code for them)
-		// while the customerinfo object had null for its customer or error loop
-		// if error occurs re enable submit button and print error
-		// else take to login page.
 	}
 
 	private void executeLogin() {
@@ -96,7 +89,8 @@ public class ActivityLogin extends Activity implements OnClickListener {
 					viewTextError.setText(customer.getError());
 				}
 				else {
-					// TODO close login activity and open customer profile page (passing customer info object)
+					appState.setUser(customer);
+					finish();
 				}
 			}
 			

@@ -1,9 +1,15 @@
 package com.prcse.jamjar;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import com.prcse.datamodel.Customer;
+import com.prcse.datamodel.Tour;
 import com.prcse.protocol.CustomerForm;
 import com.prcse.protocol.CustomerInfo;
+import com.prcse.protocol.Request;
 import com.prcse.utils.PrcseConnection;
+import com.prcse.utils.ResponseHandler;
 
 import android.opengl.Visibility;
 import android.os.AsyncTask;
@@ -18,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -26,9 +33,8 @@ import android.widget.TextView;
 public class ActivityRegister extends Activity implements OnClickListener, OnItemSelectedListener, OnKeyListener {
 	
 	private CustomerInfo customer;
-	private PrcseConnection connection;
-	private String host = "77.99.8.110";
-	private int port = 1234;
+	private CustomerForm enumsData;
+	private JarLid appState;
 	
 	private String passCheck = null;
 	private String tempEmail = null;
@@ -50,7 +56,8 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 	private TextView viewTextError = null;
 	private Button btnRegister = null;
 	
-	//View registerView;
+	private ArrayAdapter<String> titleAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+	private ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 	
 	public CustomerInfo getCustomer() {
 		return customer;
@@ -66,7 +73,74 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
 		
-		connection = new PrcseConnection(host, port);
+		appState = ((JarLid)this.getApplication());
+				
+		appState.getConnection().addObserver(new Observer() {
+			
+			@Override
+			public void update(Observable arg0, Object arg1) {
+				if(appState.isLoggedIn()) {
+					finish();
+				}
+			}
+			
+		});
+		
+		appState.getConnection().getCustomerFormData(enumsData, new ResponseHandler() {
+
+			@Override
+			public void handleResponse(Request response) {
+				if(customer.getError() != null) {
+					Log.e("Connection Error", "Could not get form fill data.");
+					finish();
+					// TODO send to can't connect page
+				}
+				else {
+					// if result is not 0
+					if (enumsData.getTitles().size() > 0)
+					{
+						// build adapter
+						titleAdapter.add("Select Title");
+						for (String s : enumsData.getTitles())
+						{
+							titleAdapter.add(s);
+						}
+						spinnerTitle.setEnabled(true);
+					}
+					else
+					{
+						// set no data
+						titleAdapter.add("No Data");
+						// disable spinner
+						spinnerTitle.setEnabled(false);
+					}
+					// set spinner adapter
+					spinnerTitle.setAdapter(titleAdapter);
+					
+					// if result is not 0
+					if (enumsData.getCountries().size() > 0)
+					{
+						// build adapter
+						countryAdapter.add("Select Country");
+						for (String s : enumsData.getCountries())
+						{
+							countryAdapter.add(s);
+						}
+						spinnerCountry.setEnabled(true);
+					}
+					else
+					{
+						// set no data
+						countryAdapter.add("No Data");
+						// disable spinner
+						spinnerCountry.setEnabled(false);
+					}
+					// set spinner adapter
+					spinnerCountry.setAdapter(countryAdapter);
+				}
+			}
+			
+		});
 		
 		editTextEmail = (EditText)findViewById(R.id.txtEmailReg);
 		editTextPassword = (EditText)findViewById(R.id.txtPasswordReg);
@@ -90,9 +164,6 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 		spinnerTitle.setOnItemSelectedListener(this);
 		spinnerCountry.setOnItemSelectedListener(this);
 		btnRegister.setOnClickListener(this);
-
-		
-		//connection = new PrcseConnection(host, port);
 	}
 
 	@Override
@@ -117,10 +188,7 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 	}
 
 	private void executeRegister() {
-		Intent intent;
-		
 		customer = new CustomerInfo();
-		
 		customer.setCustomer(new Customer(editTextEmail.getText().toString(),
 										editTextPassword.getText().toString(),
 										spinnerTitle.getSelectedItem().toString(),
@@ -138,79 +206,21 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 										null, //date created
 										true)); //new account
 		
-		new Connector().execute(connection);
-		
-		while(customer.getCustomer() == null || customer.getError() == null) {
-			if(customer.getError() != null) {
-				btnRegister.setEnabled(true);
-				viewTextError.setText(customer.getError());
+		appState.getConnection().syncCustomer(customer, new ResponseHandler() {
+
+			@Override
+			public void handleResponse(Request response) {
+				if(customer.getError() != null) {
+					btnRegister.setEnabled(true);
+					viewTextError.setText(customer.getError());
+				}
+				else {
+					finish();
+				}
 			}
-			else {
-				// TODO copy to login activity
-				intent = new Intent(this, ActivityProfile.class);
-				intent.putExtra("customerObj", customer);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
-				startActivity(intent);
-			}
-		}
-	}
-	
-	private class Connector extends AsyncTask<PrcseConnection, Integer, Boolean> {
-		@Override
-		protected Boolean doInBackground(PrcseConnection... params) {
-			PrcseConnection connection = params[0];
-			try {
-				connection.connect();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return connection.isConnected();
-		}
-		
-		protected void onPostExecute(Boolean result) {
-    		if(result == true) {
-    			new RunRegister().execute(connection);
-    		}
-    	}
-    }
-	
-	private class RunRegister extends AsyncTask<PrcseConnection, Integer, CustomerInfo> {
-    	@Override
-		protected CustomerInfo doInBackground(PrcseConnection... params) {
-			PrcseConnection connection = params[0];
-			CustomerInfo customer = ActivityRegister.this.getCustomer();
 			
-			try {
-				connection.syncCustomer(customer, null);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return customer;
-		}
-    	
-    	protected void onPostExecute(CustomerInfo result) {
-    		ActivityRegister.this.setCustomer(result);
-    	}
-    }
-	
-//	private class getEnums extends AsyncTask<PrcseConnection, Integer, CustomerForm> {
-//    	@Override
-//		protected CustomerForm doInBackground(PrcseConnection... params) {
-//			PrcseConnection connection = params[0];
-//			CustomerInfo customer = ActivityRegister.this.getCustomer();
-//			
-//			try {
-//				connection.syncCustomer(customer);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			return customer;
-//		}
-//    	
-//    	protected void onPostExecute(CustomerInfo result) {
-//    		ActivityRegister.this.setCustomer(result);
-//    	}
-//    }
+		});
+	}
 
 	@Override
 	public void onItemSelected(AdapterView<?> view, View subView, int position,
