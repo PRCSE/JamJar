@@ -22,8 +22,8 @@
 
         <TextView
             android:id="@+id/artist_bio"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="10dp"
             android:scrollbars="vertical"
             android:text="Sorry, there currently is no bio avalible for this artist." />
