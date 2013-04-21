@@ -181,7 +181,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
     		
     	case R.id.artists:
     		intent = new Intent(view.getContext(), ActivityArtistsGrid.class);
-    		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     		

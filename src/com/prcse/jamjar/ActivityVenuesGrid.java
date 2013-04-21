@@ -121,7 +121,7 @@ public class ActivityVenuesGrid extends Activity implements OnClickListener, OnC
     		
     	case R.id.venues:
     		intent = new Intent(v.getContext(), ActivityVenuesGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
     		startActivity(intent);
     		break;
     			

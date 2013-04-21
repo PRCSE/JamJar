@@ -127,7 +127,7 @@ public class ActivityToursGrid extends Activity implements OnClickListener, OnCl
     			
     	case R.id.tours:
     		intent = new Intent(v.getContext(), ActivityToursGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     	}
