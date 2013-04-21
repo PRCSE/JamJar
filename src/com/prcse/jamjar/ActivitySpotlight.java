@@ -92,7 +92,7 @@ public class ActivitySpotlight extends Activity implements OnClickListener, OnCl
 		menu_venues_btn.setOnClickListener(this);
 		menu_tours_btn.setOnClickListener(this);
 		
-		menu_profile_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+		menu_spotlight_btn.setBackgroundColor(Color.parseColor("#7f4993"));
 		
 //		if (appState.isLoggedIn())
 //		{

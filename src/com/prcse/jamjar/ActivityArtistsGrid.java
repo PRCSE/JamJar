@@ -142,7 +142,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 		menu_venues_btn.setOnClickListener(this);
 		menu_tours_btn.setOnClickListener(this);
 		
-		menu_profile_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+		menu_artists_btn.setBackgroundColor(Color.parseColor("#7f4993"));
 	}
 	
     @Override
