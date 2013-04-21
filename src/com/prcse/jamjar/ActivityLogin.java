@@ -27,6 +27,7 @@ public class ActivityLogin extends Activity implements OnClickListener {
 	private EditText editTextPassword = null;
 	private TextView viewTextError = null;
 	private Button btnLogin = null;
+	private TextView textRegister = null;;
 	private JarLid appState;
 	private String errorState;
 
@@ -41,8 +42,10 @@ public class ActivityLogin extends Activity implements OnClickListener {
 		editTextPassword = (EditText)findViewById(R.id.password);
 		viewTextError = (TextView)findViewById(R.id.errorText);
 		btnLogin = (Button)findViewById(R.id.login);
+		textRegister = (TextView)findViewById(R.id.register);
 		
 		btnLogin.setOnClickListener(this);
+		textRegister.setOnClickListener(this);
 	}
 
 	@Override
@@ -60,6 +63,12 @@ public class ActivityLogin extends Activity implements OnClickListener {
 		case R.id.login:
 			setErrorState(null);
 			executeLogin();
+			break;
+		case R.id.register:
+			Intent intent = new Intent(this, ActivityRegister.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		overridePendingTransition(0,0);
+    		startActivity(intent);
 			break;
 		}
 	}

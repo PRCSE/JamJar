@@ -25,10 +25,11 @@
     <string name="title_activity_activity_login">ActivityLogin</string>
     <string name="title_activity_activity_book">Event</string>
     <string name="title_activity_activity_booking">ActivityBooking</string>
+    <string name="title_activity_activity_register">Register</string>
     <string name="title">Title</string>
     <string name="country">Country</string>
     <string name="system_null_image_url">https://dl.dropboxusercontent.com/u/6918192/University/PRCSE/null</string>
-    <string name="title_activity_activity_seat_picker">ActivitySeatPicker</string>
+    <string name="title_activity_activity_seat_picker">Seat Picker</string>
     <string name="hello_world">Hello world!</string>
 
 </resources>

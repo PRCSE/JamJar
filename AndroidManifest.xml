@@ -11,10 +11,10 @@
         android:targetSdkVersion="17" />
 
     <application
+        android:name="com.prcse.jamjar.JarLid"
         android:allowBackup="true"
         android:icon="@drawable/jam_jar"
         android:label="@string/app_name"
-        android:name="JarLid"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.prcse.jamjar.ActivitySpotlight"
@@ -31,6 +31,12 @@
             android:name="com.prcse.jamjar.Artists"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_artists"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.prcse.jamjar.ActivityRegister"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_activity_register"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -90,6 +96,10 @@
         <activity
             android:name="com.prcse.jamjar.ActivityBooking"
             android:label="@string/title_activity_activity_booking" >
+        </activity>
+        <activity
+            android:name="com.prcse.jamjar.ActivitySeatPicker"
+            android:label="@string/title_activity_activity_seat_picker" >
         </activity>
     </application>
 
