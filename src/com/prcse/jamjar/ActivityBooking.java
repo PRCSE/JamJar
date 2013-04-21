@@ -18,11 +18,14 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ActivityBooking extends Activity implements OnClosedListener, OnOpenedListener, OnClickListener {
+	
+	private static final int ADD_SEATS = 0;
 	
 	private RelativeLayout menu_profile_btn;
 	private RelativeLayout menu_spotlight_btn;
@@ -56,11 +59,15 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		TextView cityName = (TextView) findViewById(R.id.city_name);
 		TextView dateString = (TextView) findViewById(R.id.date_string);
 		
+		Button seatPicker = (Button) findViewById(R.id.seat_picker_button);
+		
 		artistName.setText(artist.getName());
 		//tourName.setText
 		venueName.setText(event.getSeatingPlan().getVenue().getName());
 		cityName.setText(event.getSeatingPlan().getVenue().getPostcode());
 		dateString.setText(event.getDateToString());
+		
+		seatPicker.setOnClickListener(this);
 		
 		menuTraySetUp();
 	}
@@ -155,7 +162,20 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
     		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
+    	case R.id.seat_picker_button:
+    		intent = new Intent(ActivityBooking.this, ActivitySeatPicker.class);
+    		startActivityForResult(intent, RESULT_CANCELED);
+    		break;
     	}
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		if (requestCode == ADD_SEATS)
+		{
+			// TODO amend seats to booking request
+		}
 	}
 	
 	@Override
