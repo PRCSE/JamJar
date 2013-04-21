@@ -92,7 +92,6 @@ public class ActivityLogin extends Activity implements OnClickListener {
 						}
 						
 					});
-					
 				}
 				else {
 					appState.setUser((CustomerInfo)response);

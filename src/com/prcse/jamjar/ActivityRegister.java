@@ -106,6 +106,17 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 						ActivityRegister.this.getEnumsData(arg1);
 					}
 				}
+				else if(((CustomerForm)arg1).getError() != null) {
+					ActivityRegister.this.runOnUiThread(new Runnable() {
+
+						@Override
+						public void run() {
+							btnRegister.setEnabled(true);
+							viewTextError.setText(customer.getError());
+						}
+						
+					});
+				}
 				else {
 					//TODO setContentView(R.layout.network_error_alert);
 				}
@@ -182,10 +193,10 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 		int id = view.getId();
 		
 		switch(id) {
-		case R.id.register:
+		case R.id.btnRegister:
 			//TODO add constraints check
-			btnRegister.setEnabled(false);
 			executeRegister();
+			btnRegister.setEnabled(false);
 			break;
 		}
 		
@@ -204,9 +215,9 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 										editTextAddress2.getText().toString(),
 										editTextTown.getText().toString(),
 										editTextCounty.getText().toString(),
-										null, //thumbnail URL
 										editTextPostCode.getText().toString(),
 										spinnerCountry.getSelectedItem().toString(),
+										null, //thumbnail URL
 										null, //date created
 										true)); //new account
 		
@@ -215,8 +226,18 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 			@Override
 			public void handleResponse(Request response) {
 				if(customer.getError() != null) {
-					btnRegister.setEnabled(true);
-					viewTextError.setText(customer.getError());
+					ActivityRegister.this.runOnUiThread(new Runnable() {
+
+						@Override
+						public void run() {
+							btnRegister.setEnabled(true);
+							viewTextError.setText(customer.getError());
+						}
+						
+					});
+				}
+				else {
+					finish();
 				}
 			}
 			
