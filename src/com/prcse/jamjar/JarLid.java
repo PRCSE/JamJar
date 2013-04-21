@@ -63,16 +63,6 @@ public class JarLid extends Application {
 							artists = ((FrontPage)response).getArtists();
 						}
 					});
-					
-					connection.login(user, new ResponseHandler() {
-
-						@Override
-						public void handleResponse(Request response) {
-							// change to the profile page
-							
-						}
-						
-					});
 				}	
 			}
         	
