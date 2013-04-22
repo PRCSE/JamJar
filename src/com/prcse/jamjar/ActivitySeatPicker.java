@@ -30,6 +30,7 @@ import android.widget.Button;
 public class ActivitySeatPicker extends Activity implements OnClickListener {
 
 	private static final int ADD_SEATS = 0;
+	private static final int CANCEL = 1;
 	
 	private JarLid appState;
 	private AvailableSeats seats;
@@ -78,6 +79,8 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 		appState = ((JarLid)this.getApplication());
 		
 		findSeatViews();
+		confirmBtn = (Button) findViewById(R.id.choose_seating_plan_button);
+		cancelBtn = (Button) findViewById(R.id.cancel_seating_plan_button);
 		confirmBtn.setOnClickListener(this);
 		cancelBtn.setOnClickListener(this);
 		
@@ -244,6 +247,8 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 		
+		Intent intent;
+		
 		switch(view.getId())
 		{
 		case R.id.standingArea:
@@ -339,10 +344,15 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 		case R.id.row_3_seat_j:
 			toggleSeatSelect(view);
 			break; 
-		case R.id.cancel_seating_plan_button:
-			Intent intent = new Intent(this, ActivityBooking.class);
+		case R.id.choose_seating_plan_button:
+			intent = new Intent(this, ActivityBooking.class);
 			intent.putExtra("seats", selectedSeats);
 			setResult(ADD_SEATS, intent);
+			startActivity(intent);
+			break;
+		case R.id.cancel_seating_plan_button:
+			intent = new Intent(this, ActivityBooking.class);
+			setResult(CANCEL, intent);
 			startActivity(intent);
 			break;
 		}

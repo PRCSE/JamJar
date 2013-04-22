@@ -39,6 +39,7 @@ import android.widget.Toast;
 public class ActivityBooking extends Activity implements OnClosedListener, OnOpenedListener, OnClickListener {
 	
 	private static final int ADD_SEATS = 0;
+	private static final int CANCEL = 1;
 	
 	private RelativeLayout menu_profile_btn;
 	private RelativeLayout menu_spotlight_btn;
