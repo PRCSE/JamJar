@@ -2,6 +2,8 @@ package com.prcse.jamjar;
 
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import com.prcse.datamodel.Artist;
 
@@ -26,6 +28,17 @@ public class ArtistGridAdapter extends BaseAdapter {
         mContext = c;
         layoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.appState = appState;
+        
+        appState.getConnection().addObserver(new Observer() {
+
+			@Override
+			public void update(Observable arg0, Object arg1) {
+				if(JarLid.IMAGES == arg1) {
+					ArtistGridAdapter.this.notifyDataSetChanged();
+				}
+			}
+        	
+        });
     }
     
     public void setArtists(ArrayList<Artist> artists) {

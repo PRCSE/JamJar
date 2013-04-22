@@ -39,7 +39,7 @@ public class JarLid extends Application {
 	
 	// Connection variables
 	private String image_base = "https://dl.dropboxusercontent.com/u/6918192/University/PRCSE/";
-	private String host = "80.235.137.15"; // 77.99.8.110  alternative server location
+	private String host = "77.99.8.110"; // "80.235.137.15"  alternative server location
 	private int port = 1234;
 	private PrcseConnection connection;
 	private Thread connThread;
@@ -50,6 +50,8 @@ public class JarLid extends Application {
 	private Bitmap user_image;
 	HashMap<Long, Bitmap> artist_images;
 	HashMap<Long, CustomerBooking> bookings;
+	public final static String CONNECTION = "CONNECTION";
+	public final static String IMAGES = "IMAGES";
 
 	public JarLid() {
 		user = new CustomerInfo();
@@ -222,8 +224,13 @@ public class JarLid extends Application {
 		            e.printStackTrace();
 		        }
 			}
-			artist_images = images;
 			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			artist_images = images;
+			JarLid.this.getConnection().changed(JarLid.IMAGES);
 		}
 	}
 	 
