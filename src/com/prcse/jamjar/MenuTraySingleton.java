@@ -22,9 +22,6 @@ public class MenuTraySingleton {
 	}
 	
 	public void menuTraySetUp(Context context, int width) {
-//		if(menu_tray == null) {
-//			menu_tray = new SlidingMenu(context);
-//		}
 		
 		menu_tray = new SlidingMenu(context);
 		
