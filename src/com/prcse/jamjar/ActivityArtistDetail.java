@@ -27,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ import android.widget.Toast;
 
 /*
  * Activity: Artist Detail. Displays detailed information about an artist. This includes
- * an image, bio, current tours, 
+ * an image, bio, current tours and events.
  */
 public class ActivityArtistDetail extends Activity implements OnClickListener, 
 								OnItemClickListener, OnClosedListener, OnOpenedListener {
@@ -127,24 +128,16 @@ public class ActivityArtistDetail extends Activity implements OnClickListener,
 
         
         
+        // --- LISTENERS --- //
         eventGrid.setOnItemClickListener(this);
 		
         
         
+        // --- SLIDING TRAY SET UP --- //
         menuTraySetUp();
 
 	}
-
-	private void setToursAdapterWith(ArrayList<Tour> passedTours) 
-	{
-		toursArrayAdapter.add("All Events");	// set, to be, default menu string.
-		
-		for (Tour t : passedTours) // FOR EACH: of the artists tours...
-		{
-			toursArrayAdapter.add(t.getName()); // ... Add tour name to adapter
-		}
-	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -159,7 +152,6 @@ public class ActivityArtistDetail extends Activity implements OnClickListener,
 				finish();
 				break;
 		}
-		
 		return true;
 	}
 
@@ -177,6 +169,16 @@ public class ActivityArtistDetail extends Activity implements OnClickListener,
 		}
 	}
 
+	private void setToursAdapterWith(ArrayList<Tour> passedTours) 
+	{
+		toursArrayAdapter.add("All Events");	// set, to be, default menu string.
+		
+		for (Tour t : passedTours) // FOR EACH: of the artists tours...
+		{
+			toursArrayAdapter.add(t.getName()); // ... Add tour name to adapter
+		}
+	}
+
 	private void viewEvent(View view, int position) 
 	{
 		Toast.makeText(ActivityArtistDetail.this, "" + position, Toast.LENGTH_SHORT).show();
@@ -186,33 +188,35 @@ public class ActivityArtistDetail extends Activity implements OnClickListener,
 		startActivity(intent);
 	}
 	
-	private void menuTraySetUp() {
+	private void menuTraySetUp() 
+	{
 		actionBar = getActionBar();
-		Display display = getWindowManager().getDefaultDisplay();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        
+        
+        // get width of application on device
+        Display display = getWindowManager().getDefaultDisplay();
 		Point point = new Point();
-
-		actionBar.setDisplayHomeAsUpEnabled(true);
 		display.getSize(point);
 		int width = point.x;
-
-		menu_tray = new SlidingMenu(this);
-		menu_tray.setMode(SlidingMenu.LEFT);
-		menu_tray.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		menu_tray.setBehindOffset(width / 2);
-		menu_tray.setFadeDegree(0.35f);
-		menu_tray.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-		menu_tray.setMenu(R.layout.menu_tray);
+        
 		
-		menu_tray.setOnClosedListener(this);
-		menu_tray.setOnOpenedListener(this);
+		// get the instance of the menu tray and pass context and width...
+        MenuTraySingleton.getInstance().menuTraySetUp(this, width);
+    	MenuTraySingleton.getInstance().getMenu_tray().setOnOpenedListener(this);
+        MenuTraySingleton.getInstance().getMenu_tray().setOnClosedListener(this);
 		
-		menu_profile_btn = (RelativeLayout) menu_tray.findViewById(R.id.profile);
-		menu_spotlight_btn = (RelativeLayout) menu_tray.findViewById(R.id.spotlight);
-		menu_search_btn = (RelativeLayout) menu_tray.findViewById(R.id.search);
-		menu_artists_btn = (RelativeLayout) menu_tray.findViewById(R.id.artists);
-		menu_venues_btn = (RelativeLayout) menu_tray.findViewById(R.id.venues);
-		menu_tours_btn = (RelativeLayout) menu_tray.findViewById(R.id.tours);
+        
+        // Get menu elements (items)
+		menu_profile_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile);
+		menu_spotlight_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.spotlight);
+		menu_search_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.search);
+		menu_artists_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.artists);
+		menu_venues_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.venues);
+		menu_tours_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.tours);
 		
+		
+		// set listeners for elements
 		menu_profile_btn.setOnClickListener(this);
 		menu_spotlight_btn.setOnClickListener(this);
 		menu_search_btn.setOnClickListener(this);
@@ -220,24 +224,97 @@ public class ActivityArtistDetail extends Activity implements OnClickListener,
 		menu_venues_btn.setOnClickListener(this);
 		menu_tours_btn.setOnClickListener(this);
 		
-		menu_artists_btn.setBackgroundColor(Color.parseColor("#7f4993"));
-	}
-
-	@Override
-	public void onOpened() {
-		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void onClosed() {
-		// TODO Auto-generated method stub
+		// set background colour for of relevant location to purple to give orientation to user
+		menu_artists_btn.setBackgroundColor(getResources().getColor(R.color.dark_purple));
 		
+		
+		// IF: the user is logged in...
+		if (appState.isLoggedIn())
+		{
+			// change the menu to display there name...
+			TextView menu_profile_text = (TextView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_text);
+			ImageView menu_profile_icon = (ImageView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_icon);
+			
+			// and, if available, their profile icon. 
+			menu_profile_text.setText(appState.getUser().getCustomer().getFullName());
+			if (appState.getUser().getCustomer().getThumb() != null)
+			{
+				menu_profile_icon = (ImageView) findViewById(R.id.profile_icon);
+				menu_profile_icon.setImageBitmap(appState.getUser_image());
+			}
+		}
 	}
 
 	@Override
-	public void onClick(View arg0) {
-		// TODO Auto-generated method stub
+	public void onOpened() 
+	{
+		actionBar.setDisplayHomeAsUpEnabled(false);
+	}
+
+	@Override
+	public void onClosed() 
+	{
+		actionBar.setDisplayHomeAsUpEnabled(true);
+	}	
+
+	@Override
+	public void onClick(View view) 
+	{
+		Intent intent = null;
+    	
+		// close or open menu - depending on current state
+    	if(MenuTraySingleton.getInstance().getMenu_tray().isMenuShowing()){
+    		MenuTraySingleton.getInstance().getMenu_tray().toggle();
+    	}
+    	
+    	switch(view.getId())
+    	{
+    	case R.id.profile:
+    		if (appState.isLoggedIn())
+    		{
+    			intent = new Intent(view.getContext(), ActivityProfile.class);
+        		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    			startActivity(intent);
+    		}
+    		else 
+    		{
+    			intent = new Intent(view.getContext(), ActivityLogin.class);
+        		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    			startActivity(intent);
+    		}
+    		break;
+    		
+    	case R.id.spotlight:
+    		intent = new Intent(view.getContext(), ActivitySpotlight.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent);
+    		break;
+    		
+    	case R.id.search:
+    		intent = new Intent(view.getContext(), ActivitySearch.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		startActivity(intent);
+    		break;
+    		
+    	case R.id.artists:
+    		intent = new Intent(view.getContext(), ActivityArtistsGrid.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent);
+    		break;
+    		
+    	case R.id.venues:
+    		intent = new Intent(view.getContext(), ActivityVenuesGrid.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent);
+    		break;
+    			
+    	case R.id.tours:
+    		intent = new Intent(view.getContext(), ActivityToursGrid.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent);
+    		break;
+    	}
 		
 	}
 }

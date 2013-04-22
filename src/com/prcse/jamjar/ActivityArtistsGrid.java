@@ -118,28 +118,35 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 		this.artists = artists;
 	}
 
-	private void menuTraySetUp() {
+	private void menuTraySetUp() 
+	{
 		actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         
+        
+        // get width of application on device
         Display display = getWindowManager().getDefaultDisplay();
 		Point point = new Point();
-		
 		display.getSize(point);
 		int width = point.x;
         
+		
+		// get the instance of the menu tray and pass context and width...
         MenuTraySingleton.getInstance().menuTraySetUp(this, width);
-    	
     	MenuTraySingleton.getInstance().getMenu_tray().setOnOpenedListener(this);
         MenuTraySingleton.getInstance().getMenu_tray().setOnClosedListener(this);
 		
-		RelativeLayout menu_profile_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile);
-		RelativeLayout menu_spotlight_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.spotlight);
-		RelativeLayout menu_search_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.search);
-		RelativeLayout menu_artists_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.artists);
-		RelativeLayout menu_venues_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.venues);
-		RelativeLayout menu_tours_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.tours);
+        
+        // Get menu elements (items)
+		menu_profile_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile);
+		menu_spotlight_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.spotlight);
+		menu_search_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.search);
+		menu_artists_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.artists);
+		menu_venues_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.venues);
+		menu_tours_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.tours);
 		
+		
+		// set listeners for elements
 		menu_profile_btn.setOnClickListener(this);
 		menu_spotlight_btn.setOnClickListener(this);
 		menu_search_btn.setOnClickListener(this);
@@ -147,13 +154,19 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 		menu_venues_btn.setOnClickListener(this);
 		menu_tours_btn.setOnClickListener(this);
 		
-		menu_artists_btn.setBackgroundColor(Color.parseColor("#7f4993"));
 		
+		// set background colour for of relevant location to purple to give orientation to user
+		menu_artists_btn.setBackgroundColor(getResources().getColor(R.color.dark_purple));
+		
+		
+		// IF: the user is logged in...
 		if (appState.isLoggedIn())
 		{
+			// change the menu to display there name...
 			TextView menu_profile_text = (TextView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_text);
 			ImageView menu_profile_icon = (ImageView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_icon);
 			
+			// and, if available, their profile icon. 
 			menu_profile_text.setText(appState.getUser().getCustomer().getFullName());
 			if (appState.getUser().getCustomer().getThumb() != null)
 			{
