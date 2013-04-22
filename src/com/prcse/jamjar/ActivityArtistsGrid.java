@@ -252,12 +252,14 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 	}
 
 	@Override
-	public void onClosed() {
-		actionBar.setDisplayHomeAsUpEnabled(true);
+	public void onOpened() 
+	{
+		actionBar.setDisplayHomeAsUpEnabled(false);
 	}
 
 	@Override
-	public void onOpened() {
-		actionBar.setDisplayHomeAsUpEnabled(false);
-	}
+	public void onClosed() 
+	{
+		actionBar.setDisplayHomeAsUpEnabled(true);
+	}	
 }

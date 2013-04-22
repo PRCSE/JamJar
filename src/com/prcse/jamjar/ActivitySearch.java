@@ -143,14 +143,14 @@ public class ActivitySearch extends Activity implements OnClickListener, OnClose
     }
 
 	@Override
-	public void onClosed() {
-		// TODO Auto-generated method stub
-		actionBar.setDisplayHomeAsUpEnabled(true);
+	public void onOpened() 
+	{
+		actionBar.setDisplayHomeAsUpEnabled(false);
 	}
 
 	@Override
-	public void onOpened() {
-		// TODO Auto-generated method stub
-		actionBar.setDisplayHomeAsUpEnabled(false);
-	}
+	public void onClosed() 
+	{
+		actionBar.setDisplayHomeAsUpEnabled(true);
+	}	
 }

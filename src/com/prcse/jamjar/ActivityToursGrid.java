@@ -141,14 +141,14 @@ public class ActivityToursGrid extends Activity implements OnClickListener, OnCl
     	}
     }
 	@Override
-	public void onOpened() {
-		// TODO Auto-generated method stub
+	public void onOpened() 
+	{
 		actionBar.setDisplayHomeAsUpEnabled(false);
 	}
 
 	@Override
-	public void onClosed() {
-		// TODO Auto-generated method stub
+	public void onClosed() 
+	{
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}	
 	

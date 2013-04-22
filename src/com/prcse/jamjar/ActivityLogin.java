@@ -8,20 +8,28 @@ import com.prcse.protocol.CustomerInfo;
 import com.prcse.protocol.Request;
 import com.prcse.utils.PrcseConnection;
 import com.prcse.utils.ResponseHandler;
+import com.slidingmenu.lib.SlidingMenu.OnClosedListener;
+import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.view.Display;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class ActivityLogin extends Activity implements OnClickListener {
+public class ActivityLogin extends Activity implements OnClickListener, OnClosedListener, OnOpenedListener {
 
+	private ActionBar actionBar;
 	private CustomerInfo customer;
 	private EditText editTextEmail = null;
 	private EditText editTextPassword = null;
@@ -46,6 +54,8 @@ public class ActivityLogin extends Activity implements OnClickListener {
 		
 		btnLogin.setOnClickListener(this);
 		textRegister.setOnClickListener(this);
+		
+		menuTraySetUp();
 	}
 
 	@Override
@@ -127,4 +137,48 @@ public class ActivityLogin extends Activity implements OnClickListener {
 	public void setCustomer(CustomerInfo customer) {
 		this.customer = customer;
 	}
+	
+	private void menuTraySetUp() {
+		actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        
+        Display display = getWindowManager().getDefaultDisplay();
+		Point point = new Point();
+		
+		display.getSize(point);
+		int width = point.x;
+        
+        MenuTraySingleton.getInstance().menuTraySetUp(this, width);
+    	
+    	MenuTraySingleton.getInstance().getMenu_tray().setOnOpenedListener(this);
+        MenuTraySingleton.getInstance().getMenu_tray().setOnClosedListener(this);
+		
+		RelativeLayout menu_profile_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile);
+		RelativeLayout menu_spotlight_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.spotlight);
+		RelativeLayout menu_search_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.search);
+		RelativeLayout menu_artists_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.artists);
+		RelativeLayout menu_venues_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.venues);
+		RelativeLayout menu_tours_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.tours);
+		
+		menu_profile_btn.setOnClickListener(this);
+		menu_spotlight_btn.setOnClickListener(this);
+		menu_search_btn.setOnClickListener(this);
+		menu_artists_btn.setOnClickListener(this);
+		menu_venues_btn.setOnClickListener(this);
+		menu_tours_btn.setOnClickListener(this);
+		
+		menu_profile_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+	}
+
+	@Override
+	public void onOpened() 
+	{
+		actionBar.setDisplayHomeAsUpEnabled(false);
+	}
+
+	@Override
+	public void onClosed() 
+	{
+		actionBar.setDisplayHomeAsUpEnabled(true);
+	}	
 }
