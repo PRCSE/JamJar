@@ -1,6 +1,7 @@
 package com.prcse.jamjar;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -10,6 +11,7 @@ import com.prcse.datamodel.Booking;
 import com.prcse.datamodel.Event;
 import com.prcse.datamodel.SeatingArea;
 import com.prcse.protocol.AvailableSeats;
+import com.prcse.protocol.BaseRequest;
 import com.prcse.protocol.CustomerBooking;
 import com.prcse.protocol.Request;
 import com.prcse.utils.ResponseHandler;
@@ -88,7 +90,7 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		appState.getConnection().addObserver(new Observer(){
 
 			@Override
-			public void update(Observable observable, Object data) {
+			public void update(Observable observable, final Object data) {
 				
 				if (data instanceof CustomerBooking)
 				{
@@ -96,6 +98,49 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 					{
 						getAvaliableSeats();
 						
+						if (((CustomerBooking) data).getClientId() == appState.getConnection().getClientId())
+						{
+							ActivityBooking.this.runOnUiThread(new Runnable() {
+
+								@Override
+								public void run() 
+								{
+									if (((CustomerBooking) data).getBooking().getCancelled() != null)
+									{
+										if (((CustomerBooking) data).getBooking().getSeats().size() == 0)
+										{
+											bookBtn.setEnabled(true);
+											bookBtn.setBackgroundColor(getResources().getColor(R.color.text_grey));
+										}
+										else
+										{
+											bookBtn.setEnabled(true);
+											Toast toast = Toast.makeText(ActivityBooking.this, "Cancellation failed, try again later", Toast.LENGTH_LONG);
+											toast.show();
+										}
+									}
+									else
+									{
+										if (((CustomerBooking) data).getError() != null)
+										{
+											bookBtn.setEnabled(true);
+											bookBtn.setBackgroundColor(getResources().getColor(R.color.dark_purple));
+											bookBtn.setText("Booked! (tap again to cancel)");
+											appState.getBookings().put(event.getId(), ((CustomerBooking)data));
+										}
+										else
+										{
+											bookBtn.setEnabled(true);
+											bookBtn.setBackgroundColor(getResources().getColor(R.color.text_grey));
+											Toast toast = Toast.makeText(ActivityBooking.this, "Booking failed, try again later", Toast.LENGTH_LONG);
+											toast.show();
+										}
+									}
+								}
+								
+							});
+							
+						}
 					}
 				}
 			}
@@ -127,23 +172,6 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 						public void run() {
 							seats = ((AvailableSeats) response);
 							seatsRemaining.setText(seats.getTotal() + " TICKETS REMAINING");
-							
-							if (response.getClientId() == appState.getConnection().getClientId())
-							{
-								if (response.getError() != null)
-								{
-									bookBtn.setEnabled(true);
-									bookBtn.setBackgroundColor(getResources().getColor(R.color.dark_purple));
-									bookBtn.setText("Booked! (tap again to cancel)");
-								}
-								else
-								{
-									bookBtn.setEnabled(true);
-									bookBtn.setBackgroundColor(getResources().getColor(R.color.text_grey));
-									Toast toast = Toast.makeText(ActivityBooking.this, "Booking failed, try again later", Toast.LENGTH_LONG);
-									toast.show();
-								}
-							}
 						}
 						
 					});
@@ -259,36 +287,69 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 
 	private void tryBook() {
 		
-		booking = new Booking(event);
 		
-		if (appState.getUser().getCustomer() != null)
+		
+		boolean shouldBook = true;
+		
+		for (Long key : appState.getBookings().keySet())
 		{
-			if (selectedSeats != null && selectedSeats.size() > 0)
+			if (key == event.getId())
 			{
-				CustomerBooking bookingProto = new CustomerBooking(booking, appState.getUser().getClientId(), selectedSeats);
-				appState.getConnection().createBooking(bookingProto, new ResponseHandler(){
-
-					@Override
-					public void handleResponse(Request response) {
-						
-						getAvaliableSeats();
-					}
-					
-					
-				});
-				bookBtn.setEnabled(false);
+				shouldBook = false;
+				break;
 			}
-			else 
+		}
+		
+		if (shouldBook == true)
+		{
+			if (appState.getUser().getCustomer() != null)
 			{
-				Toast toast = Toast.makeText(this, "Please select your seats", Toast.LENGTH_LONG);
+				booking = new Booking(event);
+				
+				if (selectedSeats != null && selectedSeats.size() > 0)
+				{
+					CustomerBooking bookingProto = new CustomerBooking(booking, appState.getUser().getClientId(), selectedSeats);
+					appState.getConnection().createBooking(bookingProto, new ResponseHandler(){
+
+						@Override
+						public void handleResponse(Request response) {
+							
+							getAvaliableSeats();
+
+						}
+						
+						
+					});
+					bookBtn.setEnabled(false);
+				}
+				else 
+				{
+					Toast toast = Toast.makeText(this, "Please select your seats", Toast.LENGTH_LONG);
+					toast.show();
+				}
+			}
+			else
+			{
+				Toast toast = Toast.makeText(this, "Please login to make a booking", Toast.LENGTH_LONG);
 				toast.show();
 			}
 		}
 		else
 		{
-			Toast toast = Toast.makeText(this, "Please login to make a booking", Toast.LENGTH_LONG);
-			toast.show();
+			CustomerBooking cancelation = appState.getBookings().get(event.getId());
+			cancelation.getBooking().cancel();
+			appState.getConnection().cancelBooking(cancelation, new ResponseHandler(){
+
+				@Override
+				public void handleResponse(Request response) {
+					
+					getAvaliableSeats();
+					
+				}
+				
+			});
 		}
+		
 		
 	}
 

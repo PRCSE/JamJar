@@ -16,6 +16,7 @@ import java.util.Observer;
 
 import com.prcse.datamodel.Artist;
 import com.prcse.datamodel.Customer;
+import com.prcse.protocol.CustomerBooking;
 import com.prcse.protocol.CustomerInfo;
 import com.prcse.protocol.Request;
 import com.prcse.protocol.FrontPage;
@@ -48,6 +49,7 @@ public class JarLid extends Application {
 	private CustomerInfo user;
 	private Bitmap user_image;
 	HashMap<Long, Bitmap> artist_images;
+	HashMap<Long, CustomerBooking> bookings;
 
 	public JarLid() {
 		user = new CustomerInfo();
@@ -131,6 +133,14 @@ public class JarLid extends Application {
 	
 	public String getImage_base() {
 		return image_base;
+	}
+	
+	public HashMap<Long, CustomerBooking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(HashMap<Long, CustomerBooking> bookings) {
+		this.bookings = bookings;
 	}
 	
 	//File streams to write and read a customer/user object, to/from storage
