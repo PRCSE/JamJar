@@ -122,7 +122,6 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 		this.artists = artists;
 	}
 
-
 	private void menuTraySetUp() {
 		
 		//Get variables needed to calculate width of display. Also some nifty stuff with the action bar button.
