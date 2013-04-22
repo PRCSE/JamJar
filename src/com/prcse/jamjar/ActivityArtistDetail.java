@@ -32,71 +32,87 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ActivityArtistDetail extends Activity implements OnClickListener, OnItemClickListener, OnClosedListener, OnOpenedListener {
+/*
+ * Activity: Artist Detail. Displays detailed information about an artist. This includes
+ * an image, bio, current tours, 
+ */
+public class ActivityArtistDetail extends Activity implements OnClickListener, 
+								OnItemClickListener, OnClosedListener, OnOpenedListener {
 
+	// ======== CLASS VARIABLES ======================================================== //
+	// Application state
+	private JarLid appState;
+	
+	// Menu declarations
+	private ActionBar actionBar;
+	private SlidingMenu menu_tray;
 	private RelativeLayout menu_profile_btn;
 	private RelativeLayout menu_spotlight_btn;
 	private RelativeLayout menu_search_btn;
 	private RelativeLayout menu_artists_btn;
 	private RelativeLayout menu_venues_btn;
 	private RelativeLayout menu_tours_btn;
-	private ActionBar actionBar;
-	private SlidingMenu menu_tray;
-	private ArrayList<Artist> artists;
-	private JarLid appState;
-	private GridView eventGrid;
-	private Artist artist;
-	private EventGridAdapter eventGridAdapter;
 	
+	// UI elements
+	private TextView artistBio;
+	private Spinner toursSpinner; // Spinner to show artist's tours
+	private GridView eventGrid; // Grid to show custom adapter items.
+	private TextView noEventsMessage; // displays string if no events.
+	
+	private Artist artist; // holds the artist to be focused.
+	private EventGridAdapter eventGridAdapter; // holds a adapter of artist's events 
+	private ArrayAdapter<String> toursArrayAdapter; // holds a adapter of artist's tours
+	
+	// ================================================================================= //
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_artist_detail);
+		setContentView(R.layout.activity_artist_detail); 	// set layout
+		appState = ((JarLid)this.getApplication());			// get snapshot of global state
+		artist = (Artist) getIntent().getExtras().get("artist"); /* fetch selected artist *
+		 														  * from intent extras to *
+		 														  * focus.                */
 		
-		// get global variables
-        appState = ((JarLid)this.getApplication());
-        artists = appState.getArtists();
 		
-        // fetch selected artist from intent extras
-		artist = (Artist) getIntent().getExtras().get("artist");
+		// Get UI elements from res.
+		artistBio = (TextView) findViewById(R.id.artist_bio);
+		toursSpinner = (Spinner) findViewById(R.id.tour_filter_spinner);
+		eventGrid = (GridView) findViewById(R.id.event_tickets);
+		noEventsMessage = (TextView) findViewById(R.id.event_unavalible_message);
 		
-		ArrayList<Tour> tours = (ArrayList<Tour>) artist.getTours();
-		TextView artistBio = (TextView) findViewById(R.id.artist_bio);
-		Spinner toursSpinner = (Spinner) findViewById(R.id.tour_filter_spinner);
-		ArrayAdapter<String> toursArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-		TextView noEventsMessage = (TextView) findViewById(R.id.event_unavalible_message);
+
 		
-		// set page artist title and bio for passed artist
+		// --- ARTIST --- //
+		// set pages artist title and description for focused artist.
 		setTitle(artist.getName());
 		artistBio.setText(artist.getBio());
 		
-		// get artist tour information
-		if (tours.size() > 0)
+		
+		
+		// --- TOURS --- //
+		// Parse tour information for focused artist.
+		toursArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+		ArrayList<Tour> tours = (ArrayList<Tour>) artist.getTours();
+		
+		if (tours.size() > 0) // IF: the focused artist has tours...
 		{
-			// Add an All events selection option for the spinner adapter
-			toursArrayAdapter.add("All Events");
-			
-			// for each of the artists tours...
-			for (Tour t : tours)
-			{
-				// get the tour name and add it to the spinner adapter
-				toursArrayAdapter.add(t.getName());
-			}
+			setToursAdapterWith(tours);
 			toursSpinner.setEnabled(true);
 		}
-		else
+		else // else if the artist has no tours, disable spinner
 		{
-			// if the artist has no tours
 			toursArrayAdapter.add("Currently No Scheduled Tours");
 			toursSpinner.setEnabled(false);
 		}
 		
-		// set spinner adapter with values
-		toursSpinner.setAdapter(toursArrayAdapter);
+		toursSpinner.setAdapter(toursArrayAdapter); // set spinner adapter with values
 		
 		
+		
+		// --- EVENT --- //
+		// Parse event information for focused artist.
 		eventGridAdapter = new EventGridAdapter(this, artist);
-		eventGrid = (GridView) findViewById(R.id.event_tickets);
         eventGrid.setAdapter(eventGridAdapter);
         eventGridAdapter.notifyDataSetChanged();
         
@@ -108,11 +124,25 @@ public class ActivityArtistDetail extends Activity implements OnClickListener, O
         {
         	noEventsMessage.setVisibility(View.GONE);
         }
+
+        
         
         eventGrid.setOnItemClickListener(this);
 		
+        
+        
         menuTraySetUp();
 
+	}
+
+	private void setToursAdapterWith(ArrayList<Tour> passedTours) 
+	{
+		toursArrayAdapter.add("All Events");	// set, to be, default menu string.
+		
+		for (Tour t : passedTours) // FOR EACH: of the artists tours...
+		{
+			toursArrayAdapter.add(t.getName()); // ... Add tour name to adapter
+		}
 	}
 
 	@Override
