@@ -6,6 +6,10 @@ import com.prcse.datamodel.Artist;
 import com.prcse.datamodel.Billing;
 import com.prcse.datamodel.Event;
 import com.prcse.datamodel.Tour;
+import com.prcse.protocol.AvailableSeats;
+import com.prcse.protocol.CustomerInfo;
+import com.prcse.protocol.Request;
+import com.prcse.utils.ResponseHandler;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.SlidingMenu.OnClosedListener;
 import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
@@ -16,6 +20,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,6 +65,7 @@ public class ActivityArtistDetail extends Activity implements OnClickListener,
 	private TextView noEventsMessage; // displays string if no events.
 	
 	private Artist artist; // holds the artist to be focused.
+	private ArrayList<AvailableSeats> seats; // holds seating availabilities.
 	private EventGridAdapter eventGridAdapter; // holds a adapter of artist's events 
 	private ArrayAdapter<String> toursArrayAdapter; // holds a adapter of artist's tours
 	
@@ -130,7 +136,7 @@ public class ActivityArtistDetail extends Activity implements OnClickListener,
         // --- LISTENERS --- //
         eventGrid.setOnItemClickListener(this);
 		
-        
+		
         
         // --- SLIDING TRAY SET UP --- //
         menuTraySetUp();

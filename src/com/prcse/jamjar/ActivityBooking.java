@@ -1,9 +1,18 @@
 package com.prcse.jamjar;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import com.prcse.datamodel.Artist;
+import com.prcse.datamodel.Billing;
+import com.prcse.datamodel.Booking;
 import com.prcse.datamodel.Event;
+import com.prcse.datamodel.SeatingArea;
+import com.prcse.protocol.AvailableSeats;
+import com.prcse.protocol.CustomerBooking;
+import com.prcse.protocol.Request;
+import com.prcse.utils.ResponseHandler;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.SlidingMenu.OnClosedListener;
 import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
@@ -14,6 +23,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.View;
@@ -22,6 +32,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ActivityBooking extends Activity implements OnClosedListener, OnOpenedListener, OnClickListener {
 	
@@ -38,10 +49,16 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 	private SlidingMenu menu_tray;
 	private GridView artistGrid;
 	private ArtistGridAdapter artistAdapter;
+	private TextView seatsRemaining;
 	private ArrayList<Artist> artists;
+	private Button bookBtn;
 	private JarLid appState;
 	private Artist artist;
 	private Event event;
+	private AvailableSeats seats;
+	
+	private Booking booking;
+	private ArrayList<Long> selectedSeats;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +75,7 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		TextView venueName = (TextView) findViewById(R.id.venue_name);
 		TextView cityName = (TextView) findViewById(R.id.city_name);
 		TextView dateString = (TextView) findViewById(R.id.date_string);
-		
+		seatsRemaining = (TextView) findViewById(R.id.number_of_tickets);
 		Button seatPicker = (Button) findViewById(R.id.seat_picker_button);
 		
 		artistName.setText(artist.getName());
@@ -67,9 +84,75 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		cityName.setText(event.getSeatingPlan().getVenue().getPostcode());
 		dateString.setText(event.getDateToString());
 		
+		
+		appState.getConnection().addObserver(new Observer(){
+
+			@Override
+			public void update(Observable observable, Object data) {
+				
+				if (data instanceof CustomerBooking)
+				{
+					if (event == ((CustomerBooking)data).getBooking().getEvent())
+					{
+						getAvaliableSeats();
+						
+					}
+				}
+			}
+			
+		});
+		
+    	getAvaliableSeats();
+    	
+		
+    	booking = new Booking(event);
+    	
+    	
 		seatPicker.setOnClickListener(this);
+		bookBtn.setOnClickListener(this);
 		
 		menuTraySetUp();
+	}
+
+	private void getAvaliableSeats() {
+		appState.getConnection().getEventAvailability(new AvailableSeats(this.event), new ResponseHandler() {
+			
+			@Override
+			public void handleResponse(final Request response) {
+				
+				if(response.getError() == null) {
+					ActivityBooking.this.runOnUiThread(new Runnable() {
+
+						@Override
+						public void run() {
+							seats = ((AvailableSeats) response);
+							seatsRemaining.setText(seats.getTotal() + " TICKETS REMAINING");
+							
+							if (response.getClientId() == appState.getConnection().getClientId())
+							{
+								if (response.getError() != null)
+								{
+									bookBtn.setEnabled(true);
+									bookBtn.setBackgroundColor(getResources().getColor(R.color.dark_purple));
+									bookBtn.setText("Booked! (tap again to cancel)");
+								}
+								else
+								{
+									bookBtn.setEnabled(true);
+									bookBtn.setBackgroundColor(getResources().getColor(R.color.text_grey));
+									Toast toast = Toast.makeText(ActivityBooking.this, "Booking failed, try again later", Toast.LENGTH_LONG);
+									toast.show();
+								}
+							}
+						}
+						
+					});
+				}
+				else {
+					Log.e("CONNECTION_ERROR", "failed to get avalible event seats.");
+				}
+			}
+		});
 	}
 
 	@Override
@@ -164,17 +247,62 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
     		break;
     	case R.id.seat_picker_button:
     		intent = new Intent(ActivityBooking.this, ActivitySeatPicker.class);
+    		intent.putExtra("seats", seats);
     		startActivityForResult(intent, RESULT_CANCELED);
+    		break;
+    	case R.id.book_button:
+    		tryBook();
     		break;
     	}
 	}
-	
+
+
+	private void tryBook() {
+		
+		booking = new Booking(event);
+		
+		if (appState.getUser().getCustomer() != null)
+		{
+			if (selectedSeats != null && selectedSeats.size() > 0)
+			{
+				CustomerBooking bookingProto = new CustomerBooking(booking, appState.getUser().getClientId(), selectedSeats);
+				appState.getConnection().createBooking(bookingProto, new ResponseHandler(){
+
+					@Override
+					public void handleResponse(Request response) {
+						
+						getAvaliableSeats();
+					}
+					
+					
+				});
+				bookBtn.setEnabled(false);
+			}
+			else 
+			{
+				Toast toast = Toast.makeText(this, "Please select your seats", Toast.LENGTH_LONG);
+				toast.show();
+			}
+		}
+		else
+		{
+			Toast toast = Toast.makeText(this, "Please login to make a booking", Toast.LENGTH_LONG);
+			toast.show();
+		}
+		
+	}
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		if (requestCode == ADD_SEATS)
 		{
-			// TODO amend seats to booking request
+			ArrayList<SeatingArea> returnedSeats = (ArrayList<SeatingArea>) getIntent().getExtras().get("seats");
+			
+			for (SeatingArea sa : returnedSeats)
+			{
+				selectedSeats.add(sa.getId());
+			}
 		}
 	}
 	

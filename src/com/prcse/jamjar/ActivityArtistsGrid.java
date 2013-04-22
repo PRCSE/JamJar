@@ -55,7 +55,9 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
         
         // get global variables
         appState = ((JarLid)this.getApplication());
-        artists = appState.getArtists();
+        for(Object a : appState.getArtists()) {
+        	artists.add(((Artist)a));
+        }
         
         // sets up sliding menu tray
         menuTraySetUp();
@@ -84,7 +86,9 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 			@Override
 			public void update(Observable arg0, Object arg1) {
 				
-				artists = appState.getArtists();
+				for(Object a : appState.getArtists()) {
+		        	artists.add(((Artist)a));
+		        }
 				artistAdapter.setArtists(artists);
 			}	
 		});

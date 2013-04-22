@@ -21,17 +21,13 @@ import com.prcse.protocol.Request;
 import com.prcse.protocol.FrontPage;
 import com.prcse.utils.PrcseConnection;
 import com.prcse.utils.ResponseHandler;
-import com.slidingmenu.lib.SlidingMenu;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
 
 
 
@@ -48,7 +44,7 @@ public class JarLid extends Application {
 	private Thread connThread;
 	
 	// global info
-	private ArrayList<Artist> artists;
+	private ArrayList<Object> artists;
 	private CustomerInfo user;
 	private Bitmap user_image;
 	HashMap<Long, Bitmap> artist_images;
@@ -117,11 +113,11 @@ public class JarLid extends Application {
 		return artist_images;
 	}
 
-	public ArrayList<Artist> getArtists() {
+	public ArrayList<Object> getArtists() {
 		return artists;
 	}
 
-	public void setArtists(ArrayList<Artist> artists) {
+	public void setArtists(ArrayList<Object> artists) {
 		this.artists = artists;
 	}
 
@@ -137,6 +133,7 @@ public class JarLid extends Application {
 		return image_base;
 	}
 	
+	//File streams to write and read a customer/user object, to/from storage
 	public boolean getCustomerStorage() {
 		try {
 			FileOutputStream output = this.openFileOutput(customerCertificate, Context.MODE_PRIVATE);
@@ -191,53 +188,6 @@ public class JarLid extends Application {
 		}
 	}
 	
-	// generic click listener for sliding menu tray
-	public void menuClickListen(View v, SlidingMenu menu_tray) {
-		Intent intent = null;
-    	
-    	if(menu_tray.isMenuShowing()){
-    		menu_tray.toggle();
-    	}
-    	
-    	switch(v.getId()){
-    	
-    	case R.id.profile:
-    		intent = new Intent(v.getContext(), ActivityProfile.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivity(intent);
-    		break;
-    		
-    	case R.id.spotlight:
-    		intent = new Intent(v.getContext(), ActivitySpotlight.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-			startActivity(intent);
-    		break;
-    		
-    	case R.id.search:
-    		intent = new Intent(v.getContext(), ActivitySearch.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    		startActivity(intent);
-    		break;
-    		
-    	case R.id.artists:
-    		intent = new Intent(v.getContext(), ActivityArtistsGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivity(intent);
-    		break;
-    		
-    	case R.id.venues:
-    		intent = new Intent(v.getContext(), ActivityVenuesGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivity(intent);
-    		break;
-    			
-    	case R.id.tours:
-    		intent = new Intent(v.getContext(), ActivityToursGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivity(intent);
-    		break;
-    	}
-	}
 	
 	 private class DownloadImageTask extends AsyncTask<Void, Void, Void> {
 		 HashMap<Long, Bitmap> images;
@@ -248,14 +198,14 @@ public class JarLid extends Application {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			for(Artist a : artists) {
-				String url = image_base + a.getThumb();
+			for(Object a : artists) {
+				String url = image_base + ((Artist)a).getThumb();
 				Bitmap mIcon = null;
 				try {
 					if(url != null) {
 			            InputStream in = new java.net.URL(url).openStream();
 			            mIcon = BitmapFactory.decodeStream(in);
-			            images.put(a.getId(), mIcon);
+			            images.put(((Artist)a).getId(), mIcon);
 					}
 		        } catch (Exception e) {
 		            Log.e("Error", e.getMessage());
