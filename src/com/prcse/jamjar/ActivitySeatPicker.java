@@ -195,7 +195,7 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 	}
 
 	private void createSeatingPlan() {
-		
+
 		for (SeatingArea sa : seats.getAvailableSeats())
 		{
 			if (sa.getParent() == 0)
@@ -219,8 +219,6 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 				fillSeat(sa);
 			}
 		}
-		
-		
 	}
 
 	private void fillSeat(SeatingArea sa) {
