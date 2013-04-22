@@ -113,13 +113,13 @@ public class ActivityToursGrid extends Activity implements OnClickListener, OnCl
     		if (appState.isLoggedIn())
     		{
     			intent = new Intent(view.getContext(), ActivityProfile.class);
-        		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
     			startActivity(intent);
     		}
     		else 
     		{
     			intent = new Intent(view.getContext(), ActivityLogin.class);
-        		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
     			startActivity(intent);
     		}
     		break;
@@ -132,25 +132,25 @@ public class ActivityToursGrid extends Activity implements OnClickListener, OnCl
     		
     	case R.id.search:
     		intent = new Intent(view.getContext(), ActivitySearch.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
     		startActivity(intent);
     		break;
     		
     	case R.id.artists:
     		intent = new Intent(view.getContext(), ActivityArtistsGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     		
     	case R.id.venues:
     		intent = new Intent(view.getContext(), ActivityVenuesGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     		break;
     			
     	case R.id.tours:
     		intent = new Intent(view.getContext(), ActivityToursGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 			startActivity(intent);
     		break;
     	}
