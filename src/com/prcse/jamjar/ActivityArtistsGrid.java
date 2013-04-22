@@ -25,7 +25,9 @@ import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivityArtistsGrid extends Activity implements OnClickListener, OnTouchListener, OnItemClickListener, OnClosedListener, OnOpenedListener {
@@ -145,6 +147,18 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 		menu_tours_btn.setOnClickListener(this);
 		
 		menu_artists_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+		
+		if (appState.isLoggedIn())
+		{
+			TextView menu_profile_text = (TextView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_text);
+			ImageView menu_profile_icon = (ImageView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_icon);
+			
+			menu_profile_text.setText(appState.getUser().getCustomer().getFullName());
+			if (appState.getUser().getCustomer().getThumb() != null)
+			{
+				// TODO: get user image...
+			}
+		}
 	}
 	
     @Override

@@ -14,7 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class ActivityVenuesGrid extends Activity implements OnClickListener, OnClosedListener, OnOpenedListener {
 	
@@ -81,6 +83,18 @@ public class ActivityVenuesGrid extends Activity implements OnClickListener, OnC
 		menu_tours_btn.setOnClickListener(this);
 		
 		menu_venues_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+		
+		if (appState.isLoggedIn())
+		{
+			TextView menu_profile_text = (TextView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_text);
+			ImageView menu_profile_icon = (ImageView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_icon);
+			
+			menu_profile_text.setText(appState.getUser().getCustomer().getFullName());
+			if (appState.getUser().getCustomer().getThumb() != null)
+			{
+				// TODO: get user image...
+			}
+		}
 	}
 	
     @Override
