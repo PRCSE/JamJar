@@ -29,8 +29,13 @@ public class ActivitySpotlight extends Activity implements OnClickListener, OnCl
         setContentView(R.layout.activity_spotlight); 
         setTitle(R.string.title_activity_spotlight);
         appState = ((JarLid)this.getApplication());
-        
-        menuTraySetUp();
+    }
+    
+    @Override
+    public void onResume()
+    {
+    	super.onResume();
+    	menuTraySetUp();
     }
 
     @Override
