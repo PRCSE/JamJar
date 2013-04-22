@@ -158,6 +158,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int sample_user_icon=0x7f02000d;
         public static final int social_group=0x7f02000e;
         public static final int social_person=0x7f02000f;
+        public static final int spotlight_splatter=0x7f020010;
     }
     public static final class id {
         public static final int act=0x7f040068;

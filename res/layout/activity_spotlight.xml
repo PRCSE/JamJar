@@ -3,9 +3,10 @@
     android:id="@+id/spotlight"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:focusable="true" >
+    android:focusable="true" 
+    android:background="@drawable/spotlight_splatter">
 
-    <TextView
+    <!-- <TextView
         android:id="@+id/place_holder_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,13 +16,13 @@
         android:text="Spotlight Comming Soon"
         android:textSize="25sp" />
 
-    <TextView
+    <TextView --><!-- 
         android:id="@+id/page_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/place_holder_text"
         android:layout_alignRight="@+id/place_holder_text"
         android:layout_below="@+id/place_holder_text"
-        android:text="Will show featured events, tours and artists etc. Taking the role of the users home page" />
+        android:text="Will show featured events, tours and artists etc. Taking the role of the users home page" /> -->
 
 </RelativeLayout>
