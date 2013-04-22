@@ -38,6 +38,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 	private RelativeLayout menu_artists_btn;
 	private RelativeLayout menu_venues_btn;
 	private RelativeLayout menu_tours_btn;
+	private ImageView menu_profile_icon;
 	
 	private ActionBar actionBar;
 	private GridView artistGrid;
@@ -156,7 +157,8 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 			menu_profile_text.setText(appState.getUser().getCustomer().getFullName());
 			if (appState.getUser().getCustomer().getThumb() != null)
 			{
-				// TODO: get user image...
+				menu_profile_icon = (ImageView) findViewById(R.id.profile_icon);
+				menu_profile_icon.setImageBitmap(appState.getUser_image());
 			}
 		}
 	}

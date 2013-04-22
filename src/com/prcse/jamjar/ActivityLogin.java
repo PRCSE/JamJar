@@ -243,7 +243,8 @@ public class ActivityLogin extends Activity implements OnClickListener, OnClosed
 			menu_profile_text.setText(appState.getUser().getCustomer().getFullName());
 			if (appState.getUser().getCustomer().getThumb() != null)
 			{
-				// TODO: get user image...
+				menu_profile_icon = (ImageView) findViewById(R.id.profile_icon);
+				menu_profile_icon.setImageBitmap(appState.getUser_image());
 			}
 		}
 	}
