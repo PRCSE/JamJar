@@ -42,10 +42,7 @@ public class ActivitySearch extends Activity implements OnClickListener, OnClose
     	
     	switch (item.getItemId()) {
 			case android.R.id.home:
-				intent = new Intent(this, ActivitySpotlight.class);
-		    	intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
-		    	overridePendingTransition(0,0);
-		    	startActivity(intent);
+				MenuTraySingleton.getInstance().getMenu_tray().toggle();
 				break;
 		}
 		

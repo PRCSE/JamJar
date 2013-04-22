@@ -25,7 +25,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class ActivityRegister extends Activity implements OnClickListener, OnItemSelectedListener, OnKeyListener {
+public class ActivityRegister extends Activity implements OnClickListener, OnItemSelectedListener {
 	
 	private CustomerInfo customer;
 	private CustomerForm enumsData;
@@ -89,8 +89,8 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 		
 		btnRegister = (Button)findViewById(R.id.btnRegister);
 		
-		editTextEmail.setOnKeyListener(this);
-		editTextPasswordConfirm.setOnKeyListener(this);
+		spinnerTitle.setEnabled(false);
+		spinnerCountry.setEnabled(false);
 		spinnerTitle.setOnItemSelectedListener(this);
 		spinnerCountry.setOnItemSelectedListener(this);
 		btnRegister.setOnClickListener(this);
@@ -162,10 +162,10 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 			{
 				titleAdapter.add(s);
 			}
-			spinnerTitle.setEnabled(true);
-				
+	
 			// set spinner adapter
 			spinnerTitle.setAdapter(titleAdapter);
+			spinnerTitle.setEnabled(true);
 			
 			// build adapter
 			countryAdapter.add("Select Country");
@@ -256,28 +256,4 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public boolean onKey(View view, int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-		int id = view.getId();
-		
-		switch(id) {
-		case R.id.txtPasswordRegConfirm:
-			passCheck = editTextPasswordConfirm.getText().toString();
-			break;
-			
-		case R.id.txtEmailReg:
-			tempEmail = editTextEmail.getText().toString();
-			Log.i("Register", "email is: " + tempEmail);
-			break;
-			
-		default:
-			break;
-				
-		}
-		
-		return false;
-	}
-
 }
