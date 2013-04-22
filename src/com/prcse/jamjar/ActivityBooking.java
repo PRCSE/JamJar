@@ -169,10 +169,11 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 				
 				if(response.getError() == null) {
 					ActivityBooking.this.runOnUiThread(new Runnable() {
-
+						
 						@Override
 						public void run() {
 							seats = ((AvailableSeats) response);
+							//setSeats(seats);
 							seatsRemaining.setText(seats.getTotal() + " TICKETS REMAINING");
 						}
 						
@@ -191,6 +192,11 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		getMenuInflater().inflate(R.menu.activity_booking, menu);
 		return true;
 	}
+	
+//	public void setSeats(AvailableSeats passedSeats)
+//	{
+//		this.seats = passedSeats;
+//	}
 
 	//TODO implement new menu thingy
 	private void menuTraySetUp() {

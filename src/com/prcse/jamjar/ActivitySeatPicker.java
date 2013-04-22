@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PaintDrawable;
 import android.util.Log;
 import android.view.Menu;
@@ -84,7 +85,7 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 		confirmBtn.setOnClickListener(this);
 		cancelBtn.setOnClickListener(this);
 		
-		seats = (AvailableSeats) savedInstanceState.get("seats");
+		seats = (AvailableSeats) getIntent().getExtras().get("seats");
 		
 		HashMap<String, SeatingArea> seatHash = new HashMap<String, SeatingArea>();
 		ArrayList<SeatingArea> selectedSeats = new ArrayList<SeatingArea>();
@@ -199,6 +200,8 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 
 	private void createSeatingPlan() {
 
+		seatHash = new HashMap<String, SeatingArea>();
+		
 		for (SeatingArea sa : seats.getAvailableSeats())
 		{
 			if (sa.getParent() == 0)
@@ -362,17 +365,14 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 
 	private void toggleSeatSelect(View view) {
 		
-		Paint viewColour = ((PaintDrawable) view.getBackground()).getPaint();
-		int colourARGB = viewColour.getColor();
-		
-		if (colourARGB == getResources().getColor(R.color.dark_purple))
-		{
-			deselect(view);
-		}
-		else
-		{
-			select(view);
-		}
+//		if (view.getAlpha())
+//		{
+//			deselect(view);
+//		}
+//		else
+//		{
+//			select(view);
+//		}
 		
 	}
 
