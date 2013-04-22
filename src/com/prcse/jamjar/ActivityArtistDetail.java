@@ -46,7 +46,6 @@ public class ActivityArtistDetail extends Activity implements OnClickListener,
 	
 	// Menu declarations
 	private ActionBar actionBar;
-	private SlidingMenu menu_tray;
 	private RelativeLayout menu_profile_btn;
 	private RelativeLayout menu_spotlight_btn;
 	private RelativeLayout menu_search_btn;

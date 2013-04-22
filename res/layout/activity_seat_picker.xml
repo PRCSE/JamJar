@@ -9,121 +9,503 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ActivitySeatPicker" >
-  
-    <!--  
-    <LinearLayout
-		 	android:layout_width="fill_parent"
-		 	android:layout_height="wrap_content"
-		 	android:background="@color/title_white"
-		 	android:gravity="center">
-				
-		    <Button
-		        android:id="@+id/decrement_seat_count"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="-" />
-		    
-		    <Button
-		        android:id="@+id/increment_seat_count"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="+" />
 
-
-		</LinearLayout>-->
-		
-    
-    
         <View
-            android:id="@+id/seat_1"
+            android:id="@+id/stand"
            	android:layout_width="fill_parent"
            	android:layout_height="fill_parent"
-           	android:background="@color/dark_purple"
+           	android:background="@color/text_grey"
            	android:layout_weight="1"
-           	android:clickable="true">
-            
-        </View>
-		
-		<View
-            android:id="@+id/seat_2"
-           	android:layout_width="fill_parent"
-           	android:layout_height="fill_parent"
-           	android:background="@color/light_purple"
-           	android:layout_weight="1">
+           	android:layout_gravity="center"
+           	android:clickable="true"
+           	android:layout_marginBottom="10dp">
+           	
+
             
         </View>
         
 		<LinearLayout
 		    android:id="@+id/seatingArea"
+		    android:orientation="vertical"
+		    android:layout_height="fill_parent"
+		    android:layout_width="fill_parent"
+		    android:layout_weight="2"
+		    android:background="#000000"
+		    android:layout_marginBottom="20dp">
+		    
+		    <LinearLayout
+		    android:id="@+id/row_1"
+		    android:layout_marginTop="2dp"
+		    android:layout_marginBottom="2dp"
+		    android:layout_marginLeft="2dp"
+		    android:layout_marginRight="2dp"
 		    android:orientation="horizontal"
 		    android:layout_height="fill_parent"
 		    android:layout_width="fill_parent"
 		    android:layout_weight="1"
 		    android:background="@color/text_grey">
 		    
-				<View
-		            android:id="@+id/seat_3"
+		        <View
+		            android:id="@+id/row_1_seat_a"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
-		           	android:background="@color/dark_purple"
+		           	android:background="@color/text_grey"
+		           	android:padding="2dp"
 		           	android:layout_weight="1">
 		            
 		        </View>
-				
-				<View
-		            android:id="@+id/seat_4"
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_1_seat_b"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
-		           	android:background="@color/light_purple"
+		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_1_seat_c"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_1_seat_d"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_1_seat_e"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        
+		        <View
+		            android:id="@+id/row_1_seat_f"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_weight="1"
+		            android:background="@color/text_grey" >
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_1_seat_g"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_1_seat_h"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_1_seat_i"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_1_seat_j"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
 		           	android:layout_weight="1">
 		            
 		        </View>
 		        
+		    </LinearLayout>
+		    
 				<LinearLayout
-				    android:id="@+id/seatingArea"
-				    android:orientation="vertical"
-				    android:layout_height="fill_parent"
-				    android:layout_width="fill_parent"
-				    android:layout_weight="1"
-				    android:background="@color/text_grey">
+		    android:id="@+id/row_2"
+		    android:orientation="horizontal"
+		    android:layout_height="fill_parent"
+		    android:layout_width="fill_parent"
+		    android:layout_marginLeft="2dp"
+		    android:layout_marginRight="2dp"
+		    android:layout_weight="1"
+		    android:background="@color/text_grey">
 		    
-				<View
-		            android:id="@+id/seat_3"
+		        <View
+		            android:id="@+id/row_2_seat_a"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
-		           	android:background="@color/dark_purple"
+		           	android:background="@color/text_grey"
 		           	android:layout_weight="1">
 		            
 		        </View>
-				
-				<View
-		            android:id="@+id/seat_4"
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_2_seat_b"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
-		           	android:background="@color/light_purple"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_2_seat_c"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_2_seat_d"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_2_seat_e"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_2_seat_f"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_2_seat_g"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_2_seat_h"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_2_seat_i"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_2_seat_j"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
 		           	android:layout_weight="1">
 		            
 		        </View>
 		        
-				<View
-		            android:id="@+id/seat_3"
-		           	android:layout_width="fill_parent"
-		           	android:layout_height="fill_parent"
-		           	android:background="@color/dark_purple"
-		           	android:layout_weight="1">
-		            
-		        </View>
-				
-				<View
-		            android:id="@+id/seat_4"
-		           	android:layout_width="fill_parent"
-		           	android:layout_height="fill_parent"
-		           	android:background="@color/light_purple"
-		           	android:layout_weight="1">
-		            
-		        </View>
+		    </LinearLayout>
+		    <LinearLayout
+		    android:id="@+id/row_3"
+		    android:orientation="horizontal"
+		    android:layout_height="fill_parent"
+		    android:layout_width="fill_parent"
+		    android:layout_marginTop="2dp"
+		    android:layout_marginBottom="2dp"
+		    android:layout_marginLeft="2dp"
+		    android:layout_marginRight="2dp"
+		    android:layout_weight="1"
+		    android:background="@color/text_grey">
 		    
-		</LinearLayout>
+		        <View
+		            android:id="@+id/row_3_seat_a"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_3_seat_b"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_3_seat_c"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_3_seat_d"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_3_seat_e"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_3_seat_f"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_3_seat_g"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_3_seat_h"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_3_seat_i"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        <View
+		           	android:layout_width="2dp"
+		           	android:layout_height="fill_parent"
+		           	android:background="#000000"
+		           	android:padding="2dp">
+		            
+		        </View>
+		        <View
+		            android:id="@+id/row_3_seat_j"
+		           	android:layout_width="fill_parent"
+		           	android:layout_height="fill_parent"
+		           	android:background="@color/text_grey"
+		           	android:layout_weight="1">
+		            
+		        </View>
+		        
+		    </LinearLayout>
 		    
 		</LinearLayout>
 		
