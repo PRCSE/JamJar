@@ -134,7 +134,7 @@ public class JarLid extends Application {
 	public String getImage_base() {
 		return image_base;
 	}
-	
+
 	public HashMap<Long, CustomerBooking> getBookings() {
 		return bookings;
 	}

@@ -1,16 +1,12 @@
 package com.prcse.jamjar;
 
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import com.prcse.datamodel.Artist;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+//Custom grid adapter for the artist grid
 public class ArtistGridAdapter extends BaseAdapter {
 	private Context mContext;
 	private LayoutInflater layoutInflater;

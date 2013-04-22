@@ -26,6 +26,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 
+
 public class ActivitySeatPicker extends Activity implements OnClickListener {
 
 	private static final int ADD_SEATS = 0;

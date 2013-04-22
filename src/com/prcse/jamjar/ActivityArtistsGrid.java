@@ -122,8 +122,10 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 		this.artists = artists;
 	}
 
-	private void menuTraySetUp() 
-	{
+
+	private void menuTraySetUp() {
+		
+		//Get variables needed to calculate width of display. Also some nifty stuff with the action bar button.
 		actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         
@@ -134,9 +136,10 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 		display.getSize(point);
 		int width = point.x;
         
-		
-		// get the instance of the menu tray and pass context and width...
+		//Call instance of singleton and its setup method
         MenuTraySingleton.getInstance().menuTraySetUp(this, width);
+    	
+        //Attach listeners to the sliding menu
     	MenuTraySingleton.getInstance().getMenu_tray().setOnOpenedListener(this);
         MenuTraySingleton.getInstance().getMenu_tray().setOnClosedListener(this);
 		
@@ -148,9 +151,8 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 		menu_artists_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.artists);
 		menu_venues_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.venues);
 		menu_tours_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.tours);
-		
-		
-		// set listeners for elements
+
+		//Set listeners to clickable things
 		menu_profile_btn.setOnClickListener(this);
 		menu_spotlight_btn.setOnClickListener(this);
 		menu_search_btn.setOnClickListener(this);
@@ -158,12 +160,11 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 		menu_venues_btn.setOnClickListener(this);
 		menu_tours_btn.setOnClickListener(this);
 		
+
+		//Change background colour of menu item representing the current activity to make it stand out
+		menu_artists_btn.setBackgroundColor(Color.parseColor("#7f4993"));
 		
-		// set background colour for of relevant location to purple to give orientation to user
-		menu_artists_btn.setBackgroundColor(getResources().getColor(R.color.dark_purple));
-		
-		
-		// IF: the user is logged in...
+		//Check to see if user is logged in and if so places profile picture in the sliding menu next to the profile selection
 		if (appState.isLoggedIn())
 		{
 			// change the menu to display there name...
@@ -185,12 +186,15 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
     {
     	Intent intent = null;
     	
+    	//Toggles sliding menu if open
     	if(MenuTraySingleton.getInstance().getMenu_tray().isMenuShowing()){
     		MenuTraySingleton.getInstance().getMenu_tray().toggle();
     	}
     	
     	switch(view.getId()){
     	
+    	//Implementation of OnClickListener. Starts an appropriate intent, using flags to prevent duplicate activities
+    	//being created and wasting memory.
     	case R.id.profile:
     		if (appState.isLoggedIn())
     		{
@@ -238,6 +242,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
     	}
     }
 
+    //TODO comment this. Vlad has literally no idea why this is here because he didn't code ths bit.
 	@Override
 	public boolean onTouch(View view, MotionEvent event) {
 		
@@ -287,12 +292,14 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 	@Override
 	public void onOpened() 
 	{
+		//Makes little arrow next to action bar icon disappear. Mainly because it drove me insane that it didn't do that. - Vlad.
 		actionBar.setDisplayHomeAsUpEnabled(false);
 	}
 
 	@Override
 	public void onClosed() 
 	{
+		//Makes little arrow next to action bar icon appear when menu is closed. Mainly because it drove me insane that it didn't do that. - Vlad
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}	
 }

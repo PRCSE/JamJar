@@ -5,11 +5,16 @@ import android.content.Context;
 
 import com.slidingmenu.lib.SlidingMenu;
 
+//Singleton class to keep track of sliding menu setup.
+//Cleaner and more efficient way of handling having a sliding menu on each activity.
 public class MenuTraySingleton {
 	
+	//Initialise static variables. 
 	private static SlidingMenu menu_tray;
 	private static MenuTraySingleton menuSingleton;
 	
+	//Singleton constructor. Checks if it has already been initialised. If it hasn't it initialises it.
+	//Otherwise it returns the existing one
 	private MenuTraySingleton() {
 	}
 		
@@ -21,6 +26,7 @@ public class MenuTraySingleton {
 		return menuSingleton;
 	}
 	
+	//Method for setting up sliding menu. Width is passed from an activity to programmatically set menu to open exactly halfway.
 	public void menuTraySetUp(Context context, int width) {
 		
 		menu_tray = new SlidingMenu(context);
@@ -34,6 +40,7 @@ public class MenuTraySingleton {
 		
 	}
 
+	//Getter for current instance of sliding menu object. Pretty standard.
 	public SlidingMenu getMenu_tray() {
 		return menu_tray;
 	}	

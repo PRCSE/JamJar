@@ -42,7 +42,6 @@ public class ActivitySearch extends Activity implements OnClickListener, OnClose
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent = null;
     	
     	switch (item.getItemId()) {
 			case android.R.id.home:
@@ -55,6 +54,7 @@ public class ActivitySearch extends Activity implements OnClickListener, OnClose
 	
 	private void menuTraySetUp() {
 		
+		//Get variables needed to calculate width of display. Also some nifty stuff with the action bar button.
 		actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         
@@ -64,8 +64,10 @@ public class ActivitySearch extends Activity implements OnClickListener, OnClose
 		display.getSize(point);
 		int width = point.x;
         
+		//Call instance of singleton and its setup method
         MenuTraySingleton.getInstance().menuTraySetUp(this, width);
     	
+        //Attach listeners to the sliding menu
     	MenuTraySingleton.getInstance().getMenu_tray().setOnOpenedListener(this);
         MenuTraySingleton.getInstance().getMenu_tray().setOnClosedListener(this);
 		
@@ -76,6 +78,7 @@ public class ActivitySearch extends Activity implements OnClickListener, OnClose
 		RelativeLayout menu_venues_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.venues);
 		RelativeLayout menu_tours_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.tours);
 		
+		//Set listeners to clickable things
 		menu_profile_btn.setOnClickListener(this);
 		menu_spotlight_btn.setOnClickListener(this);
 		menu_search_btn.setOnClickListener(this);
@@ -83,8 +86,10 @@ public class ActivitySearch extends Activity implements OnClickListener, OnClose
 		menu_venues_btn.setOnClickListener(this);
 		menu_tours_btn.setOnClickListener(this);
 		
+		//Change background colour of menu item representing the current activity to make it stand out
 		menu_search_btn.setBackgroundColor(Color.parseColor("#7f4993"));
 		
+		//Check to see if user is logged in and if so places profile picture in the sliding menu next to the profile selection
 		if (appState.isLoggedIn())
 		{
 			TextView menu_profile_text = (TextView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_text);
@@ -104,10 +109,13 @@ public class ActivitySearch extends Activity implements OnClickListener, OnClose
     {
     	Intent intent = null;
     	
+    	//Toggles sliding menu if open
     	if(MenuTraySingleton.getInstance().getMenu_tray().isMenuShowing()){
     		MenuTraySingleton.getInstance().getMenu_tray().toggle();
     	}
     	
+    	//Implementation of OnClickListener. Starts an appropriate intent, using flags to prevent duplicate activities
+    	//being created and wasting memory.
     	switch(view.getId()){
     	
     	case R.id.profile:
@@ -160,12 +168,14 @@ public class ActivitySearch extends Activity implements OnClickListener, OnClose
 	@Override
 	public void onOpened() 
 	{
+		//Makes little arrow next to action bar icon disappear. Mainly because it drove me insane that it didn't do that. - Vlad.
 		actionBar.setDisplayHomeAsUpEnabled(false);
 	}
 
 	@Override
 	public void onClosed() 
 	{
+		//Makes little arrow next to action bar icon appear when menu is closed. Mainly because it drove me insane that it didn't do that. - Vlad
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}	
 }

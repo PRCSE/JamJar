@@ -17,6 +17,7 @@ import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+//Custom adapter for events
 public class EventGridAdapter extends BaseAdapter {
 	private Context mContext;
 	private LayoutInflater layoutInflater;

@@ -85,12 +85,15 @@ public class ActivityLogin extends Activity implements OnClickListener, OnClosed
 		
 		Intent intent = null;
     	
+		//Toggles sliding menu if open
     	if(MenuTraySingleton.getInstance().getMenu_tray().isMenuShowing()){
     		MenuTraySingleton.getInstance().getMenu_tray().toggle();
     	}
     	
 		int id = view.getId();
 		
+		//Implementation of OnClickListener. Starts an appropriate intent, using flags to prevent duplicate activities
+    	//being created and wasting memory.
 		switch(id) {
 		case R.id.login:
 			setErrorState(null);
@@ -150,11 +153,12 @@ public class ActivityLogin extends Activity implements OnClickListener, OnClosed
 	}
 
 	private void executeLogin() {
+		//Creates a customer info object using the email and password
 		customer = new CustomerInfo(editTextEmail.getText().toString(),
 									editTextPassword.getText().toString());
 		
 		
-		
+		//Connects to the database using the login protocol to check credentials
 		appState.getConnection().login(customer, new ResponseHandler() {
 
 			@Override
@@ -205,6 +209,8 @@ public class ActivityLogin extends Activity implements OnClickListener, OnClosed
 	}
 	
 	private void menuTraySetUp() {
+		
+		//Get variables needed to calculate width of display. Also some nifty stuff with the action bar button.
 		actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         
@@ -214,8 +220,10 @@ public class ActivityLogin extends Activity implements OnClickListener, OnClosed
 		display.getSize(point);
 		int width = point.x;
         
+		//Call instance of singleton and its setup method
         MenuTraySingleton.getInstance().menuTraySetUp(this, width);
     	
+        //Attach listeners to the sliding menu
     	MenuTraySingleton.getInstance().getMenu_tray().setOnOpenedListener(this);
         MenuTraySingleton.getInstance().getMenu_tray().setOnClosedListener(this);
 		
@@ -226,6 +234,7 @@ public class ActivityLogin extends Activity implements OnClickListener, OnClosed
 		RelativeLayout menu_venues_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.venues);
 		RelativeLayout menu_tours_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.tours);
 		
+		//Set listeners to clickable things
 		menu_profile_btn.setOnClickListener(this);
 		menu_spotlight_btn.setOnClickListener(this);
 		menu_search_btn.setOnClickListener(this);
@@ -233,8 +242,10 @@ public class ActivityLogin extends Activity implements OnClickListener, OnClosed
 		menu_venues_btn.setOnClickListener(this);
 		menu_tours_btn.setOnClickListener(this);
 		
+		//Change background colour of menu item representing profile activity to make it stand out
 		menu_profile_btn.setBackgroundColor(Color.parseColor("#7f4993"));
 		
+		//Check to see if user is logged in and if so places profile picture in the sliding menu next to the profile selection
 		if (appState.isLoggedIn())
 		{
 			TextView menu_profile_text = (TextView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_text);
@@ -253,12 +264,14 @@ public class ActivityLogin extends Activity implements OnClickListener, OnClosed
 	@Override
 	public void onOpened() 
 	{
+		//Makes little arrow next to action bar icon disappear. Mainly because it drove me insane that it didn't do that. - Vlad.
 		actionBar.setDisplayHomeAsUpEnabled(false);
 	}
 
 	@Override
 	public void onClosed() 
 	{
+		//Makes little arrow next to action bar icon appear when menu is closed. Mainly because it drove me insane that it didn't do that. - Vlad
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}	
 }

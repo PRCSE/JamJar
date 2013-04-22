@@ -52,6 +52,7 @@ public class ActivityProfile extends Activity implements OnClickListener, OnClos
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent = null;
     	
+		//TODO change this to open sliding menu to stay consistent with the rest of the app
     	switch (item.getItemId()) {
 			case android.R.id.home:
 				intent = new Intent(this, ActivitySpotlight.class);
@@ -64,6 +65,7 @@ public class ActivityProfile extends Activity implements OnClickListener, OnClos
 		return true;
 	}
 	
+	//TODO implement new menu thingy
 	private void menuTraySetUp() {
 		actionBar = getActionBar();
 		Display display = getWindowManager().getDefaultDisplay();

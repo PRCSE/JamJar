@@ -247,13 +247,13 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 	@Override
 	public void onItemSelected(AdapterView<?> view, View subView, int position,
 			long row) {
-		// TODO Auto-generated method stub
+		// TODO do we need anything here?
 		
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
+		// TODO nope, nada
 		
 	}
 }

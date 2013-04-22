@@ -190,6 +190,7 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		return true;
 	}
 
+	//TODO implement new menu thingy
 	private void menuTraySetUp() {
 		actionBar = getActionBar();
 		Display display = getWindowManager().getDefaultDisplay();
@@ -232,10 +233,13 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 	{
 		Intent intent = null;
     	
+		//Toggles sliding menu if open
     	if(menu_tray.isMenuShowing()){
     		menu_tray.toggle();
     	}
     	
+    	//Implementation of OnClickListener. Starts an appropriate intent, using flags to prevent duplicate activities
+    	//being created and wasting memory.
     	switch(view.getId()){
     	
     	case R.id.profile:
