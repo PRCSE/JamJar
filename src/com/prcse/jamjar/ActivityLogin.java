@@ -20,6 +20,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -64,9 +65,29 @@ public class ActivityLogin extends Activity implements OnClickListener, OnClosed
 		getMenuInflater().inflate(R.menu.activity_login, menu);
 		return true;
 	}
+	
+    @Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+    	Intent intent = null;
+    	
+    	switch (item.getItemId()) {
+			case android.R.id.home:
+				MenuTraySingleton.getInstance().getMenu_tray().toggle();
+				break;
+		}
+		
+		return true;
+	}
 
 	@Override
 	public void onClick(View view) {
+		
+		Intent intent = null;
+    	
+    	if(MenuTraySingleton.getInstance().getMenu_tray().isMenuShowing()){
+    		MenuTraySingleton.getInstance().getMenu_tray().toggle();
+    	}
+    	
 		int id = view.getId();
 		
 		switch(id) {
@@ -75,11 +96,55 @@ public class ActivityLogin extends Activity implements OnClickListener, OnClosed
 			executeLogin();
 			break;
 		case R.id.register:
-			Intent intent = new Intent(this, ActivityRegister.class);
+			intent = new Intent(this, ActivityRegister.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
     		overridePendingTransition(0,0);
     		startActivity(intent);
 			break;
+		case R.id.profile:
+    		if (appState.isLoggedIn())
+    		{
+    			intent = new Intent(view.getContext(), ActivityProfile.class);
+        		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    			startActivity(intent);
+    		}
+    		else 
+    		{
+    			intent = new Intent(view.getContext(), ActivityLogin.class);
+        		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    			startActivity(intent);
+    		}
+    		break;
+    		
+    	case R.id.spotlight:
+    		intent = new Intent(view.getContext(), ActivitySpotlight.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent);
+    		break;
+    		
+    	case R.id.search:
+    		intent = new Intent(view.getContext(), ActivitySearch.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		startActivity(intent);
+    		break;
+    		
+    	case R.id.artists:
+    		intent = new Intent(view.getContext(), ActivityArtistsGrid.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent);
+    		break;
+    		
+    	case R.id.venues:
+    		intent = new Intent(view.getContext(), ActivityVenuesGrid.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent);
+    		break;
+    			
+    	case R.id.tours:
+    		intent = new Intent(view.getContext(), ActivityToursGrid.class);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent);
+    		break;
 		}
 	}
 
@@ -169,6 +234,7 @@ public class ActivityLogin extends Activity implements OnClickListener, OnClosed
 		
 		menu_profile_btn.setBackgroundColor(Color.parseColor("#7f4993"));
 	}
+	
 
 	@Override
 	public void onOpened() 
