@@ -159,38 +159,47 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
     	switch(view.getId()){
     	
     	case R.id.profile:
-    		intent = new Intent(view.getContext(), ActivityProfile.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivity(intent);
+    		if (appState.isLoggedIn())
+    		{
+    			intent = new Intent(view.getContext(), ActivityProfile.class);
+        		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    			startActivity(intent);
+    		}
+    		else 
+    		{
+    			intent = new Intent(view.getContext(), ActivityLogin.class);
+        		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    			startActivity(intent);
+    		}
     		break;
     		
     	case R.id.spotlight:
     		intent = new Intent(view.getContext(), ActivitySpotlight.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     		
     	case R.id.search:
     		intent = new Intent(view.getContext(), ActivitySearch.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     		startActivity(intent);
     		break;
     		
     	case R.id.artists:
     		intent = new Intent(view.getContext(), ActivityArtistsGrid.class);
-    		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     		
     	case R.id.venues:
     		intent = new Intent(view.getContext(), ActivityVenuesGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     			
     	case R.id.tours:
     		intent = new Intent(view.getContext(), ActivityToursGrid.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     	}

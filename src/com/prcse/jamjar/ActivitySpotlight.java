@@ -28,7 +28,6 @@ public class ActivitySpotlight extends Activity implements OnClickListener, OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spotlight); 
         setTitle(R.string.title_activity_spotlight);
-        
         appState = ((JarLid)this.getApplication());
         
         menuTraySetUp();
@@ -98,7 +97,7 @@ public class ActivitySpotlight extends Activity implements OnClickListener, OnCl
 	}
 	
     @Override
-    public void onClick(View v)
+    public void onClick(View view)
     {
     	Intent intent = null;
     	
@@ -106,49 +105,49 @@ public class ActivitySpotlight extends Activity implements OnClickListener, OnCl
     		MenuTraySingleton.getInstance().getMenu_tray().toggle();
     	}
     	
-    	switch(v.getId()){
+    	switch(view.getId()){
     	
     	case R.id.profile:
     		if (appState.isLoggedIn())
     		{
-    			intent = new Intent(v.getContext(), ActivityProfile.class);
+    			intent = new Intent(view.getContext(), ActivityProfile.class);
         		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     			startActivity(intent);
     		}
     		else 
     		{
-    			intent = new Intent(v.getContext(), ActivityLogin.class);
+    			intent = new Intent(view.getContext(), ActivityLogin.class);
         		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     			startActivity(intent);
     		}
     		break;
     		
     	case R.id.spotlight:
-    		intent = new Intent(v.getContext(), ActivitySpotlight.class);
+    		intent = new Intent(view.getContext(), ActivitySpotlight.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     		
     	case R.id.search:
-    		intent = new Intent(v.getContext(), ActivitySearch.class);
+    		intent = new Intent(view.getContext(), ActivitySearch.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     		startActivity(intent);
     		break;
     		
     	case R.id.artists:
-    		intent = new Intent(v.getContext(), ActivityArtistsGrid.class);
+    		intent = new Intent(view.getContext(), ActivityArtistsGrid.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     		
     	case R.id.venues:
-    		intent = new Intent(v.getContext(), ActivityVenuesGrid.class);
+    		intent = new Intent(view.getContext(), ActivityVenuesGrid.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
     			
     	case R.id.tours:
-    		intent = new Intent(v.getContext(), ActivityToursGrid.class);
+    		intent = new Intent(view.getContext(), ActivityToursGrid.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
     		break;
