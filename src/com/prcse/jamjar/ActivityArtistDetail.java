@@ -63,6 +63,7 @@ public class ActivityArtistDetail extends Activity implements OnClickListener,
 	private Spinner toursSpinner; // Spinner to show artist's tours
 	private GridView eventGrid; // Grid to show custom adapter items.
 	private TextView noEventsMessage; // displays string if no events.
+	private ImageView artistImage;
 	
 	private Artist artist; // holds the artist to be focused.
 	private ArrayList<AvailableSeats> seats; // holds seating availabilities.
@@ -86,14 +87,16 @@ public class ActivityArtistDetail extends Activity implements OnClickListener,
 		toursSpinner = (Spinner) findViewById(R.id.tour_filter_spinner);
 		eventGrid = (GridView) findViewById(R.id.event_tickets);
 		noEventsMessage = (TextView) findViewById(R.id.event_unavalible_message);
-		
+		artistImage = (ImageView) findViewById(R.id.artist_thumb);
 
 		
 		// --- ARTIST --- //
 		// set pages artist title and description for focused artist.
 		setTitle(artist.getName());
 		artistBio.setText(artist.getBio());
-		
+		if(appState.getImages().get(artist.getId()) != null) {
+			artistImage.setImageBitmap(appState.getImages().get(artist.getId()));
+		}
 		
 		
 		// --- TOURS --- //

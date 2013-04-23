@@ -205,6 +205,7 @@ public class JarLid extends Application {
 		try
 		{
 			new File(customerCertificate).delete();
+			this.user = new CustomerInfo();
 		}
 		catch(Exception e)
 		{
