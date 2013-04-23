@@ -241,7 +241,7 @@ public class JarLid extends Application {
         protected void onPostExecute(Object[] result) {
         	Log.i("JarLid Image Loader", "Result[0] = " + ((Artist)result[1]).getId()
         									+ "\nResult[1] = " + result[0]);
-        	artist_images.put(((Artist)result[1]).getId(), (Bitmap)result[0]);
+        	artist_images.put(((Artist)result[1]).getId(), Bitmap.createBitmap((Bitmap)result[0], 0, 0, ((Bitmap)result[0]).getWidth(), ((Bitmap)result[0]).getHeight()));
             Log.i("JarLid Image Loader", "Image set for " + a.getName());
             connection.changed(IMAGES);
         }

@@ -81,7 +81,7 @@ public class ArtistGridAdapter extends BaseAdapter {
         } else {
         	holder = (ViewHolder) convertView.getTag();
         }
-
+        
         Artist artist = (Artist) artists.get(position);
         
         Log.i("Backup Grid Image Loader", "Cached images: \n" + appState.getImages().get(artist.getId()));
@@ -89,9 +89,15 @@ public class ArtistGridAdapter extends BaseAdapter {
     	//TODO get these to load in when image resource changes
         if(setImages.get(artist.getId()).equals(false)) {
         	// if image cached
-        	if(appState.getImages() != null && appState.getImages().get((int)artist.getId()) != null) 
+        	if(appState.getImages() != null && appState.getImages().get(artist.getId()) != null) 
         	{
-        		holder.image.setImageBitmap((Bitmap)appState.getImages().get((int)artist.getId()));
+        		Bitmap temp = Bitmap.createBitmap((Bitmap)appState.getImages().get(artist.getId()),
+        											0,
+        											0,
+        											((Bitmap)appState.getImages().get(artist.getId())).getWidth(),
+        											((Bitmap)appState.getImages().get(artist.getId())).getHeight());
+        		
+        		holder.image.setImageBitmap(temp);
         		setImages.put(artist.getId(), true);
         	}
         	else if(artist.getThumb() != null) {
