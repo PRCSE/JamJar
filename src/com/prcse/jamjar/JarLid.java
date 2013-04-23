@@ -106,6 +106,14 @@ public class JarLid extends Application {
 						new DownloadUserImage().execute();
 					}
 				}
+				else if(connection.isConnected() == false) {
+					try {
+						connection.connect();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			}
         	
         });
