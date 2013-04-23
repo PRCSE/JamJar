@@ -86,10 +86,9 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 		cancelBtn.setOnClickListener(this);
 		
 		seats = (AvailableSeats) getIntent().getExtras().get("seats");
-		
 		HashMap<String, SeatingArea> seatHash = new HashMap<String, SeatingArea>();
 		ArrayList<SeatingArea> selectedSeats = new ArrayList<SeatingArea>();
-		
+		selectedSeats = new ArrayList<SeatingArea>();
 		appState.getConnection().addObserver(new Observer(){
 
 			@Override
@@ -365,28 +364,29 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 
 	private void toggleSeatSelect(View view) {
 		
-//		if (view.getAlpha())
-//		{
-//			deselect(view);
-//		}
-//		else
-//		{
-//			select(view);
-//		}
+		if (view.getAlpha() == (float) 0.9)
+		{
+			deselect(view);
+		}
+		else
+		{
+			select(view);
+		}
 		
 	}
 
 	private void select(View view) {
 		
-		SeatingArea seat = seatHash.get(view.getId());
+		SeatingArea seat = seatHash.get(view.getTag());
 		
 		selectedSeats.add(seat);
-		
+
+		view.setAlpha((float) 0.9);
 	}
 
 	private void deselect(View view) {
 		
-		SeatingArea seat = seatHash.get(view.getId());
+		SeatingArea seat = seatHash.get(view.getTag());
 		
 		Iterator<SeatingArea> i = selectedSeats.iterator();
 		
@@ -400,6 +400,8 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 				i.remove();
 			}
 		}
+		
+		view.setAlpha(1);
 	}
 
 }

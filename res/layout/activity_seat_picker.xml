@@ -12,6 +12,7 @@
 
         <View
             android:id="@+id/standingArea"
+            android:tag="standingArea"
            	android:layout_width="fill_parent"
            	android:layout_height="fill_parent"
            	android:background="@color/text_grey"
@@ -52,6 +53,7 @@
 		           	android:background="@color/text_grey"
 		           	android:padding="2dp"
 		           	android:clickable="true"
+		           	android:tag="row_1_seat_a"
 		           	android:layout_weight="1">
 		            
 		        </View>
@@ -64,6 +66,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_1_seat_b"
+		            android:tag="row_1_seat_b"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -81,6 +84,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_1_seat_c"
+		            android:tag="row_1_seat_c"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -97,6 +101,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_1_seat_d"
+		            android:tag="row_1_seat_d"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -113,6 +118,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_1_seat_e"
+		            android:tag="row_1_seat_e"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -130,6 +136,7 @@
 		        
 		        <View
 		            android:id="@+id/row_1_seat_f"
+		            android:tag="row_1_seat_f"
 		            android:layout_width="fill_parent"
 		            android:layout_height="fill_parent"
 		            android:layout_weight="1"
@@ -146,6 +153,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_1_seat_g"
+		            android:tag="row_1_seat_g"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -162,6 +170,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_1_seat_h"
+		            android:tag="row_1_seat_h"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -178,6 +187,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_1_seat_i"
+		            android:tag="row_1_seat_i"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -194,6 +204,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_1_seat_j"
+		            android:tag="row_1_seat_j"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -216,6 +227,7 @@
 		    
 		        <View
 		            android:id="@+id/row_2_seat_a"
+		            android:tag="row_2_seat_a"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -232,6 +244,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_2_seat_b"
+		            android:tag="row_2_seat_b"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -248,6 +261,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_2_seat_c"
+		            android:tag="row_2_seat_c"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -264,6 +278,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_2_seat_d"
+		            android:tag="row_2_seat_d"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -280,6 +295,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_2_seat_e"
+		            android:tag="row_2_seat_e"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -296,6 +312,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_2_seat_f"
+		            android:tag="row_2_seat_f"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -312,6 +329,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_2_seat_g"
+		            android:tag="row_2_seat_g"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:clickable="true"
@@ -328,6 +346,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_2_seat_h"
+		            android:tag="row_2_seat_h"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -344,6 +363,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_2_seat_i"
+		            android:tag="row_2_seat_i"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -360,6 +380,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_2_seat_j"
+		            android:tag="row_2_seat_j"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -383,6 +404,7 @@
 		    
 		        <View
 		            android:id="@+id/row_3_seat_a"
+		            android:tag="row_3_seat_a"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -399,6 +421,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_3_seat_b"
+		            android:tag="row_3_seat_b"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -416,6 +439,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_3_seat_c"
+		            android:tag="row_3_seat_c"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -432,6 +456,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_3_seat_d"
+		            android:tag="row_3_seat_d"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:clickable="true"
@@ -448,6 +473,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_3_seat_e"
+		            android:tag="row_3_seat_e"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:clickable="true"
@@ -464,6 +490,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_3_seat_f"
+		            android:tag="row_3_seat_f"
 		           	android:layout_width="fill_parent"
 		           	android:clickable="true"
 		           	android:layout_height="fill_parent"
@@ -480,6 +507,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_3_seat_g"
+		            android:tag="row_3_seat_g"
 		           	android:layout_width="fill_parent"
 		           	android:clickable="true"
 		           	android:layout_height="fill_parent"
@@ -496,6 +524,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_3_seat_h"
+		            android:tag="row_3_seat_h"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -512,6 +541,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_3_seat_i"
+		            android:tag="row_3_seat_i"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -528,6 +558,7 @@
 		        </View>
 		        <View
 		            android:id="@+id/row_3_seat_j"
+		            android:tag="row_3_seat_j"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
