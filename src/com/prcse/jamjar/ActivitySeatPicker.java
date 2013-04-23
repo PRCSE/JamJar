@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 
@@ -376,17 +377,29 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 	}
 
 	private void select(View view) {
+
+		SeatingArea seat = seatHash.get(view.getTag().toString());
 		
-		SeatingArea seat = seatHash.get(view.getTag());
-		
-		selectedSeats.add(seat);
+		if (seat != null){
+			if (selectedSeats == null)
+			{
+				selectedSeats = new ArrayList<SeatingArea>();
+			}
+			this.selectedSeats.add(seat);
+			view.setBackgroundColor(getResources().getColor(R.color.dark_purple));
+		} else {
+			Toast toast = Toast.makeText(this, "Error occoured, Unable to select seat", Toast.LENGTH_LONG);
+			toast.show();
+		}
+			
+
 
 		view.setAlpha((float) 0.9);
 	}
 
 	private void deselect(View view) {
 		
-		SeatingArea seat = seatHash.get(view.getTag());
+		SeatingArea seat = seatHash.get(view.getTag().toString());
 		
 		Iterator<SeatingArea> i = selectedSeats.iterator();
 		
@@ -402,6 +415,7 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 		}
 		
 		view.setAlpha(1);
+		view.setBackgroundColor(getResources().getColor(R.color.text_grey));
 	}
 
 }
