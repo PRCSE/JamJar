@@ -1,7 +1,9 @@
 package com.prcse.jamjar;
 
 
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -9,6 +11,9 @@ import com.prcse.datamodel.Artist;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,26 +28,23 @@ public class ArtistGridAdapter extends BaseAdapter {
 	private LayoutInflater layoutInflater;
 	private ArrayList<Artist> artists = null;
 	private JarLid appState;
+	private HashMap<Long, Boolean> setImages;
 
     public ArtistGridAdapter(Context c, JarLid appState) {
         mContext = c;
         layoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.appState = appState;
-        
-        appState.getConnection().addObserver(new Observer() {
-
-			@Override
-			public void update(Observable arg0, Object arg1) {
-				if(JarLid.IMAGES == arg1) {
-					ArtistGridAdapter.this.notifyDataSetChanged();
-				}
-			}
-        	
-        });
+        setImages = new HashMap<Long, Boolean>();
     }
     
     public void setArtists(ArrayList<Artist> artists) {
     	this.artists = artists;
+    	setImages = new HashMap<Long, Boolean>();
+    	
+    	for(Artist a : artists) {
+        	setImages.put(a.getId(), false);
+        }
+    	
     	this.notifyDataSetChanged();
     }
 
@@ -82,19 +84,30 @@ public class ArtistGridAdapter extends BaseAdapter {
 
         Artist artist = (Artist) artists.get(position);
         
-        if(appState.getImages() != null) {
-        	//TODO get these to load in when image resource changes
-        	if(appState.getImages().get((int)artist.getId()) != null) {
+        Log.i("Backup Grid Image Loader", "Cached images: \n" + appState.getImages().get(artist.getId()));
+        
+    	//TODO get these to load in when image resource changes
+        if(setImages.get(artist.getId()).equals(false)) {
+        	// if image cached
+        	if(appState.getImages() != null) // && appState.getImages().get((int)artist.getId()) != null) 
+        	{
         		holder.image.setImageBitmap((Bitmap)appState.getImages().get((int)artist.getId()));
+        		setImages.put(artist.getId(), true);
+        	}
+        	else if(artist.getThumb() != null) {
+        		try {
+        			String url = appState.getImage_base() + artist.getThumb();
+                	new DownloadImageTask(holder.image, artist).execute(url);
+        		}
+        		catch(Exception e) {
+        			holder.image.setImageResource(R.drawable.artist_venue_placeholder);
+        		}
         	}
         	else {
-            	holder.image.setImageResource(R.drawable.artist_venue_placeholder);
+        		holder.image.setImageResource(R.drawable.artist_venue_placeholder);
             }
         }
-        else {
-        	holder.image.setImageResource(R.drawable.artist_venue_placeholder);
-        }
-
+        
         holder.text.setText(artist.getName());
         return convertView;
     }
@@ -103,5 +116,40 @@ public class ArtistGridAdapter extends BaseAdapter {
     	RelativeLayout rl;
     	ImageView image;
     	TextView text;
+    }
+    
+    private class DownloadImageTask extends AsyncTask<String, Void, Object[]> {
+        ImageView bmImage;
+        Artist a;
+        Object[] result;
+
+        public DownloadImageTask(ImageView bmImage, Artist a) {
+            this.bmImage = bmImage;
+            this.a = a;
+            result = new Object[2];
+        }
+
+        protected Object[] doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+                Log.i("Backup Grid Image Loader", "Getting image for " + a.getName());
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+                Log.e("Backup Grid Image Loader", "Failed to get image for Image set for " + a.getName());
+            };
+            result[0] = mIcon11;
+            result[1] = a;
+            return result;
+        }
+
+        protected void onPostExecute(Object[] result) {
+	        bmImage.setImageBitmap((Bitmap)result[0]);
+	        setImages.put(((Artist)result[1]).getId(), true);
+	        Log.i("Backup Grid Image Loader", "Image set for " + a.getName());
+        }
     }
 }

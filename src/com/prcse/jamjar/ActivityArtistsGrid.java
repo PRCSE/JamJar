@@ -89,11 +89,13 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 			
 			@Override
 			public void update(Observable arg0, Object arg1) {
-				
-				for(Object a : appState.getArtists()) {
-		        	artists.add(((Artist)a));
-		        }
-				artistAdapter.setArtists(artists);
+				if(JarLid.IMAGES == arg1) {
+					artists.clear();
+					for(Object a : appState.getArtists()) {
+			        	artists.add(((Artist)a));
+			        }
+					artistAdapter.setArtists(artists);
+				}
 			}	
 		});
     }

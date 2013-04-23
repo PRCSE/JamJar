@@ -29,6 +29,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageView;
 
 
 
@@ -38,8 +39,8 @@ public class JarLid extends Application {
 	private final static String customerCertificate = "customerCertificate";
 	
 	// Connection variables
-	private String image_base = "https://dl.dropboxusercontent.com/u/6918192/University/PRCSE/";
-	private String host = "77.99.8.110"; // "80.235.137.15"  alternative server location
+	private String image_base = "https://dl.dropboxusercontent.com/u/6918192/University/PRCSE";
+	private String host = "192.168.1.122"; // "77.99.8.110"; // "80.235.137.15"  alternative server location
 	private int port = 1234;
 	private PrcseConnection connection;
 	private Thread connThread;
@@ -55,6 +56,7 @@ public class JarLid extends Application {
 
 	public JarLid() {
 		user = new CustomerInfo();
+		artist_images = new HashMap<Long, Bitmap>();
 		
 		// open connection thread to the database
         connection = new PrcseConnection(host, port);
@@ -71,9 +73,17 @@ public class JarLid extends Application {
 						public void handleResponse(Request response) {
 							// to be called when response comes back
 							artists = ((FrontPage)response).getArtists();
-							
+							Log.i("Startup", "Artists set.");
 							// get images with async task
-							new DownloadImageTask().execute();
+							for(Object item : artists) {
+								Artist a = (Artist)item;
+								
+								if(artist_images.get(a.getId())  == null) {
+									Log.i("JarLid Image Loader", "Getting images");
+									String url = getImage_base() + ((Artist)a).getThumb();
+				                	new JarLidDownloadImageTask((Artist)a).execute(url);
+								}
+							}
 						}
 					});
 				}
@@ -88,6 +98,8 @@ public class JarLid extends Application {
 			}
         	
         });
+        
+        Log.i("Connection Thread", "Starting connection thread");
         connThread = new Thread(connection);
         connThread.start();
 	}
@@ -200,39 +212,40 @@ public class JarLid extends Application {
 		}
 	}
 	
-	
-	 private class DownloadImageTask extends AsyncTask<Void, Void, Void> {
-		 HashMap<Long, Bitmap> images;
-	
-	    public DownloadImageTask() {
-	        this.images = new HashMap<Long, Bitmap>();
-	    }
+	private class JarLidDownloadImageTask extends AsyncTask<String, Void, Object[]> {
+        Bitmap bmImage;
+        Artist a;
+        Object[] result;
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			for(Object a : artists) {
-				String url = image_base + ((Artist)a).getThumb();
-				Bitmap mIcon = null;
-				try {
-					if(url != null) {
-			            InputStream in = new java.net.URL(url).openStream();
-			            mIcon = BitmapFactory.decodeStream(in);
-			            images.put(((Artist)a).getId(), mIcon);
-					}
-		        } catch (Exception e) {
-		            Log.e("Error", e.getMessage());
-		            e.printStackTrace();
-		        }
-			}
-			return null;
-		}
+        public JarLidDownloadImageTask(Artist a) {
+            this.bmImage = null;
+            this.a = a;
+            result = new Object[2];
+        }
 
-		@Override
-		protected void onPostExecute(Void result) {
-			artist_images = images;
-			JarLid.this.getConnection().changed(JarLid.IMAGES);
-		}
-	}
+        protected Object[] doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                bmImage = BitmapFactory.decodeStream(in);
+                Log.i("JarLid Image Loader", "Getting image for " + a.getName());
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            };
+            result[0] = bmImage;
+            result[1] = a;
+            return result;
+        }
+
+        protected void onPostExecute(Object[] result) {
+        	Log.i("JarLid Image Loader", "Result[0] = " + ((Artist)result[1]).getId()
+        									+ "\nResult[1] = " + result[0]);
+        	artist_images.put(((Artist)result[1]).getId(), (Bitmap)result[0]);
+            Log.i("JarLid Image Loader", "Image set for " + a.getName());
+            connection.changed(IMAGES);
+        }
+    }
 	 
 	private class DownloadUserImage extends AsyncTask<Void, Void, Bitmap> {
 		Bitmap image;
@@ -257,6 +270,7 @@ public class JarLid extends Application {
 		protected void onPostExecute(Bitmap result) {
 			Bitmap retirevedImage = result;
 			JarLid.this.setUser_image(retirevedImage);
+			
 		}
 	}
 }
