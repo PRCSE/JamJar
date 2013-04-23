@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PaintDrawable;
 import android.util.Log;
 import android.view.Menu;
@@ -30,6 +31,7 @@ import android.widget.Button;
 public class ActivitySeatPicker extends Activity implements OnClickListener {
 
 	private static final int ADD_SEATS = 0;
+	private static final int CANCEL = 1;
 	
 	private JarLid appState;
 	private AvailableSeats seats;
@@ -78,10 +80,12 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 		appState = ((JarLid)this.getApplication());
 		
 		findSeatViews();
+		confirmBtn = (Button) findViewById(R.id.choose_seating_plan_button);
+		cancelBtn = (Button) findViewById(R.id.cancel_seating_plan_button);
 		confirmBtn.setOnClickListener(this);
 		cancelBtn.setOnClickListener(this);
 		
-		seats = (AvailableSeats) savedInstanceState.get("seats");
+		seats = (AvailableSeats) getIntent().getExtras().get("seats");
 		
 		HashMap<String, SeatingArea> seatHash = new HashMap<String, SeatingArea>();
 		ArrayList<SeatingArea> selectedSeats = new ArrayList<SeatingArea>();
@@ -196,6 +200,8 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 
 	private void createSeatingPlan() {
 
+		seatHash = new HashMap<String, SeatingArea>();
+		
 		for (SeatingArea sa : seats.getAvailableSeats())
 		{
 			if (sa.getParent() == 0)
@@ -243,6 +249,8 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View view) {
+		
+		Intent intent;
 		
 		switch(view.getId())
 		{
@@ -339,10 +347,15 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 		case R.id.row_3_seat_j:
 			toggleSeatSelect(view);
 			break; 
-		case R.id.cancel_seating_plan_button:
-			Intent intent = new Intent(this, ActivityBooking.class);
+		case R.id.choose_seating_plan_button:
+			intent = new Intent(this, ActivityBooking.class);
 			intent.putExtra("seats", selectedSeats);
 			setResult(ADD_SEATS, intent);
+			startActivity(intent);
+			break;
+		case R.id.cancel_seating_plan_button:
+			intent = new Intent(this, ActivityBooking.class);
+			setResult(CANCEL, intent);
 			startActivity(intent);
 			break;
 		}
@@ -352,17 +365,14 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 
 	private void toggleSeatSelect(View view) {
 		
-		Paint viewColour = ((PaintDrawable) view.getBackground()).getPaint();
-		int colourARGB = viewColour.getColor();
-		
-		if (colourARGB == getResources().getColor(R.color.dark_purple))
-		{
-			deselect(view);
-		}
-		else
-		{
-			select(view);
-		}
+//		if (view.getAlpha())
+//		{
+//			deselect(view);
+//		}
+//		else
+//		{
+//			select(view);
+//		}
 		
 	}
 

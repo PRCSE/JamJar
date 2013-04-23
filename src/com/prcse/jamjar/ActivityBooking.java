@@ -39,6 +39,7 @@ import android.widget.Toast;
 public class ActivityBooking extends Activity implements OnClosedListener, OnOpenedListener, OnClickListener {
 	
 	private static final int ADD_SEATS = 0;
+	private static final int CANCEL = 1;
 	
 	private RelativeLayout menu_profile_btn;
 	private RelativeLayout menu_spotlight_btn;
@@ -79,6 +80,7 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		TextView dateString = (TextView) findViewById(R.id.date_string);
 		seatsRemaining = (TextView) findViewById(R.id.number_of_tickets);
 		Button seatPicker = (Button) findViewById(R.id.seat_picker_button);
+		bookBtn = (Button) findViewById(R.id.book_button);
 		
 		artistName.setText(artist.getName());
 		tourName.setText(event.getTourName());
@@ -167,10 +169,11 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 				
 				if(response.getError() == null) {
 					ActivityBooking.this.runOnUiThread(new Runnable() {
-
+						
 						@Override
 						public void run() {
 							seats = ((AvailableSeats) response);
+							//setSeats(seats);
 							seatsRemaining.setText(seats.getTotal() + " TICKETS REMAINING");
 						}
 						
@@ -189,6 +192,11 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		getMenuInflater().inflate(R.menu.activity_booking, menu);
 		return true;
 	}
+	
+//	public void setSeats(AvailableSeats passedSeats)
+//	{
+//		this.seats = passedSeats;
+//	}
 
 	//TODO implement new menu thingy
 	private void menuTraySetUp() {

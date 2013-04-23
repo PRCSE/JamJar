@@ -89,7 +89,7 @@ public class ArtistGridAdapter extends BaseAdapter {
     	//TODO get these to load in when image resource changes
         if(setImages.get(artist.getId()).equals(false)) {
         	// if image cached
-        	if(appState.getImages() != null) // && appState.getImages().get((int)artist.getId()) != null) 
+        	if(appState.getImages() != null && appState.getImages().get((int)artist.getId()) != null) 
         	{
         		holder.image.setImageBitmap((Bitmap)appState.getImages().get((int)artist.getId()));
         		setImages.put(artist.getId(), true);

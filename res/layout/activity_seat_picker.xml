@@ -550,10 +550,10 @@
 		        android:id="@+id/cancel_seating_plan_button"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:text="Cancel" />
+		        android:text="Cancel_seats" />
 		    
 		    <Button
-		        android:id="@+id/cancel_seating_plan_button"
+		        android:id="@+id/choose_seating_plan_button"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:text="Choose Seats" />
