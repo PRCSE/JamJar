@@ -62,6 +62,7 @@ public class JarLid extends Application {
 	private Bitmap user_image;
 	HashMap<Long, Bitmap> artist_images;
 	HashMap<Long, CustomerBooking> bookings;
+	private ArrayList<SeatingArea> chosenSeats;
 	public final static String CONNECTION = "CONNECTION";
 	public final static String IMAGES = "IMAGES";
 
@@ -130,6 +131,14 @@ public class JarLid extends Application {
 		else {
 			return true;
 		}
+	}
+	
+	public ArrayList<SeatingArea> getChosenSeats() {
+		return chosenSeats;
+	}
+
+	public void setChosenSeats(ArrayList<SeatingArea> chosenSeats) {
+		this.chosenSeats = chosenSeats;
 	}
 	
 	public Bitmap getUser_image() {
