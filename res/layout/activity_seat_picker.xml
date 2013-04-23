@@ -19,6 +19,7 @@
            	android:layout_weight="1"
            	android:layout_gravity="center"
            	android:clickable="true"
+           	android:layout_margin="2dp"
            	android:layout_marginBottom="10dp">
            	
 
@@ -54,6 +55,7 @@
 		           	android:padding="2dp"
 		           	android:clickable="true"
 		           	android:tag="row_1_seat_a"
+		           	android:layout_margin="2dp"
 		           	android:layout_weight="1">
 		            
 		        </View>
@@ -89,6 +91,7 @@
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
 		           	android:clickable="true"
+		           	android:layout_margin="2dp"
 		           	android:layout_weight="1">
 		            
 		        </View>
@@ -106,6 +109,7 @@
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
 		           	android:clickable="true"
+		           	android:layout_margin="2dp"
 		           	android:layout_weight="1">
 		            
 		        </View>
@@ -123,6 +127,7 @@
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
 		           	android:clickable="true"
+		           	android:layout_margin="2dp"
 		           	android:layout_weight="1">
 		            
 		        </View>
@@ -139,6 +144,7 @@
 		            android:tag="row_1_seat_f"
 		            android:layout_width="fill_parent"
 		            android:layout_height="fill_parent"
+		            android:layout_margin="2dp"
 		            android:layout_weight="1"
 		            android:background="@color/text_grey"
 		            android:clickable="true" >
@@ -154,6 +160,7 @@
 		        <View
 		            android:id="@+id/row_1_seat_g"
 		            android:tag="row_1_seat_g"
+		            android:layout_margin="2dp"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -172,6 +179,7 @@
 		            android:id="@+id/row_1_seat_h"
 		            android:tag="row_1_seat_h"
 		           	android:layout_width="fill_parent"
+		           	android:layout_margin="2dp"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
 		           	android:clickable="true"
@@ -188,6 +196,7 @@
 		        <View
 		            android:id="@+id/row_1_seat_i"
 		            android:tag="row_1_seat_i"
+		            android:layout_margin="2dp"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
@@ -206,6 +215,7 @@
 		            android:id="@+id/row_1_seat_j"
 		            android:tag="row_1_seat_j"
 		           	android:layout_width="fill_parent"
+		           	android:layout_margin="2dp"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
 		           	android:clickable="true"
@@ -230,6 +240,7 @@
 		            android:tag="row_2_seat_a"
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
+		           	android:layout_margin="2dp"
 		           	android:background="@color/text_grey"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
@@ -248,6 +259,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
@@ -265,6 +277,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
@@ -282,6 +295,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
@@ -299,6 +313,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
@@ -316,6 +331,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
@@ -334,6 +350,7 @@
 		           	android:layout_height="fill_parent"
 		           	android:clickable="true"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:layout_weight="1">
 		            
 		        </View>
@@ -350,6 +367,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
@@ -367,6 +385,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
@@ -384,6 +403,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
@@ -408,6 +428,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
@@ -425,6 +446,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
@@ -443,6 +465,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
@@ -461,6 +484,7 @@
 		           	android:layout_height="fill_parent"
 		           	android:clickable="true"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:layout_weight="1">
 		            
 		        </View>
@@ -478,6 +502,7 @@
 		           	android:layout_height="fill_parent"
 		           	android:clickable="true"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:layout_weight="1">
 		            
 		        </View>
@@ -495,6 +520,7 @@
 		           	android:clickable="true"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:layout_weight="1">
 		            
 		        </View>
@@ -512,6 +538,7 @@
 		           	android:clickable="true"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:layout_weight="1">
 		            
 		        </View>
@@ -528,6 +555,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
@@ -545,6 +573,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
@@ -562,6 +591,7 @@
 		           	android:layout_width="fill_parent"
 		           	android:layout_height="fill_parent"
 		           	android:background="@color/text_grey"
+		           	android:layout_margin="2dp"
 		           	android:clickable="true"
 		           	android:layout_weight="1">
 		            
