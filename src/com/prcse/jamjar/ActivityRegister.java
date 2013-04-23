@@ -8,12 +8,19 @@ import com.prcse.protocol.CustomerForm;
 import com.prcse.protocol.CustomerInfo;
 import com.prcse.protocol.Request;
 import com.prcse.utils.ResponseHandler;
+import com.slidingmenu.lib.SlidingMenu.OnClosedListener;
+import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Point;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
@@ -22,10 +29,14 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class ActivityRegister extends Activity implements OnClickListener, OnItemSelectedListener {
+public class ActivityRegister extends Activity implements OnClickListener, OnItemSelectedListener, OnClosedListener, OnOpenedListener {
+	
+	private ActionBar actionBar;
 	
 	private CustomerInfo customer;
 	private CustomerForm enumsData;
@@ -96,29 +107,35 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 		btnRegister.setOnClickListener(this);
 		
 		appState = ((JarLid)this.getApplication());
-				
+		
 		appState.getConnection().addObserver(new Observer() {
 			
 			@Override
 			public void update(Observable arg0, Object arg1) {
-				if(appState.getConnection().isConnected()) {
-					if(gettingEnums == false) {
-						ActivityRegister.this.getEnumsData(arg1);
+				if(arg1 == appState.IMAGES) {
+					// do nothing
+				}
+				else if(arg1 instanceof CustomerForm && appState.getConnection().isConnected()) {
+					if(((CustomerForm)arg1).getError() != null) {
+						ActivityRegister.this.runOnUiThread(new Runnable() {
+	
+							@Override
+							public void run() {
+								btnRegister.setEnabled(true);
+								viewTextError.setText(customer.getError());
+							}
+							
+						});
+					}
+					else {
+						if(gettingEnums == false) {
+							ActivityRegister.this.getEnumsData(arg1);
+						}
 					}
 				}
-				else if(((CustomerForm)arg1).getError() != null) {
-					ActivityRegister.this.runOnUiThread(new Runnable() {
-
-						@Override
-						public void run() {
-							btnRegister.setEnabled(true);
-							viewTextError.setText(customer.getError());
-						}
-						
-					});
-				}
-				else {
+				else if(appState.getConnection().isConnected() == false) {
 					//TODO setContentView(R.layout.network_error_alert);
+					btnRegister.setEnabled(false);
 				}
 			}
 			
@@ -133,7 +150,12 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 		}
 	}
 	
-	
+	@Override
+    public void onResume()
+    {
+    	super.onResume();
+    	menuTraySetUp();
+    }
 
 	public void getEnumsData(Object request) {
 		if(request == null) {
@@ -156,6 +178,8 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 			//TODO setContentView(R.layout.network_error_alert);
 		}
 		else {
+			titleAdapter.clear();
+			
 			// build adapter
 			titleAdapter.add("Select Title");
 			for (String s : enumsData.getTitles())
@@ -167,16 +191,18 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 			spinnerTitle.setAdapter(titleAdapter);
 			spinnerTitle.setEnabled(true);
 			
+			titleAdapter.clear();
+			
 			// build adapter
 			countryAdapter.add("Select Country");
 			for (String s : enumsData.getCountries())
 			{
 				countryAdapter.add(s);
 			}
-			spinnerCountry.setEnabled(true);
 			
 			// set spinner adapter
 			spinnerCountry.setAdapter(countryAdapter);
+			spinnerCountry.setEnabled(true);
 		}
 		gettingEnums = false;
 	}
@@ -186,6 +212,69 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_register, menu);
 		return true;
+	}
+	
+	 @Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			switch (item.getItemId()) {
+				case android.R.id.home:
+					MenuTraySingleton.getInstance().getMenu_tray().toggle();
+					break;
+			}
+			
+			return true;
+		}
+	
+private void menuTraySetUp() {
+    	
+    	//Get variables needed to calculate width of display. Also some nifty stuff with the action bar button.
+    	actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        
+        Display display = getWindowManager().getDefaultDisplay();
+		Point point = new Point();
+		
+		display.getSize(point);
+		int width = point.x;
+        
+		//Call instance of singleton and its setup method
+        MenuTraySingleton.getInstance().menuTraySetUp(this, width);
+    	
+        //Attach listeners to the sliding menu
+    	MenuTraySingleton.getInstance().getMenu_tray().setOnOpenedListener(this);
+        MenuTraySingleton.getInstance().getMenu_tray().setOnClosedListener(this);
+		
+		RelativeLayout menu_profile_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile);
+		RelativeLayout menu_spotlight_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.spotlight);
+		RelativeLayout menu_search_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.search);
+		RelativeLayout menu_artists_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.artists);
+		RelativeLayout menu_venues_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.venues);
+		RelativeLayout menu_tours_btn = (RelativeLayout) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.tours);
+		
+		//Set listeners to clickable things
+		menu_profile_btn.setOnClickListener(this);
+		menu_spotlight_btn.setOnClickListener(this);
+		menu_search_btn.setOnClickListener(this);
+		menu_artists_btn.setOnClickListener(this);
+		menu_venues_btn.setOnClickListener(this);
+		menu_tours_btn.setOnClickListener(this);
+		
+		//Change background colour of menu item representing the current activity
+		menu_spotlight_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+		
+		//Check to see if user is logged in and if so places profile picture in the sliding menu next to the profile selection
+		if (appState.isLoggedIn())
+		{
+			TextView menu_profile_text = (TextView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_text);
+			ImageView menu_profile_icon = (ImageView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_icon);
+			
+			menu_profile_text.setText(appState.getUser().getCustomer().getFullName());
+			if (appState.getUser().getCustomer().getThumb() != null)
+			{
+				menu_profile_icon = (ImageView) findViewById(R.id.profile_icon);
+				menu_profile_icon.setImageBitmap(appState.getUser_image());
+			}
+		}
 	}
 
 	@Override
@@ -255,5 +344,17 @@ public class ActivityRegister extends Activity implements OnClickListener, OnIte
 	public void onNothingSelected(AdapterView<?> arg0) {
 		// TODO nope, nada
 		
+	}
+
+	@Override
+	public void onOpened() {
+		// TODO Auto-generated method stub
+		actionBar.setDisplayHomeAsUpEnabled(false);
+	}
+
+	@Override
+	public void onClosed() {
+		// TODO Auto-generated method stub
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 }
