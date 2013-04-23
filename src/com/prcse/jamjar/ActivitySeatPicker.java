@@ -31,9 +31,6 @@ import android.widget.Toast;
 
 public class ActivitySeatPicker extends Activity implements OnClickListener {
 
-	private static final int ADD_SEATS = 0;
-	private static final int CANCEL = 1;
-	
 	private JarLid appState;
 	private AvailableSeats seats;
 	private HashMap<String, SeatingArea> seatHash;
@@ -348,15 +345,16 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 			toggleSeatSelect(view);
 			break; 
 		case R.id.choose_seating_plan_button:
+			appState.setChosenSeats(selectedSeats);
 			intent = new Intent(this, ActivityBooking.class);
-			intent.putExtra("seats", selectedSeats);
-			setResult(ADD_SEATS, intent);
-			startActivity(intent);
+//			intent.putExtra("seats", selectedSeats);
+			setResult(RESULT_OK, intent);
+			finish();
 			break;
 		case R.id.cancel_seating_plan_button:
 			intent = new Intent(this, ActivityBooking.class);
-			setResult(CANCEL, intent);
-			startActivity(intent);
+			setResult(RESULT_CANCELED, intent);
+			finish();
 			break;
 		}
 		

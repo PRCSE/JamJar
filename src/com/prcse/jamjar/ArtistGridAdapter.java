@@ -141,7 +141,7 @@ public class ArtistGridAdapter extends BaseAdapter {
             try {
                 InputStream in = new java.net.URL(urldisplay).openStream();
                 mIcon11 = BitmapFactory.decodeStream(in);
-                Log.i("Backup Grid Image Loader", "Getting image for " + a.getName());
+                //Log.i("Backup Grid Image Loader", "Getting image for " + a.getName());
             } catch (Exception e) {
                 Log.e("Error", e.getMessage());
                 e.printStackTrace();
@@ -155,7 +155,7 @@ public class ArtistGridAdapter extends BaseAdapter {
         protected void onPostExecute(Object[] result) {
 	        bmImage.setImageBitmap((Bitmap)result[0]);
 	        setImages.put(((Artist)result[1]).getId(), true);
-	        Log.i("Backup Grid Image Loader", "Image set for " + a.getName());
+	        //Log.i("Backup Grid Image Loader", "Image set for " + a.getName());
         }
     }
 }

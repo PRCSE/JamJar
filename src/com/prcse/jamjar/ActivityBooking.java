@@ -28,19 +28,18 @@ import android.graphics.Point;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivityBooking extends Activity implements OnClosedListener, OnOpenedListener, OnClickListener {
-	
-	private static final int ADD_SEATS = 0;
-	private static final int CANCEL = 1;
-	
+
 	private RelativeLayout menu_profile_btn;
 	private RelativeLayout menu_spotlight_btn;
 	private RelativeLayout menu_search_btn;
@@ -81,6 +80,7 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		seatsRemaining = (TextView) findViewById(R.id.number_of_tickets);
 		Button seatPicker = (Button) findViewById(R.id.seat_picker_button);
 		bookBtn = (Button) findViewById(R.id.book_button);
+		
 		
 		artistName.setText(artist.getName());
 		tourName.setText(event.getTourName());
@@ -160,6 +160,17 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		
 		menuTraySetUp();
 	}
+	
+    @Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				finish();
+				break;
+		}
+		
+		return true;
+	}
 
 	private void getAvaliableSeats() {
 		appState.getConnection().getEventAvailability(new AvailableSeats(this.event), new ResponseHandler() {
@@ -172,6 +183,7 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 						
 						@Override
 						public void run() {
+							
 							seats = ((AvailableSeats) response);
 							//setSeats(seats);
 							seatsRemaining.setText(seats.getTotal() + " TICKETS REMAINING");
@@ -234,6 +246,22 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		menu_tours_btn.setOnClickListener(this);
 		
 		menu_artists_btn.setBackgroundColor(Color.parseColor("#7f4993"));
+		
+		// IF: the user is logged in...
+		if (appState.isLoggedIn())
+		{
+			// change the menu to display there name...
+			TextView menu_profile_text = (TextView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_text);
+			ImageView menu_profile_icon = (ImageView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_icon);
+			
+			// and, if available, their profile icon. 
+			menu_profile_text.setText(appState.getUser().getCustomer().getFullName());
+			if (appState.getUser().getCustomer().getThumb() != null)
+			{
+				menu_profile_icon = (ImageView) findViewById(R.id.profile_icon);
+				menu_profile_icon.setImageBitmap(appState.getUser_image());
+			}
+		}
 	}
 
 	@Override
@@ -299,68 +327,100 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 
 	private void tryBook() {
 		
-		
-		
 		boolean shouldBook = true;
-		
-		for (Long key : appState.getBookings().keySet())
+		Toast toast;
+		if (booking == null)
 		{
-			if (key == event.getId())
-			{
-				shouldBook = false;
-				break;
-			}
+			shouldBook = false;
+		}
+		if (selectedSeats == null || selectedSeats.size() == 0)
+		{
+			shouldBook = false;
+			toast = Toast.makeText(this, "Please select your seats", Toast.LENGTH_LONG);
+			toast.show();
+		}
+		if (appState.getConnection().isConnected() == false)
+		{
+			shouldBook = false;
+			toast = Toast.makeText(this, "Please establish a network connection", Toast.LENGTH_LONG);
+			toast.show();
+		}
+		if (appState.isLoggedIn() == false)
+		{
+			shouldBook = false;
+			toast = Toast.makeText(this, "Please login to make a booking", Toast.LENGTH_LONG);
+			toast.show();
 		}
 		
-		if (shouldBook == true)
+		if (shouldBook)
 		{
-			if (appState.getUser().getCustomer() != null)
-			{
-				booking = new Booking(event);
-				
-				if (selectedSeats != null && selectedSeats.size() > 0)
-				{
-					CustomerBooking bookingProto = new CustomerBooking(booking, appState.getUser().getClientId(), selectedSeats);
-					appState.getConnection().createBooking(bookingProto, new ResponseHandler(){
-
-						@Override
-						public void handleResponse(Request response) {
-							
-							getAvaliableSeats();
-
-						}
-						
-						
-					});
-					bookBtn.setEnabled(false);
-				}
-				else 
-				{
-					Toast toast = Toast.makeText(this, "Please select your seats", Toast.LENGTH_LONG);
-					toast.show();
-				}
-			}
-			else
-			{
-				Toast toast = Toast.makeText(this, "Please login to make a booking", Toast.LENGTH_LONG);
-				toast.show();
-			}
-		}
-		else
-		{
-			CustomerBooking cancelation = appState.getBookings().get(event.getId());
-			cancelation.getBooking().cancel();
-			appState.getConnection().cancelBooking(cancelation, new ResponseHandler(){
+			CustomerBooking bookingProto = new CustomerBooking(booking, appState.getUser().getCustomer().getId(), selectedSeats);
+			
+			appState.getConnection().createBooking(bookingProto, new ResponseHandler() {
 
 				@Override
 				public void handleResponse(Request response) {
-					
+
 					getAvaliableSeats();
-					
 				}
 				
 			});
 		}
+		
+		
+		
+		
+		
+		
+//		if (shouldBook == true)
+//		{
+//			if (appState.getUser().getCustomer() != null)
+//			{
+//				booking = new Booking(event);
+//				
+//				if (selectedSeats != null && selectedSeats.size() > 0)
+//				{
+//					CustomerBooking bookingProto = new CustomerBooking(booking, appState.getUser().getClientId(), selectedSeats);
+//					appState.getConnection().createBooking(bookingProto, new ResponseHandler(){
+//
+//						@Override
+//						public void handleResponse(Request response) {
+//							
+//							getAvaliableSeats();
+//
+//						}
+//						
+//						
+//					});
+//					bookBtn.setEnabled(false);
+//				}
+//				else 
+//				{
+//					Toast toast = Toast.makeText(this, "Please select your seats", Toast.LENGTH_LONG);
+//					toast.show();
+//				}
+//			}
+//			else
+//			{
+//				Toast toast = Toast.makeText(this, "Please login to make a booking", Toast.LENGTH_LONG);
+//				toast.show();
+//			}
+//		}
+//		else
+//		{
+//			CustomerBooking cancelation = appState.getBookings().get(event.getId());
+//			cancelation.getBooking().cancel();
+//			appState.getConnection().cancelBooking(cancelation, new ResponseHandler(){
+//
+//				@Override
+//				public void handleResponse(Request response) {
+//					
+//					getAvaliableSeats();
+//					
+//				}
+//				
+//			});
+//		}
 		
 		
 	}
@@ -368,14 +428,41 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		if (requestCode == ADD_SEATS)
+		ArrayList<SeatingArea> returnedSeats = new ArrayList<SeatingArea>();
+		
+		if (resultCode == RESULT_OK)
 		{
-			ArrayList<SeatingArea> returnedSeats = (ArrayList<SeatingArea>) getIntent().getExtras().get("seats");
-			
-			for (SeatingArea sa : returnedSeats)
+//			Intent i = getIntent();
+//			Bundle b = i.getExtras();
+//			Log.i("seat picker", "returned" + b.getSerializable("seats"));
+			try
 			{
-				selectedSeats.add(sa.getId());
+				if (appState.getChosenSeats() != null)
+				{
+					returnedSeats = appState.getChosenSeats();
+				}
+				
 			}
+			catch (Exception e)
+			{
+				Log.e("Returned Seats", "unable to cast returned seats");
+			}
+			
+			
+			if (selectedSeats == null)
+			{
+				selectedSeats = new ArrayList<Long>();
+			}
+			selectedSeats.clear();
+			
+			if (returnedSeats != null)
+			{
+				for (SeatingArea sa : returnedSeats)
+				{
+					selectedSeats.add(sa.getId());
+				}
+			}
+			
 		}
 	}
 	

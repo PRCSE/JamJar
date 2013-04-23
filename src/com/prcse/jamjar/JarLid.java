@@ -16,6 +16,7 @@ import java.util.Observer;
 
 import com.prcse.datamodel.Artist;
 import com.prcse.datamodel.Customer;
+import com.prcse.datamodel.SeatingArea;
 import com.prcse.protocol.CustomerBooking;
 import com.prcse.protocol.CustomerInfo;
 import com.prcse.protocol.Request;
@@ -47,6 +48,16 @@ public class JarLid extends Application {
 	
 	// global info
 	private ArrayList<Object> artists;
+	private ArrayList<SeatingArea> chosenSeats;
+	
+	public ArrayList<SeatingArea> getChosenSeats() {
+		return chosenSeats;
+	}
+
+	public void setChosenSeats(ArrayList<SeatingArea> chosenSeats) {
+		this.chosenSeats = chosenSeats;
+	}
+
 	private CustomerInfo user;
 	private Bitmap user_image;
 	HashMap<Long, Bitmap> artist_images;
@@ -79,7 +90,7 @@ public class JarLid extends Application {
 								Artist a = (Artist)item;
 								
 								if(artist_images.get(a.getId())  == null) {
-									Log.i("JarLid Image Loader", "Getting images");
+									//Log.i("JarLid Image Loader", "Getting images");
 									String url = getImage_base() + ((Artist)a).getThumb();
 				                	new JarLidDownloadImageTask((Artist)a).execute(url);
 								}
@@ -229,7 +240,7 @@ public class JarLid extends Application {
             try {
                 InputStream in = new java.net.URL(urldisplay).openStream();
                 bmImage = BitmapFactory.decodeStream(in);
-                Log.i("JarLid Image Loader", "Getting image for " + a.getName());
+                //Log.i("JarLid Image Loader", "Getting image for " + a.getName());
             } catch (Exception e) {
                 Log.e("Error", e.getMessage());
                 e.printStackTrace();
@@ -240,10 +251,10 @@ public class JarLid extends Application {
         }
 
         protected void onPostExecute(Object[] result) {
-        	Log.i("JarLid Image Loader", "Result[0] = " + ((Artist)result[1]).getId()
-        									+ "\nResult[1] = " + result[0]);
+        	//Log.i("JarLid Image Loader", "Result[0] = " + ((Artist)result[1]).getId()
+        									//+ "\nResult[1] = " + result[0]);
         	artist_images.put(((Artist)result[1]).getId(), Bitmap.createBitmap((Bitmap)result[0], 0, 0, ((Bitmap)result[0]).getWidth(), ((Bitmap)result[0]).getHeight()));
-            Log.i("JarLid Image Loader", "Image set for " + a.getName());
+            //Log.i("JarLid Image Loader", "Image set for " + a.getName());
             connection.changed(IMAGES);
         }
     }
