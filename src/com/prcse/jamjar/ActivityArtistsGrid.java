@@ -63,8 +63,7 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
             }
         }
         
-        // sets up sliding menu tray
-        menuTraySetUp();
+        
 
         // gets grid, set values to custom adapter then sets adapter to grid.
         // Finally, sets listener for artist select.
@@ -100,7 +99,18 @@ public class ActivityArtistsGrid extends Activity implements OnClickListener, On
 		});
     }
     
+    
+    
     @Override
+	protected void onResume() {
+		super.onResume();
+		// sets up sliding menu tray
+        menuTraySetUp();
+	}
+
+
+
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.artists, menu);

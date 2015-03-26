@@ -41,22 +41,13 @@ public class JarLid extends Application {
 	
 	// Connection variables
 	private String image_base = "https://dl.dropboxusercontent.com/u/6918192/University/PRCSE";
-	private String host = "77.99.8.110"; // "77.99.8.110"; // "80.235.137.15"  alternative server location
+	private String host = "141.163.112.177"; // "80.235.137.15"  alternative server location
 	private int port = 1234;
-	private PrcseConnection connection;
+	private PrcseConnection connection;  
 	private Thread connThread;
 	
 	// global info
 	private ArrayList<Object> artists;
-	private ArrayList<SeatingArea> chosenSeats;
-	
-	public ArrayList<SeatingArea> getChosenSeats() {
-		return chosenSeats;
-	}
-
-	public void setChosenSeats(ArrayList<SeatingArea> chosenSeats) {
-		this.chosenSeats = chosenSeats;
-	}
 
 	private CustomerInfo user;
 	private Bitmap user_image;

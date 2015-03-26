@@ -69,6 +69,8 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 	private View row_3_seat_i;
 	private View row_3_seat_j;
 	
+	private AvailableSeats reponse;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,7 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 		cancelBtn.setOnClickListener(this);
 		
 		seats = (AvailableSeats) getIntent().getExtras().get("seats");
+		reponse = (AvailableSeats) getIntent().getExtras().get("seatRequest");
 		HashMap<String, SeatingArea> seatHash = new HashMap<String, SeatingArea>();
 		ArrayList<SeatingArea> selectedSeats = new ArrayList<SeatingArea>();
 		selectedSeats = new ArrayList<SeatingArea>();
@@ -107,7 +110,7 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 										@Override
 										public void run() {
 											seats = (AvailableSeats)response;
-											createSeatingPlan();
+											createSeatingPlan((AvailableSeats)response);
 										}
 										
 									});
@@ -124,7 +127,7 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 			
 		});
 		
-		createSeatingPlan();
+		createSeatingPlan(reponse);
 	}
 
 	private void findSeatViews() {
@@ -195,12 +198,16 @@ public class ActivitySeatPicker extends Activity implements OnClickListener {
 		
 	}
 
-	private void createSeatingPlan() {
+	private void createSeatingPlan(AvailableSeats response) {
 
 		seatHash = new HashMap<String, SeatingArea>();
 		
 		for (SeatingArea sa : seats.getAvailableSeats())
 		{
+			if(response != null) {
+				sa.setCapacity(response.getTotal());
+			}
+			
 			if (sa.getParent() == 0)
 			{
 				seatHash.put("standingArea", sa);

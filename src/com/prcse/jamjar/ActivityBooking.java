@@ -18,6 +18,7 @@ import com.prcse.utils.ResponseHandler;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.SlidingMenu.OnClosedListener;
 import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
+import com.prcse.protocol.AvailableSeats;
 
 import android.os.Bundle;
 import android.app.ActionBar;
@@ -59,6 +60,8 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 	private Event event;
 	private AvailableSeats seats;
 	
+	private AvailableSeats seatRequest;
+	
 	private Booking booking;
 	private ArrayList<Long> selectedSeats;
 	
@@ -98,7 +101,12 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 				{
 					if (event == ((CustomerBooking)data).getBooking().getEvent())
 					{
-						getAvaliableSeats();
+						ActivityBooking.this.runOnUiThread(new Runnable() { 
+							@Override
+							public void run() {
+								getAvaliableSeats();
+							}
+						});
 						
 						if (((CustomerBooking) data).getClientId() == appState.getConnection().getClientId())
 						{
@@ -107,6 +115,7 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 								@Override
 								public void run() 
 								{
+									
 									if (((CustomerBooking) data).getBooking().getCancelled() != null)
 									{
 										if (((CustomerBooking) data).getBooking().getSeats().size() == 0)
@@ -158,10 +167,17 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		seatPicker.setOnClickListener(this);
 		bookBtn.setOnClickListener(this);
 		
-		menuTraySetUp();
+		
 	}
 	
     @Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		menuTraySetUp();
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case android.R.id.home:
@@ -186,7 +202,9 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 							
 							seats = ((AvailableSeats) response);
 							//setSeats(seats);
-							seatsRemaining.setText(seats.getTotal() + " TICKETS REMAINING");
+							seatsRemaining.setText(seats.getTotal() + " tickets left");
+							
+							seatRequest = (AvailableSeats) response;
 						}
 						
 					});
@@ -250,11 +268,9 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
 		// IF: the user is logged in...
 		if (appState.isLoggedIn())
 		{
-			// change the menu to display there name...
 			TextView menu_profile_text = (TextView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_text);
 			ImageView menu_profile_icon = (ImageView) MenuTraySingleton.getInstance().getMenu_tray().findViewById(R.id.profile_icon);
 			
-			// and, if available, their profile icon. 
 			menu_profile_text.setText(appState.getUser().getCustomer().getFullName());
 			if (appState.getUser().getCustomer().getThumb() != null)
 			{
@@ -316,6 +332,7 @@ public class ActivityBooking extends Activity implements OnClosedListener, OnOpe
     	case R.id.seat_picker_button:
     		intent = new Intent(ActivityBooking.this, ActivitySeatPicker.class);
     		intent.putExtra("seats", seats);
+    		intent.putExtra("seatRequest", seatRequest);
     		startActivityForResult(intent, RESULT_CANCELED);
     		break;
     	case R.id.book_button:
